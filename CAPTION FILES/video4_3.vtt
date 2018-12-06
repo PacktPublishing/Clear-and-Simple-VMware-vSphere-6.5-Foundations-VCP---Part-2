@@ -1,0 +1,118 @@
+WEBVTT
+
+00:00.740 --> 00:08.530
+This video we'll look at some of the basic database management tasks required for VSE Hunter now and
+
+00:08.530 --> 00:11.610
+the center server appliance version 6.5.
+
+00:11.620 --> 00:21.790
+We have an embedded Wii postgresql database and this is simply a postgresql UL database that is customized
+
+00:21.850 --> 00:26.140
+and optimized for the Center Right.
+
+00:26.140 --> 00:32.710
+So it's a baked and database that is basically purpose built purely for the center.
+
+00:32.710 --> 00:38.900
+And so now we don't really have to rely on any sort of external databases.
+
+00:38.980 --> 00:42.910
+And of course the database is a critical piece of the center.
+
+00:43.180 --> 00:50.200
+You know many many organizations have a team of dbspace that are focused on architecting and optimizing
+
+00:50.200 --> 00:51.060
+databases.
+
+00:51.950 --> 01:02.400
+And so there may be some hesitance to off load this database maintenance type task to Avies for.
+
+01:04.340 --> 01:06.820
+But vendors made it very simple.
+
+01:06.860 --> 01:07.120
+Right.
+
+01:07.130 --> 01:12.920
+There's really not a lot of stuff that you have to think about when it comes to maintaining this database.
+
+01:12.920 --> 01:17.540
+Very it's very straightforward very simple and easy to manage.
+
+01:17.540 --> 01:23.410
+There are some tuning optimizations that kind of have happened behind the scenes here.
+
+01:24.520 --> 01:30.180
+So where has defined higher default values for certain critical settings.
+
+01:30.520 --> 01:38.230
+Some of the buffers and Checkpoint segments and other aspects of the database that optimally tune to
+
+01:38.230 --> 01:40.490
+work as a database for V Center.
+
+01:40.550 --> 01:40.710
+Right.
+
+01:40.720 --> 01:43.070
+So it's not just a generic database.
+
+01:43.270 --> 01:50.970
+It's a database that is purpose built to work as the ideal database for VSA under there we have a process
+
+01:50.970 --> 01:59.180
+called vacuuming so the postscripts QOL databases require periodic maintenance known as vacuuming.
+
+01:59.340 --> 02:08.010
+Vacuuming is used to recover or reuse disk space that was occupied by rows that have now been deleted
+
+02:08.130 --> 02:14.430
+or to update data statistics for queries or to update the visibility maps.
+
+02:14.520 --> 02:18.840
+So we have to do a periodic vacuuming process now.
+
+02:18.870 --> 02:20.520
+Now baked right into the center.
+
+02:20.650 --> 02:27.690
+There's actually an automated vacuuming process and so you can set up auto vacuuming and then you don't
+
+02:27.690 --> 02:29.840
+really even have to think about this.
+
+02:30.060 --> 02:34.330
+And of course one of the great things that are baked right into the center share of appliance as well
+
+02:34.330 --> 02:37.600
+is the ability to natively backup and restore.
+
+02:37.700 --> 02:42.030
+Right so we don't really even have to think about the database in that regard.
+
+02:42.090 --> 02:49.440
+And if we're using the center server high availability all of the data that's in the database is going
+
+02:49.440 --> 02:56.430
+to be synchronously replicated to to as standby the center instance.
+
+02:56.430 --> 03:02.640
+Right so all that stuff like database clustering and mirroring and replication of data we don't even
+
+03:02.640 --> 03:07.460
+have to think about that stuff when it comes to the center share of her appliance version 6.5.
+
+03:07.710 --> 03:15.570
+We can simply set it up do the occasional vacuuming task or set it up to automatically happen and then
+
+03:15.570 --> 03:20.490
+enable the center server high availability and that will handle all of the synchronous replication of
+
+03:20.490 --> 03:21.700
+data for us.
+
+03:21.870 --> 03:23.220
+And we don't even need to think about it.

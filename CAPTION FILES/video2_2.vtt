@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00.950 --> 00:07.780
+In this video I'll demonstrate how to use the motion to migrate a virtual machine from one ESX host
+
+00:07.810 --> 00:09.960
+to another.
+
+00:09.990 --> 00:16.170
+So here you can see in my voice for a web client I'm in the hosts and Klosters view and I have to ESX
+
+00:16.170 --> 00:23.810
+I host and at the moment I have not set up any of my requirements for Wii motion yet.
+
+00:24.160 --> 00:24.310
+Right.
+
+00:24.310 --> 00:26.710
+So let's talk about a couple of those things.
+
+00:26.740 --> 00:31.940
+Let's look at Host 1 9 2 1 6 8 1 9 9 out 100.
+
+00:32.050 --> 00:38.790
+And let's look at the datasource and you can see here we have one data store available on this host
+
+00:38.790 --> 00:46.420
+is called Data Store one and it's a VMI Fast Five data store and this other host we have data store
+
+00:46.420 --> 00:46.830
+one.
+
+00:46.870 --> 00:54.050
+And then the number one in parentheses and it is a thirty two point five gigabyte data store.
+
+00:54.070 --> 00:59.710
+So we've got to ESX I hosts but they don't have a data store in common.
+
+01:00.280 --> 01:08.410
+And so that's one of the major prerequisites for Wii motion is I have to have a data store in common
+
+01:08.800 --> 01:14.400
+between these two ESX host in order to be motion of virtual machine from one host to another.
+
+01:14.470 --> 01:16.630
+So that's going to be step one in my process here.
+
+01:16.630 --> 01:23.350
+I'm actually going to go ahead establish a shared data store that both of these hosts can access so
+
+01:23.350 --> 01:28.290
+in appalls my recording for a moment while I set that prerequisite up.
+
+01:28.300 --> 01:33.880
+OK so while my recording was paused I went ahead and set up a shared data store.
+
+01:34.300 --> 01:40.360
+And if we go to hostes and Klosters and we look at our first host you can see I've got a new data store
+
+01:40.360 --> 01:41.840
+here called shared.
+
+01:42.190 --> 01:47.890
+And if I look below that a little bit I've got an additional data store called shared and they're both
+
+01:47.890 --> 01:48.900
+the same data store.
+
+01:48.910 --> 01:55.190
+And so now I've met one of my Wii motion prerequisites.
+
+01:55.240 --> 02:02.650
+Now the other important Wii motion prerequisite that I have to me is I have to have a Wii motion network
+
+02:02.650 --> 02:04.600
+and figure.
+
+02:04.760 --> 02:11.120
+So let's go ahead and click on this first host and under this first host I'm going to look at my VM
+
+02:11.120 --> 02:20.630
+kernel adapters and at the moment I've only got one VM kernel port created on each ESX I host a VM kernel
+
+02:20.630 --> 02:23.230
+port specifically for management.
+
+02:23.280 --> 02:26.260
+So if I look at both hosts they're identical.
+
+02:26.790 --> 02:30.130
+I have a VM kernel port just for me an internet.
+
+02:30.190 --> 02:33.420
+Now there's a couple options that I can take here.
+
+02:33.430 --> 02:38.980
+Number one I could just simply click on the pencil icon here.
+
+02:40.700 --> 02:47.130
+And enable the motion on this existing management VM kernel port right.
+
+02:47.540 --> 02:55.100
+And the goal of this VM kernel port is to be able to essentially transfer all of the information that
+
+02:55.100 --> 03:00.530
+needs to get transferred when you're moving a virtual machine from one host to another like the contents
+
+03:00.530 --> 03:02.330
+of memory all that sort of stuff.
+
+03:03.060 --> 03:10.910
+So we have to identify a VM kernel pore on every host that can be used for motion traffic.
+
+03:10.910 --> 03:16.250
+And sometimes you'll see it done this way sometimes you'll see organizations that use the same VM kernel
+
+03:16.250 --> 03:21.420
+port for Wii motion and for management it's really up to you.
+
+03:21.430 --> 03:28.780
+It kind of depends on your own organization's scenario what your security policies are and all of that
+
+03:28.780 --> 03:34.130
+sort of kind of external factors are really what drive your decision here.
+
+03:34.630 --> 03:42.150
+But for my lab environment enabling these both on the same VM kernel port is perfectly suitable right.
+
+03:42.180 --> 03:48.290
+So now I've got to VM kernel ports with the motion enabled right.
+
+03:48.550 --> 03:54.560
+And I'm in good shape to go ahead and start to try and carry out some Wii motion operations.
+
+03:54.820 --> 03:58.140
+So I'm going to do a little clean up here and get rid of this old VM.
+
+03:58.240 --> 04:00.040
+I'm going to create a new virtual machine.
+
+04:01.420 --> 04:03.760
+And this is just going to take a moment.
+
+04:04.150 --> 04:07.890
+And when I create this new VM there's a couple of things I want to show you.
+
+04:08.020 --> 04:08.390
+All right.
+
+04:08.410 --> 04:15.950
+So there is also some important prerequisites for your virtual machines themselves.
+
+04:15.970 --> 04:23.140
+So if I'm going to be Wii motioning a virtual machine from host to host it's critical that I ensure
+
+04:23.350 --> 04:28.890
+number one that the virtual machine is located on a shared storage.
+
+04:29.060 --> 04:29.610
+Right.
+
+04:29.720 --> 04:36.300
+So that's the first important factor so I'm going to place this on my shared data store.
+
+04:36.330 --> 04:44.270
+It's important that the virtual machine is compatible with the host that you plan to migrate it to.
+
+04:44.550 --> 04:53.000
+So if I still have some ESX I six hosts in my environment I want to choose the appropriate compatibility
+
+04:53.000 --> 04:54.080
+mode.
+
+04:54.080 --> 05:02.510
+Now in my case all of my hosts are 6 5 so I can safely choose the latest virtual hardware version and
+
+05:02.750 --> 05:07.140
+go ahead and select that and I'll pick my guest operating system.
+
+05:07.280 --> 05:09.300
+And I'm just going to stick with the defaults here.
+
+05:10.750 --> 05:13.270
+And now I can customize my hardware.
+
+05:13.270 --> 05:17.410
+Now there's also some important things related Wii motion here as well.
+
+05:17.830 --> 05:21.920
+So let me walk you through a couple of the key settings here.
+
+05:22.000 --> 05:30.460
+So number one under C-p you we want to make sure that Seip scheduling affinity is not configured right.
+
+05:30.550 --> 05:33.940
+That will break the motion right there.
+
+05:33.940 --> 05:40.840
+So we don't want to enable that let's see we also want to make sure that our virtual machine is connected
+
+05:40.900 --> 05:49.420
+to a network that is present on all of my ESX I host because I might be migrating this VM to another
+
+05:49.420 --> 05:50.260
+host.
+
+05:50.260 --> 05:55.380
+Hopefully that other host also has this network called 199 on it.
+
+05:57.120 --> 06:02.350
+Then I also need to be able to migrate this virtual machine.
+
+06:02.350 --> 06:11.320
+So if it's connected to an ISO image that is on my local data store that's going to be a problem.
+
+06:11.500 --> 06:12.000
+Right.
+
+06:12.280 --> 06:17.380
+So I want to make sure that my virtual machine is not connected to any local ISO images.
+
+06:17.380 --> 06:24.100
+So go ahead and just leave that as client device and I'm going to go ahead and make sure that my hard
+
+06:24.100 --> 06:28.930
+disk is thin provisioned just because I don't have a lot of space to work with here.
+
+06:30.450 --> 06:36.390
+And I'll hit next and I'll finish since I've created a VM and that VM doesn't really have any kind of
+
+06:36.390 --> 06:40.600
+built in problems related to Wii motion.
+
+06:40.600 --> 06:42.570
+Right it's going to work.
+
+06:42.700 --> 06:49.380
+So I'm going to go ahead and power this VM on and then we'll take a look at actually carrying out a
+
+06:49.380 --> 06:50.520
+Wii motion migration.

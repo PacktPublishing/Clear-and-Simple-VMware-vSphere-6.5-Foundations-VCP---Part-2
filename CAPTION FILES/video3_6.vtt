@@ -1,0 +1,190 @@
+WEBVTT
+
+00:02.350 --> 00:10.860
+In this video we'll talk about troubleshooting common installation issues with ESX and V Center OK.
+
+00:10.940 --> 00:17.210
+So when we're installing ESX high we have a few different options of ways that we can actually perform
+
+00:17.210 --> 00:18.390
+the installation.
+
+00:18.770 --> 00:20.760
+We can do an interactive installation.
+
+00:20.930 --> 00:28.940
+This is probably the most common way that people install ESX I for the first time right where basically
+
+00:28.940 --> 00:37.400
+you have the ESX site installation media you boot up a host from let's say a DVD and you go through
+
+00:37.400 --> 00:40.930
+all the prompts and you manually install ESX.
+
+00:41.210 --> 00:46.500
+That's definitely the most common option if you're having problems there.
+
+00:46.580 --> 00:50.650
+Make sure that you've got the boot order in your bios selected correctly.
+
+00:50.690 --> 00:57.310
+Right so that the ESX host will actually boot from the media you're using to install ESX side.
+
+00:57.410 --> 00:59.270
+That's a pretty straightforward one.
+
+01:00.940 --> 01:10.570
+You can also install ESX from us be devices you can install ESX by using a scripted installation where
+
+01:10.570 --> 01:19.270
+you write your own script to control the installation of ESX from some sort of image repository or you
+
+01:19.270 --> 01:21.160
+can use auto deploy.
+
+01:21.340 --> 01:27.250
+Now I wouldn't expect to see a lot on the VSE for six foundations exam about these topics but if you're
+
+01:27.250 --> 01:33.820
+taking the VCP exam you can expect some questions about scripted installations and auto deploy.
+
+01:34.920 --> 01:43.830
+From the perspective of auto deploy what you're actually doing is you're booting up ESX hosts with no
+
+01:43.920 --> 01:46.140
+local image whatsoever.
+
+01:46.560 --> 01:51.030
+They might not even have any local storage whatsoever.
+
+01:51.800 --> 01:58.370
+And as you're ESX I host boot up they're doing something called a Pixi boot and the Pixi bu enables
+
+01:58.370 --> 02:06.260
+them to boot from an average on a TFT server which allows them to then download and ESX site image directly
+
+02:06.260 --> 02:07.120
+into memory.
+
+02:07.940 --> 02:14.000
+So you can actually write it ESX I hosts with no local storage whatsoever.
+
+02:14.210 --> 02:20.150
+And so without getting into a whole bunch of detail on auto ploy just understand that we've got all
+
+02:20.150 --> 02:23.130
+these different ways to install ESX II.
+
+02:23.690 --> 02:29.390
+Here we're primarily focused on the interactive installation method.
+
+02:29.470 --> 02:29.750
+Right.
+
+02:29.780 --> 02:35.720
+So we'll talk a little bit about some of the troubleshooting you can do with the interactive installation.
+
+02:35.990 --> 02:40.970
+But first let's talk about the impact of improper licensing.
+
+02:41.390 --> 02:41.810
+Right.
+
+02:42.110 --> 02:50.440
+So if you have an expired visa center license what you'll see in your visa for a web client is all of
+
+02:50.440 --> 02:53.890
+your hosts will appear to be disconnected.
+
+02:54.500 --> 03:00.210
+That's usually the result of an expired visa have a license and you cannot connect your hosts to the
+
+03:00.210 --> 03:09.470
+sender until that license is either replaced or something along those lines you have to have a current
+
+03:09.470 --> 03:12.680
+valid license to connect those hosts.
+
+03:12.920 --> 03:20.300
+You also can't apply a license to a host if the license has insufficient C.P. use.
+
+03:20.310 --> 03:27.230
+Right so if you have a license for ACP use and you have a host with 16 C.P use while you're not going
+
+03:27.230 --> 03:31.300
+to be able to apply that license to that host.
+
+03:31.530 --> 03:36.200
+Now and this screen we're actually looking at V.M. Where is documentation.
+
+03:36.310 --> 03:42.640
+And here you can see a document called collecting logs for troubleshooting a V Center server installation
+
+03:42.670 --> 03:44.310
+or upgrade.
+
+03:44.380 --> 03:49.230
+This is important information for the certification and for real life as well.
+
+03:49.570 --> 03:57.160
+So if you're installing or upgrading vse center there is a number of logs that are specific only to
+
+03:57.160 --> 03:58.690
+the installation process.
+
+03:58.690 --> 04:04.630
+Right so if an installation or upgrade fails you can check these logs to help you identify the source
+
+04:04.630 --> 04:05.980
+of the failure.
+
+04:06.610 --> 04:13.250
+And the most common method is to simply use the installation wizard to collect those installation logs.
+
+04:13.250 --> 04:13.720
+Right.
+
+04:14.080 --> 04:20.790
+So if the installation fails and we get this page thing the set up has been interrupted and there some
+
+04:20.880 --> 04:27.880
+checkboxes automatically selected that will simply allow you to download those log files.
+
+04:28.120 --> 04:34.210
+So that's the easiest and simplest way but there's also other options you can collect deployment log
+
+04:34.210 --> 04:36.400
+files from the center server appliance.
+
+04:36.400 --> 04:43.270
+You can even export a V Center server support bundle for troubleshooting.
+
+04:43.750 --> 04:50.290
+And so this the documentation will walk you through you know all of the individual steps required to
+
+04:50.320 --> 04:51.890
+complete these tasks.
+
+04:52.210 --> 04:57.380
+And while we're in the documentation there is one other document I want to show you.
+
+04:57.910 --> 05:03.150
+This is another error that I would not be shocked to see on the certification test.
+
+05:03.580 --> 05:11.380
+If you get this error Microsoft sequel database set to unsupported compatibility mode causes the center
+
+05:11.380 --> 05:13.880
+installation to fail.
+
+05:14.020 --> 05:18.040
+Basically at this point you just have to make sure you're running a database version that's actually
+
+05:18.040 --> 05:19.470
+supported by the center.
+
+05:19.760 --> 05:28.890
+So if sequel 2008 is set up to run in sequel 2000 compatibility mode this error occurs.
+
+05:28.930 --> 05:33.730
+This is the type of scenario you want to memorize for the certification test.

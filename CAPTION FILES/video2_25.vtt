@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00.290 --> 00:05.730
+In this video I'll be explaining VSD for data protection and how it can be used as a backup solution
+
+00:05.730 --> 00:13.710
+for your virtual machines for data protection is a Virtual Machine backup solution that is completely
+
+00:13.710 --> 00:15.500
+integrated with the sphere.
+
+00:15.750 --> 00:19.080
+It's managed using the vees fair web client.
+
+00:19.120 --> 00:25.420
+Now we have to deploy a virtual machine called the VSE for data protection appliance.
+
+00:25.420 --> 00:33.530
+And this is a pre-built prepackaged Linux virtual machine that will use to manage vse for data protection
+
+00:35.730 --> 00:41.750
+we'll set up backup jobs for virtual machines and after those VMs are initially backed up only the change
+
+00:41.750 --> 00:43.290
+two blocks are copied.
+
+00:43.320 --> 00:44.300
+Moving forward.
+
+00:44.400 --> 00:46.420
+So we can do incremental backups.
+
+00:47.720 --> 00:52.400
+It provides virtual machine protection as well as file level protection.
+
+00:52.400 --> 00:59.180
+If we install and in guest agent and we can also do application where backups for sequel's Sharepoint
+
+00:59.180 --> 01:02.650
+in exchange if that guest agent is installed.
+
+01:02.900 --> 01:07.070
+This is a new feature for VSE for data protection.
+
+01:07.070 --> 01:13.430
+These applications are where backups used to only be available in a product called Vee's for data protection
+
+01:13.430 --> 01:14.670
+advanced.
+
+01:14.690 --> 01:21.020
+Now all of the features of these for data protection Advanced have been rolled into the VSE for data
+
+01:21.020 --> 01:28.020
+protection product which is free with VSE for.
+
+01:28.070 --> 01:34.790
+So we have to deploy the VSE fear and data protection appliance which is a pre-built Linux based virtual
+
+01:34.790 --> 01:41.150
+appliance we can deploy up to 20 of these virtual appliances per pervy center instance and by default
+
+01:41.170 --> 01:47.960
+they are equipped with 4 gigs of memory and for virtual C-p use each Vee's for data protection appliance
+
+01:47.960 --> 01:57.110
+supports a maximum of 8 terabytes of backup data per appliance which on average is 150 to 200 virtual
+
+01:57.110 --> 01:58.020
+machines.
+
+02:00.160 --> 02:07.150
+These for data protection is compatible with VSE VM FS and NFZ data stores.
+
+02:07.210 --> 02:13.000
+So let's take a look and an example back up job and we'll also take a look at a screenshot of a retention
+
+02:13.000 --> 02:15.660
+policy.
+
+02:15.670 --> 02:22.180
+So the first step is to pick out what we want to back up which can be either a virtual machine or a
+
+02:22.180 --> 02:26.330
+container object such as resource pool.
+
+02:26.430 --> 02:29.210
+Then we can schedule the frequency of the backup job.
+
+02:29.210 --> 02:32.120
+How often do we want backups to occur.
+
+02:32.480 --> 02:38.830
+And in a moment I'll show you a screen shot of a potential retention policy that we can configure.
+
+02:38.890 --> 02:44.560
+But before I show you that a few other options on the backup job that we can configure is replication
+
+02:45.190 --> 02:53.620
+we can replicate backed up data using these for data protection to either another Vee's for data protection
+
+02:53.620 --> 02:57.510
+appliance or even to EMC Avatar's solution.
+
+02:58.740 --> 03:06.100
+Any of this replicated data is compressed and encrypted and once we've created a backup job we can clone
+
+03:06.100 --> 03:13.020
+it and this will make it easy to configure future backup jobs with a matching retention policy.
+
+03:13.090 --> 03:19.060
+So here we see our retention policy and this is a good example of a fairly typical retention policy
+
+03:19.540 --> 03:25.690
+where we're going to save a certain number of daily backups a certain number of backups for weeks a
+
+03:25.690 --> 03:29.580
+certain number of monthly backups in a certain number of annual backups
+
+03:32.590 --> 03:40.700
+piece for data protection does allow us to perform application backups of sequel Exchange and SharePoint
+
+03:41.780 --> 03:48.590
+in order to do this we need to install the VSD for data protection application agents in the guest operating
+
+03:48.590 --> 03:57.560
+system and the job of this agent is to ensure that the data is in an application consistent state prior
+
+03:57.560 --> 04:04.940
+to backing that data up and may need to commit certain transaction logs to prepare those particular
+
+04:04.940 --> 04:08.170
+applications for backup.
+
+04:08.240 --> 04:16.850
+It supports sequel server Klosters and Exchange Server database availability groups and it can also
+
+04:16.850 --> 04:22.960
+be installed on physical exchange sequel and Sharepoint servers as well.
+
+04:25.210 --> 04:32.720
+Now we don't just have the ability to do VM level backups we can also restore individual files and folders.
+
+04:32.740 --> 04:39.010
+However this does require a client installation on the guest operating system and once we've taken these
+
+04:39.010 --> 04:39.610
+backups.
+
+04:39.610 --> 04:43.750
+A web based client can be used to perform these resource.
+
+04:43.900 --> 04:50.050
+As a matter of fact we can even give our end users access to a simple web interface so that they can
+
+04:50.050 --> 04:57.400
+perform their own self-service restores files can be restored to the original location or we can choose
+
+04:57.400 --> 05:00.850
+a different folder to place them in.
+
+05:01.050 --> 05:06.810
+So in review these for data protection provides backup and recovery for virtual machines.
+
+05:06.840 --> 05:13.380
+It's completely integrated into vse fair and is managed using the VSE for web client the VSE for data
+
+05:13.380 --> 05:18.450
+protection appliance is required and only changed blocks are backed up.
+
+05:18.450 --> 05:25.320
+We have incremental backups once a complete backup of a VM is performed each time the backup window
+
+05:25.320 --> 05:26.140
+arrives.
+
+05:26.190 --> 05:33.010
+The change to blocks are backed up and saved to a duplicated backup data location.
+
+05:35.740 --> 05:40.330
+These are data protection provides virtual machine and file level rephrase
+
+05:43.580 --> 05:48.250
+vse for data protection provides virtual machine and file level protection.
+
+05:48.360 --> 05:53.860
+The file level protection however does require the installation of unguessed agent.
+
+05:54.300 --> 05:57.220
+So do application aware backups for sequel.
+
+05:57.270 --> 05:58.890
+SharePoint and Exchange.

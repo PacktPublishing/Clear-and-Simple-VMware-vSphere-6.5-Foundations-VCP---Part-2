@@ -1,0 +1,256 @@
+WEBVTT
+
+00:01.310 --> 00:07.790
+In this video I'll introduce the concept of storage Wii motion and how it can be used to take a virtual
+
+00:07.790 --> 00:13.530
+machine and move it from one day to store to another.
+
+00:13.730 --> 00:20.000
+And that's the purpose of storage the motion is to take a running VM and move it from one data store
+
+00:20.000 --> 00:20.750
+to another.
+
+00:20.780 --> 00:25.300
+And what we're moving is the virtual machines set of files.
+
+00:25.480 --> 00:29.740
+And this does not result in any downtime whatsoever.
+
+00:29.740 --> 00:31.940
+So why would we do a stored V motion.
+
+00:32.200 --> 00:37.480
+Well maybe one data store is starting to fill up and we need to take some virtual machines and move
+
+00:37.480 --> 00:44.020
+them to another data store or maybe one physical storage device is going to be retired and so we want
+
+00:44.020 --> 00:48.250
+to move all of our victims off of it without any downtime.
+
+00:48.260 --> 00:53.210
+That's the sort of thing that will use storage of emotion for.
+
+00:53.380 --> 00:57.940
+So let's take a look at what happens during a storage Wii motion operation.
+
+00:57.940 --> 01:04.460
+And in this case we see we've got a virtual machine in the middle running on ESX I host one.
+
+01:04.540 --> 01:07.810
+So that's the host that my Virtu machine is running on.
+
+01:07.810 --> 01:11.580
+That's like the live state of the host.
+
+01:11.830 --> 01:16.160
+And the files for this host are currently located on data store one.
+
+01:16.330 --> 01:18.990
+And so let's assume that data store one is nearly full.
+
+01:20.080 --> 01:22.700
+All right and we need to free up some space.
+
+01:22.870 --> 01:32.390
+So we want to move the virtual machine files from one data store to another using storage of emotion.
+
+01:32.390 --> 01:35.460
+Let's take a look at what actually happens.
+
+01:35.630 --> 01:44.200
+While this storage of emotion is in progress OK so again we see this virtual machine that's running
+
+01:44.200 --> 01:51.680
+on ESX I host one in the middle of our diagram and our administrator kicks off a storage Wii motion
+
+01:51.800 --> 01:54.080
+using the vees for web client.
+
+01:54.170 --> 01:59.720
+And so now all of these files need to be copied from data store one to data store.
+
+01:59.870 --> 02:06.940
+And this can be really resource intensive VM decay files especially can be really large.
+
+02:07.110 --> 02:14.560
+And so all of this virtual machine data all these files are going to be copied from the source data
+
+02:14.560 --> 02:23.380
+store to the destination data store and now will have an identical copy of all of the virtual machines
+
+02:23.380 --> 02:25.120
+files on both data stores.
+
+02:25.120 --> 02:27.560
+Now this might take a while.
+
+02:27.700 --> 02:34.250
+And so as this is occurring the copy is occurring the virtual machine continues to run and there may
+
+02:34.250 --> 02:44.630
+be changes that occur while this copy is in progress the ESX host has a mechanism called The Mirror
+
+02:44.650 --> 02:45.420
+driver.
+
+02:45.880 --> 02:54.100
+And what that does is ensures that while this storage Wii motion is in progress while the data is being
+
+02:54.100 --> 03:04.770
+copied from day to store one data store to any changes that occur are mirrored across both data stores.
+
+03:04.790 --> 03:10.730
+So if anything changes on that virtual machine which is running during the entire storage V motion process
+
+03:11.120 --> 03:17.210
+all of those changes are automatically mirror to both the source and destination data stores to keep
+
+03:17.210 --> 03:18.330
+them identical.
+
+03:18.680 --> 03:26.000
+And when the copy is complete view the data on data store one is disposed of and the virtual machine
+
+03:26.060 --> 03:33.660
+instance now uses the copy of the files on data store to and that's a stored V motion.
+
+03:33.660 --> 03:38.020
+Now there's a few things you might want to bear in mind when it comes to storage Wii motion.
+
+03:38.040 --> 03:40.020
+Number one it's resource intensive.
+
+03:40.200 --> 03:44.820
+There's a lot of data potentially copying from data store one data store.
+
+03:44.940 --> 03:50.790
+So you may want to plan it for off hours or a time when really there's not a whole lot of other storage
+
+03:50.790 --> 03:58.310
+traffic going on just because that could potentially overwhelm the ESX I hostes connection to storage.
+
+03:58.560 --> 04:03.690
+And so we want to keep these to a minimum especially during business hours and we want to plan them
+
+04:03.690 --> 04:08.510
+out carefully during times of minimal storage usage.
+
+04:12.010 --> 04:18.600
+Now one final type of Wii motion that I want to talk about is called a shared nothing Wii motion.
+
+04:18.610 --> 04:28.350
+And you may have heard this referred to as an enhanced V motion or a cross host's storage of emotion
+
+04:28.600 --> 04:33.100
+and the name tends to change every couple of years and I don't know why that is.
+
+04:33.340 --> 04:39.580
+But I think the current name is actually very descriptive so hopefully it'll stick.
+
+04:39.580 --> 04:43.290
+This is called a shared nothing V motion.
+
+04:43.360 --> 04:50.530
+And in this scenario we've got a virtual machine running on ESX I host one and the virtual machines
+
+04:50.530 --> 05:01.080
+files are not on shared storage they're on a data store that is only accessible to ESX I host one.
+
+05:01.110 --> 05:08.850
+So now we're in a bit of a bit of a situation here because if I try to take this virtual machine and
+
+05:08.850 --> 05:14.520
+Wii motion it to host to it's not going to be able to access any of its files.
+
+05:15.660 --> 05:18.410
+So in this case the motion is not possible.
+
+05:18.560 --> 05:19.200
+Right.
+
+05:19.260 --> 05:25.380
+The motion is not possible because the virtual machine needs to maintain access to those files.
+
+05:25.440 --> 05:31.890
+So the only way that we can get a Wii motion to work is if we move not only the virtual machines live
+
+05:31.890 --> 05:40.140
+state but the set of files for that virtual machine as well and we move them simultaneously and that's
+
+05:40.140 --> 05:41.670
+what a shared nothing.
+
+05:41.700 --> 05:49.590
+The motion is in it's going to take the running live state of a virtual machine and all of the files
+
+05:49.650 --> 05:51.050
+for that virtual machine.
+
+05:51.360 --> 05:54.990
+And it's going to instantiate a copy to the destination.
+
+05:55.040 --> 06:00.440
+ESX I host and to another data store that we specify.
+
+06:00.690 --> 06:08.010
+And when the copy operation is complete when the virtual machines live state has been completed moving
+
+06:08.010 --> 06:14.340
+over a VM motion network when my virtual machine files have been copied from the source data store to
+
+06:14.340 --> 06:15.690
+the destination data store.
+
+06:15.810 --> 06:20.090
+And I have an identical configuration on both sides.
+
+06:20.250 --> 06:23.730
+Then the original virtual machine instance ceases to exist.
+
+06:24.970 --> 06:31.410
+And we cut over to the new instance on host to and on the destination data store.
+
+06:31.420 --> 06:36.760
+So with this mechanism we can actually take virtual machines that are running a local storage and move
+
+06:36.760 --> 06:40.630
+them to a different host.
+
+06:40.700 --> 06:44.380
+So that is what we call a shared nothing the motion.
+
+06:44.420 --> 06:46.330
+It's not used for duress.
+
+06:46.520 --> 06:52.610
+So if you're using distributed resource scheduler de-risk does not actually leverage shared nothing.
+
+06:52.610 --> 06:56.270
+The motion de-risk requires shared storage.
+
+06:56.270 --> 07:01.740
+It can't do what we see here in this slide.
+
+07:01.750 --> 07:08.110
+So in this lesson we learned that storage promotion is used to take a running virtual machine and move
+
+07:08.110 --> 07:10.270
+it from one data store to another.
+
+07:10.270 --> 07:16.480
+And as the copy is in progress the changes are mirrored to the source and destination data store using
+
+07:16.480 --> 07:20.340
+the mirror driver of the ESX I host.
+
+07:20.360 --> 07:28.430
+We also learned how we can use a shared nothing or cross host storage Wii motion to take a running virtual
+
+07:28.430 --> 07:35.330
+machine and move it from one host to another and one data store to another at the same time even if
+
+07:35.330 --> 07:36.920
+we don't have shared storage.

@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00.480 --> 00:04.860
+In this video I'll explain high availability admission control.
+
+00:05.020 --> 00:12.360
+Now the purpose of admission control is to ensure that these fair high availability has enough spare
+
+00:12.360 --> 00:19.110
+resources to accommodate the failure of one or more ESX hosts.
+
+00:19.260 --> 00:25.470
+And when we have a host failure with ha all of the teams that were running on that host will fail and
+
+00:25.470 --> 00:28.620
+they'll get booted up on other hosts within that cluster.
+
+00:29.830 --> 00:37.210
+So as these VMT that are failed get restarted on these other hosts we're going to use that mission control
+
+00:37.210 --> 00:44.260
+to ensure that those hosts that still remain have enough spare resources to adequately run those virtual
+
+00:44.260 --> 00:45.070
+machines.
+
+00:46.100 --> 00:50.560
+And also make sure that virtual machines with reservations will be able to boot.
+
+00:51.660 --> 00:58.530
+Now if a virtual machine has a reservation that means that that VM is guaranteed a certain amount of
+
+00:58.530 --> 01:05.030
+resources and if those resources are not available the VM won't be able to boot.
+
+01:05.040 --> 01:10.980
+So again high availability of mission control is going to help us ensure that if an ha event occurs
+
+01:11.190 --> 01:16.090
+every single virtual machine ends up booting up.
+
+01:16.170 --> 01:22.770
+So here we see a cluster of ESX I hosts and on each of these ESX I hosts we're utilizing about 80 percent
+
+01:22.770 --> 01:24.540
+of the memory or c.p.
+
+01:24.810 --> 01:25.350
+Right.
+
+01:25.740 --> 01:33.810
+And if one of these hosts now fails there is not enough spare capacity on the surviving hosts to adequately
+
+01:33.810 --> 01:36.230
+run those virtual machines.
+
+01:36.690 --> 01:44.280
+Therefore we need something like a Mission Control to kind of place some limits on these hosts and ensure
+
+01:44.280 --> 01:50.270
+that we don't run so many Reems that we can't tolerate a failure.
+
+01:50.280 --> 01:57.300
+Now if an ESX I host fails we have enough spare capacity to boot those virtual machines up the surviving
+
+01:57.300 --> 01:59.780
+hosts.
+
+01:59.910 --> 02:05.490
+So here we see the first admission control policy that we can choose from which is called Host failures
+
+02:05.490 --> 02:07.720
+that clustered Howard's.
+
+02:07.970 --> 02:13.640
+This is a very common choice but it's not as simple as it sounds and it's often misunderstood.
+
+02:14.000 --> 02:16.980
+So let's take a look at how this method works.
+
+02:17.000 --> 02:24.290
+The first step is to calculate the slot size which is based on the largest CPU and memory reservations
+
+02:24.650 --> 02:28.990
+of any virtual machine in the cluster.
+
+02:29.000 --> 02:37.370
+So here we see VM one with a 1 gig memory reservation and VM 2 with a 500 megahertz CPQ reservation.
+
+02:37.370 --> 02:42.530
+And those two virtual machines combine to form our slot size.
+
+02:42.530 --> 02:47.470
+So now we know how big the biggest VM can possibly be.
+
+02:47.900 --> 02:54.650
+And the next step is to determine how many slots can run on each of our hosts.
+
+02:54.700 --> 03:01.990
+So all of our hosts in this case support the same number of slots and let's assume that high availability
+
+03:01.990 --> 03:05.980
+is configured to tolerate a single host failure.
+
+03:05.980 --> 03:12.480
+That means we need to set aside five slots as spare capacity.
+
+03:12.520 --> 03:15.300
+Now let's say that we have a large virtual machine.
+
+03:15.310 --> 03:23.760
+See on the left VM one now has a 4 gig memory reservation Well that's going to contribute to a larger
+
+03:23.760 --> 03:26.060
+slot size.
+
+03:26.280 --> 03:30.840
+And that's going to skew the number of slots that are available per host.
+
+03:30.840 --> 03:34.350
+Right now I can only power on two virtual machines per host.
+
+03:34.530 --> 03:40.520
+And let's not forget we need to set aside one Holst's worth of resources for failover.
+
+03:40.560 --> 03:48.620
+So now my cluster has the same hardware but because my slot size is larger I can run less virtual machines.
+
+03:50.440 --> 03:52.210
+So in this slide here.
+
+03:52.210 --> 03:57.550
+Notice we now have four usable slots.
+
+03:57.610 --> 04:04.330
+Let's say that because we can't power on many VA EMS we decide hey let's take host ESX zero or three
+
+04:04.690 --> 04:12.610
+and double the memory and double the C.P you so now host ESX zero or three has way more resources than
+
+04:12.610 --> 04:13.710
+it had before.
+
+04:14.490 --> 04:21.120
+And we still have the 4 gig memory reservation on VM one on the left and 500 to make her reservation
+
+04:21.350 --> 04:23.260
+in the VM two on the right.
+
+04:23.520 --> 04:32.980
+So our slot size remains unchanged but now our cluster as a whole can run a total of eight slots.
+
+04:33.050 --> 04:38.110
+So we're hoping hey we're going to have more than four usable slots this time around.
+
+04:38.390 --> 04:38.870
+Well no.
+
+04:38.900 --> 04:47.240
+No such luck because we need to account for a failure of the largest host their force for slots have
+
+04:47.240 --> 04:53.810
+to be reserved for fail over and we end up again with four usable slots just like we had before the
+
+04:53.810 --> 04:56.290
+memory in the upgrade.
+
+04:56.400 --> 04:58.970
+So this method can be a little tricky.
+
+04:59.350 --> 05:04.420
+And when people can't boot up their virtual machines they tend to turn off at Mission Control which
+
+05:04.420 --> 05:05.340
+is a bad thing.
+
+05:06.930 --> 05:08.070
+So there's a few things you can do.
+
+05:08.070 --> 05:16.830
+Number one you can manually configure the slot size or you could simply configure a percentage of resources
+
+05:17.430 --> 05:21.710
+that admission control reserves no tricky slot sizes here.
+
+05:21.780 --> 05:28.320
+It's just a simple percentage that says hey we're going to reserve 25 percent of resources for failover
+
+05:28.770 --> 05:34.270
+while not all of these hosts you know 36 gigs out of 48 will be usable.
+
+05:34.300 --> 05:37.230
+This is a really simple way to do this.
+
+05:37.270 --> 05:42.520
+And if we say hey let's take that fourth host and give it more resources.
+
+05:43.200 --> 05:43.370
+Right.
+
+05:43.390 --> 05:49.130
+Double the memory one that we're going to actually get something of doubling the memory of that host.
+
+05:49.210 --> 05:54.040
+We're going to get double the amount of usable memory because we're using a simple percentage.
+
+05:54.070 --> 05:59.740
+And this also helps just reduce the odds that somebody is going to just turn off at mission control
+
+05:59.740 --> 06:05.450
+because they can boot up a VM.
+
+06:05.520 --> 06:11.850
+The final admission control method you can utilize is by specifying a fail over host.
+
+06:11.850 --> 06:17.810
+This is like setting aside one host just for failover no Reems run on this host.
+
+06:17.910 --> 06:20.040
+It's simply spare capacity.

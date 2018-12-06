@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.980 --> 00:04.820
+In this video I'll demonstrate fault tolerance.
+
+00:04.870 --> 00:11.530
+So here we see a virtual machine and let's assume that this is a really critical VM.
+
+00:11.530 --> 00:17.980
+This is a VM that we can't tolerate even the slightest amount of downtime.
+
+00:18.340 --> 00:25.050
+So I want to enable fault tolerance on this virtual machine and fault tolerance is going to give me
+
+00:25.050 --> 00:27.450
+that 100 percent uptime solution.
+
+00:28.340 --> 00:35.000
+But before we can do that we need to go to our ESX I hosts and make sure that we've done some of the
+
+00:35.510 --> 00:40.010
+prep work that's required for fault tolerance.
+
+00:40.100 --> 00:48.160
+So I'm going to go to a VM kernel port on my first host and I'm going to go ahead and enable fault tolerance
+
+00:48.180 --> 00:51.200
+logging my VM kernel port.
+
+00:51.300 --> 00:57.270
+Now just bear in mind this is my lab environment right so I'm doing the motion management and the fault
+
+00:57.270 --> 01:00.580
+tolerance all on the same VM kernel port.
+
+01:00.840 --> 01:07.710
+In real life you might not want to do this especially fault tolerance logging because this can generate
+
+01:07.770 --> 01:09.580
+a lot of traffic.
+
+01:09.780 --> 01:10.140
+Right.
+
+01:10.170 --> 01:13.980
+So in my lab This is fine.
+
+01:14.010 --> 01:18.000
+Putting all these different types of traffic on the same VM kernel ports is just fine.
+
+01:18.120 --> 01:20.780
+But in real life it might not actually want to do that.
+
+01:23.050 --> 01:29.960
+OK so let's go ahead and write this VM motion demo fault tolerance is different than high availability
+
+01:30.020 --> 01:36.410
+or DRAM or things like that because we're going to enable it on a virtual machine by virtual machine
+
+01:36.410 --> 01:36.980
+basis.
+
+01:37.040 --> 01:39.850
+Right re-enabling one VM at a time.
+
+01:40.640 --> 01:48.570
+So I'm going to turn on fault tolerance for this really critical VM and I'm going to pick the data store
+
+01:48.900 --> 01:58.760
+for my secondary VM desks and configuration files so right now this Wii motion demo VM is stored on
+
+01:58.760 --> 02:00.630
+the shared data store.
+
+02:00.680 --> 02:06.900
+So in this case I'm going to go ahead and put my secondary VM disks right on the shared data store.
+
+02:06.980 --> 02:16.220
+Now this exposes me a little bit because now I'm putting the disks for my primary VM and my secondary
+
+02:16.220 --> 02:18.970
+VM on the same data store.
+
+02:19.010 --> 02:24.650
+So if that storage device were to ever fail I'm going to have a problem there and I could potentially
+
+02:24.650 --> 02:29.520
+lose all of the data associated with that VM.
+
+02:29.630 --> 02:35.390
+So if I were to have maybe a second shared data store that would be awesome because then I could go
+
+02:35.390 --> 02:41.990
+ahead and place my secondary VM disks and configuration files on a completely different data store on
+
+02:41.990 --> 02:48.650
+a completely different storage array and I'd have that even higher level of protection.
+
+02:48.700 --> 02:55.280
+My lab I only have one storage device so I'm going to go ahead and pick the shared data store and then
+
+02:55.280 --> 02:59.810
+I'll pick a host that the secondary VM can reside on.
+
+02:59.810 --> 03:04.970
+And it's telling me down here you know I'm using the same data store for both the primary and secondary
+
+03:04.970 --> 03:06.900
+VMT case obviously.
+
+03:06.950 --> 03:09.550
+I just explained why that's not ideal.
+
+03:09.560 --> 03:16.850
+So in real life try to split up those VM disks across different physical storage systems
+
+03:19.770 --> 03:20.880
+and that's really it.
+
+03:20.880 --> 03:25.590
+So I've turned on fault tolerance on this Wii motion demo virtual machine.
+
+03:25.590 --> 03:31.860
+And so what is going to do is it's actually going to spin up a secondary VM on this second host the
+
+03:31.860 --> 03:35.430
+1 9 2 1 6 8 1 9 9 1 2 3.
+
+03:35.760 --> 03:42.070
+And the process might take a little time because it's got to create a copy of those virtual disks.
+
+03:42.180 --> 03:50.110
+But in this scenario I've got a really small VM and so it's not going to take very long in this environment.
+
+03:50.400 --> 03:53.850
+So you can see here we've got fault tolerance turned on.
+
+03:53.850 --> 04:00.210
+We've got a secondary VM started on my second host and if I go back to my first post and I look at the
+
+04:00.210 --> 04:04.590
+VMA there I've got my primary VM on that host.
+
+04:04.590 --> 04:08.560
+So let's go ahead and test this out.
+
+04:08.810 --> 04:11.970
+I have got my primary VM on this first host.
+
+04:12.030 --> 04:16.530
+I'm going to go ahead take that host and shut it down.
+
+04:18.130 --> 04:20.890
+And I'm not going to put it in maintenance mode.
+
+04:20.980 --> 04:28.570
+And what we should see is that the secondary VM should take over as primary as soon as that host start
+
+04:28.570 --> 04:30.290
+shutting down.
+
+04:30.500 --> 04:33.300
+And we should have zero downtime on this virtual machine.
+
+04:35.190 --> 04:35.850
+OK.
+
+04:35.900 --> 04:37.940
+So now my Wii motion demo VM is down.
+
+04:37.940 --> 04:39.460
+It's disconnected.
+
+04:40.130 --> 04:46.680
+The secondary should take over as primary and you can see there is an alert associated with this VM.
+
+04:46.700 --> 04:53.950
+So let's go ahead and take a look but you'll notice the secondary did immediately take over as primary.
+
+04:54.120 --> 05:00.780
+And if I monitor this VM we can take a look at the events that have occurred and we can see the fault
+
+05:00.780 --> 05:03.190
+tolerant state changed on the virtual machine.
+
+05:03.190 --> 05:10.470
+So let's give ourselves a little bit more room to work with here by unpinning some of these tabs that
+
+05:10.470 --> 05:11.600
+I really don't need.
+
+05:13.260 --> 05:13.740
+Yeah.
+
+05:13.770 --> 05:17.390
+So the fault tolerance state changed from green to red.
+
+05:17.390 --> 05:24.110
+You can see that one of our posts was disconnected and that the VM failed over failed over from the
+
+05:24.110 --> 05:27.380
+first host of the second host.
+
+05:27.430 --> 05:33.100
+So we can see that our virtual machine has actually successfully started up though it's running on the
+
+05:33.100 --> 05:34.220
+second host.
+
+05:34.300 --> 05:36.040
+So that's the goal of fault tolerance.
+
+05:36.040 --> 05:41.510
+So now what happens when I restore that first host.
+
+05:41.650 --> 05:44.130
+What's going to happen when I restore that first host.
+
+05:44.140 --> 05:47.620
+Well with fault tolerance it won't fail back.
+
+05:47.620 --> 05:50.050
+It's not going to fail back to the original host.
+
+05:50.110 --> 05:59.260
+So this secondary VM that's now running on my other ESX I host 1 9 2 1 6 8 1 9 and 1 0 3 that is now
+
+05:59.260 --> 06:06.160
+my primary and it's going to stay the primary unless some other sort of failure occurs.

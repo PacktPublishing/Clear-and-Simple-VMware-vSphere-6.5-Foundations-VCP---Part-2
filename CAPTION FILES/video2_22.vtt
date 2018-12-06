@@ -1,0 +1,118 @@
+WEBVTT
+
+00:00.240 --> 00:07.590
+In this video I'll explain the fear of fault tolerance of fault tolerance can be used to provide 100
+
+00:07.590 --> 00:14.670
+percent uptime for critical virtual machines and fault tolerance has undergone some significant changes
+
+00:14.670 --> 00:22.770
+in vees fair six in that it actually protects virtual machine data so we can have no data loss no transaction
+
+00:22.770 --> 00:31.140
+loss or TCAP connection loss the primary virtue machine is protected by mirroring it to a secondary
+
+00:31.140 --> 00:38.340
+virtual machine that's running on another ESX host and the secondary VM is kept exactly the same as
+
+00:38.340 --> 00:44.730
+the primary so that we can easily fail over to the secondary with no downtime
+
+00:47.210 --> 00:54.830
+if the primary virtue machine fails the secondary takes over and becomes the primary and then a new
+
+00:54.830 --> 01:01.500
+secondary VM is spawned on a different host to protect that new primary VM.
+
+01:03.220 --> 01:09.990
+A second day early data store can also be selected to store their files for the secondary VM protecting
+
+01:09.990 --> 01:15.620
+our virtual machine from data loss should the primary virtue machines data store fail.
+
+01:17.700 --> 01:23.550
+Fault tolerance supports up to two virtual C.P. with VSE for standard and up to four virtual Sipah use
+
+01:23.550 --> 01:24.500
+on Enterprise.
+
+01:24.510 --> 01:32.010
+Plus it supports VM ocean on the primary and secondary VM and it supports thin provisioned or thick
+
+01:32.010 --> 01:33.570
+provisioned virtual disks.
+
+01:33.570 --> 01:39.240
+This is another change since vse fair 5.5 Envy's for sex.
+
+01:39.240 --> 01:47.560
+We have all these different disk types supported and we have multiday VCP to support it requires high
+
+01:47.560 --> 01:53.610
+availability and enhanced emotion compatibility to be configured on the cluster.
+
+01:53.640 --> 01:57.570
+So let's take a look at how fault tolerance works.
+
+01:57.570 --> 02:02.090
+We have a primary virtue machine and a secondary virtual machine.
+
+02:02.090 --> 02:08.280
+And in order to get this running we need to create a fault tolerant logging network to keep the primary
+
+02:08.280 --> 02:11.400
+VM and the secondary VM identical.
+
+02:11.400 --> 02:19.280
+We'll do this by configuring a VM kernel port and configuring it for fault tolerance logging traffic.
+
+02:19.430 --> 02:27.440
+Then I will enable fault tolerance on a primary virtual machine which will result in the secondary VM
+
+02:27.440 --> 02:28.670
+being created.
+
+02:31.180 --> 02:37.870
+You can also choose a data store when you configure fault tolerance to keep a copy of the virtual machine
+
+02:37.870 --> 02:42.700
+files on some other data store for that secondary VM.
+
+02:43.000 --> 02:50.640
+So now we have a primary and a secondary VM and also a copy of those virtual machine files on two different
+
+02:50.690 --> 02:55.230
+datasource and asked changes happened on the primary VM.
+
+02:55.280 --> 03:01.680
+They were immediately copied into memory on the secondary virtual machine so that those virtual machines
+
+03:01.680 --> 03:09.840
+are kept in the exact identical state and this is very helpful when we have a failure like an ESX host
+
+03:09.840 --> 03:11.940
+failure for example.
+
+03:11.960 --> 03:21.440
+So here ESX 0 1 is failed and there is an instantaneous immediate fail over to the secondary via Now
+
+03:21.440 --> 03:29.050
+the secondary VM is going to become the primary virtual machine and a new secondary will be created
+
+03:29.050 --> 03:33.660
+on one of the other surviving hosts to report Takht this virtual machine.
+
+03:36.930 --> 03:41.990
+Now one thing that this doesn't protect you from is a guest operating system problem.
+
+03:42.970 --> 03:49.700
+So let's say within the primary virtual machine we get the Windows Blue Screen of Death while the contents
+
+03:49.700 --> 03:56.540
+of memory on that primary VM are going to be immediately copy did the secondary via So the Windows Blue
+
+03:56.540 --> 03:58.630
+Screen of Death will appear there as well.
+
+03:58.770 --> 04:02.930
+All right so there are certain types of failures that fall tolerance doesn't really protect you from.

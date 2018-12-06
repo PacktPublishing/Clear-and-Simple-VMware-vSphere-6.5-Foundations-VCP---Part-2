@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00.460 --> 00:08.310
+In this video I'll describe the relationship of the center and distributed resource scheduler.
+
+00:08.330 --> 00:13.700
+So first off we have to have the center in order to create a dress cluster.
+
+00:13.700 --> 00:20.960
+We can't create any type of host cluster without the center so we need the Center for that management
+
+00:20.990 --> 00:26.520
+capability of creating an ESX I host cluster.
+
+00:26.550 --> 00:32.800
+Now once we've created that de-risk cluster the center stays involved.
+
+00:32.850 --> 00:37.090
+This isn't like high availability with high availability.
+
+00:37.090 --> 00:42.480
+The center is used to create the cluster and then the center kind of steps aside and H.A. can run with
+
+00:42.480 --> 00:43.980
+it without the center.
+
+00:44.190 --> 00:50.650
+Diyar Ross cannot run without the center because we can't even carry out of the motion without the center.
+
+00:50.790 --> 00:53.030
+And that's what difference does.
+
+00:53.150 --> 01:04.020
+It uses VM motion to load balance by distributing virtual machines across hosts evenly so yes absolutely
+
+01:04.020 --> 01:05.430
+requires the center.
+
+01:05.430 --> 01:10.110
+We need the center to configure and we need the Center for DRM to operate.

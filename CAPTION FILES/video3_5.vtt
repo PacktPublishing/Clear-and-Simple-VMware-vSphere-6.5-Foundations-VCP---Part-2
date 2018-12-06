@@ -1,0 +1,91 @@
+WEBVTT
+
+00:01.230 --> 00:07.180
+In this video we'll learn how to reset the ESX time management agents and we'll also learn their purpose
+
+00:07.180 --> 00:08.580
+and what they're used for.
+
+00:11.390 --> 00:20.950
+So ESX I host management agents run on our ESX I hosts and these are what allow the host to synchronize
+
+00:20.950 --> 00:23.240
+its status with the center.
+
+00:23.360 --> 00:29.790
+So the center needs to be aware of many things happening on the ESX I host.
+
+00:29.930 --> 00:36.920
+And if you suddenly lose the ability to manage your host through the center or something along those
+
+00:36.920 --> 00:42.170
+lines you might actually need to restart these management agents.
+
+00:42.620 --> 00:49.310
+Think of them like a service that runs on the ESX I host that at times may need to get restarted for
+
+00:49.310 --> 00:56.540
+troubleshooting purposes and theres a couple of different ways that you can restart the services.
+
+00:56.550 --> 01:05.460
+Now the most common way is to use the direct console user interface or DSU y to restart services.
+
+01:05.460 --> 01:12.570
+That's the simplest way and probably the most frequently used but you can also do it via the command
+
+01:12.570 --> 01:13.220
+line.
+
+01:13.230 --> 01:20.430
+So here are a couple of commands that you can issue to restart hostie and veep's say on your ESX host
+
+01:21.430 --> 01:28.420
+and if you take a look at knowledge base article 1 0 0 0 3 4 9 0.
+
+01:28.630 --> 01:35.200
+It will explain how to carry out both of these methods to restart the management agents.
+
+01:35.200 --> 01:40.510
+If you're going to use the command line option it's pretty straightforward you'll just connect to your
+
+01:40.510 --> 01:49.290
+host using an S-sh client such as puttee and you have to enable S-sh on the ESX host first.
+
+01:49.350 --> 01:55.050
+But once you've done that you can connect to the host via poddy log in with the root credentials and
+
+01:55.050 --> 02:02.640
+then simply execute the two commands shown here and that can be useful especially in situations where
+
+02:02.640 --> 02:08.330
+you're not sitting in the data center and you don't have access to the DC UI.
+
+02:08.420 --> 02:15.270
+And so if you can't get remote console access or if you're not physically nearby the host the command
+
+02:15.270 --> 02:20.500
+line is a great way to quickly and easily do this remotely.
+
+02:20.970 --> 02:26.040
+Here's a look at the direct console user interface right.
+
+02:26.050 --> 02:30.480
+And here you can see I put a little red block around troubleshooting options.
+
+02:30.820 --> 02:37.300
+So when you log into the DC Why you'll just use the arrow keys to kind of scroll down here and get to
+
+02:37.300 --> 02:42.280
+troubleshooting options and then you'll hit enter and other troubleshooting options.
+
+02:42.280 --> 02:46.210
+We have the option to just restart the management agents.
+
+02:46.270 --> 02:54.490
+Now if you've never used the DC before all you need to do is hook up a keyboard and a monitor to the
+
+02:54.490 --> 02:58.330
+back of your ESX host and that will get you into the DC y.
+
+02:58.630 --> 03:07.780
+Or if you have drak or EPM I or some other sort of remote console solution you can use that as well.

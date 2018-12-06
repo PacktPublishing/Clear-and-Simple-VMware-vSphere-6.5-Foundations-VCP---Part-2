@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00.490 --> 00:05.500
+In this video I'll demonstrate how to perform a storage Wii motion.
+
+00:05.530 --> 00:08.750
+So let's take a look at our hosts and Klosters view.
+
+00:09.130 --> 00:14.830
+And here you can see we've got a couple of ESX I host and we've got a virtual machine called Wii motion
+
+00:14.830 --> 00:23.020
+demo and the Wii motion demo virtual machine exists on my shared data store currently.
+
+00:23.500 --> 00:27.860
+And I can validate that by expanding the VM hardware here.
+
+00:28.550 --> 00:35.350
+And when we look at hard disk 1 we can see that it's stored on our shared data store.
+
+00:35.440 --> 00:38.120
+So that's where my VM is currently located.
+
+00:38.440 --> 00:45.030
+And let's say in this scenario I'd like to relocate this virtual machines files.
+
+00:45.040 --> 00:52.630
+So here we see the shared data store and if we look at files we can see all of the files associated
+
+00:52.630 --> 00:57.650
+with this virtual machine in the folder that has the same name as the VM.
+
+00:57.760 --> 00:58.190
+Right.
+
+00:58.450 --> 01:02.740
+So we've got things like the VM DK file the VM X File.
+
+01:02.890 --> 01:09.020
+All these critical files that my virtual machine needs in order to function.
+
+01:09.250 --> 01:14.050
+And so what I want to do is take those files in a while the virtual machine is running.
+
+01:14.200 --> 01:17.650
+Migrate them to one of these other data stores.
+
+01:19.410 --> 01:23.580
+So that's what we're going to do in the scenario that we're going to take this Wii motion demo virtual
+
+01:23.580 --> 01:29.340
+machine and we're going to migrate all of the data and the virtual machine is going to remain on the
+
+01:29.340 --> 01:30.440
+same host.
+
+01:30.450 --> 01:35.580
+It's not going to move to a different host but all the files are going to move to a different data store.
+
+01:36.630 --> 01:46.090
+So I right click to my VM chose migrate and now I'm going to click on change storage only and I'll hit
+
+01:46.090 --> 01:47.260
+next.
+
+01:47.260 --> 01:52.220
+And here we can see the possible data stores that I can migrate this virtual machine to.
+
+01:52.570 --> 01:55.230
+So I'm going to choose data store one.
+
+01:55.360 --> 02:00.760
+And at this point I can actually change the format of the desk.
+
+02:00.850 --> 02:05.860
+So if I want to take this virtual disk and thick provisioning or thin provision at this point I can
+
+02:05.860 --> 02:06.340
+do that.
+
+02:06.490 --> 02:12.650
+I'm going to go ahead and choose then provision and I'll hit next and I'll finish.
+
+02:12.790 --> 02:16.710
+And that's going to kick off my storage Wii motion.
+
+02:16.810 --> 02:23.500
+So now that my stored Wii motion has been kicked off how long it takes really is going to depend on
+
+02:23.500 --> 02:26.900
+the amount of data that you have on your virtual disk.
+
+02:26.950 --> 02:34.000
+This particular virtual machine has a 10 gig virtual disk and we're actually only using 4 gigs of data
+
+02:34.150 --> 02:35.670
+and it's extremely small.
+
+02:35.830 --> 02:39.570
+That's by design so that I can easily demonstrate everything.
+
+02:39.880 --> 02:42.480
+So we can see it happen almost immediately.
+
+02:42.490 --> 02:47.710
+Right now I can see my virtual machine has been relocated to a different data store.
+
+02:48.040 --> 02:50.130
+The VM never stopped running right.
+
+02:50.350 --> 02:53.540
+And the storage the motion was completed.
+
+02:53.550 --> 03:00.920
+Now one final thing I just want to point out if we click on monitor for this virtual machine you can
+
+03:00.920 --> 03:03.140
+schedule this as a task as well.
+
+03:03.320 --> 03:11.250
+So I could create a new scheduled task I could choose migrate and I could migrate to a different data
+
+03:11.250 --> 03:13.900
+store as a scheduled task as well.
+
+03:16.970 --> 03:22.910
+So for example I could move it back to my shared data store and I could schedule it to happen some time
+
+03:22.910 --> 03:24.460
+later tonight.
+
+03:24.460 --> 03:31.370
+All right so for example let's go ahead and just set it for let's say 10:50 p.m. and this is something
+
+03:31.580 --> 03:41.480
+that is often a good idea with storage v. Motion's because storage of emotions can be really really
+
+03:41.480 --> 03:47.690
+resource intensive where you're taking a lot of data in certain cases and moving it from one data store
+
+03:47.690 --> 03:48.650
+to another.
+
+03:48.740 --> 03:54.650
+You might not want to do that in the middle of the day because it might introduce enough storage related
+
+03:54.650 --> 04:00.740
+work that it's actually going to slow down the way that your virtual machines operate.
+
+04:00.740 --> 04:01.390
+Right.
+
+04:01.780 --> 04:05.480
+So scheduling these for later isn't necessarily a bad idea.
+
+04:05.520 --> 04:11.720
+Lots of times it make sense to schedule a sort of emotion to occur sometime during whatever your maintenance
+
+04:11.760 --> 04:12.330
+window is.

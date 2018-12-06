@@ -1,0 +1,346 @@
+WEBVTT
+
+00:01.260 --> 00:07.180
+This video we'll take a look at what's new for high availability in VSE fair 6.5.
+
+00:07.620 --> 00:15.150
+And there are a few big changes to the feature set of high availability and 6.5 some really great new
+
+00:15.150 --> 00:21.600
+features that can help us not only respond to outages but actually prevent them.
+
+00:21.870 --> 00:31.980
+And that's where proactive ha comes in proactive high availability is a way to prevent outages and we
+
+00:31.980 --> 00:37.100
+know with high availability if you have a host failure or something along those lines.
+
+00:37.230 --> 00:39.890
+Ha normally involves downtime.
+
+00:39.930 --> 00:48.570
+If we have an H.A. type event we're going to have virtual machines that are down proactive high availability
+
+00:48.870 --> 00:58.320
+seeks to avoid preventable downtime by detecting hardware issues and proactively migrating virtual machines
+
+00:58.320 --> 00:59.580
+to different hosts.
+
+01:00.960 --> 01:08.130
+Proactive ha actually works with hardware vendors different monitoring solutions to find out about the
+
+01:08.130 --> 01:14.940
+health status of hardware components like things like power supplies memory fan storage systems network
+
+01:14.940 --> 01:15.870
+systems.
+
+01:16.500 --> 01:24.190
+And then we can configure high availability to respond according to the failures of these hardware components.
+
+01:24.210 --> 01:30.960
+So this can help us avoid downtime for our virtual machines by detecting hardware failures and then
+
+01:30.960 --> 01:35.850
+taking that host and performing some sort of action on it.
+
+01:35.850 --> 01:41.940
+And one of those possibilities is that a host can be placed in something called quarantine mode.
+
+01:41.940 --> 01:44.930
+Now this feature does require duress.
+
+01:44.970 --> 01:50.970
+We can't enable proactive high availability unless we have Deros enabled.
+
+01:51.130 --> 01:55.200
+Right so proactive high availability is actually using the motion.
+
+01:55.420 --> 02:03.160
+And don't confuse that with normal H.A. are usually H.A. does not use the motion.
+
+02:03.160 --> 02:09.260
+Usually a host fails and then those virtual machines are booted up on other ESX hosts.
+
+02:09.290 --> 02:11.420
+And that's not Wii motion.
+
+02:11.580 --> 02:14.770
+It requires shared storage but it's not Wii motion.
+
+02:15.090 --> 02:20.770
+Proactive ha actually uses Wii motion to migrate virtual machines with no downtime.
+
+02:22.160 --> 02:22.550
+OK.
+
+02:22.610 --> 02:28.550
+So when we set up a cluster with proactive high availability there's a couple of different automation
+
+02:28.550 --> 02:29.920
+levels that we can choose.
+
+02:29.930 --> 02:34.670
+Number one we can choose a manual mode and this is very similar to dress.
+
+02:34.670 --> 02:42.680
+All right so if we set up proactive ha in manual mode what will happen is if there is some sort of problem
+
+02:42.680 --> 02:50.540
+detected on the hosts The center will give us suggestions about where virtual machine should be relocated
+
+02:50.540 --> 02:50.990
+to.
+
+02:51.080 --> 02:55.360
+But it won't automatically move any VM to different hosts.
+
+02:56.110 --> 03:03.900
+Whereas with automated mode virtual machines will be automatically migrated to hosts that are healthy
+
+03:05.180 --> 03:12.830
+and the hosts that are in a problematic state are the degraded hosts will be entered into either quarantine
+
+03:13.730 --> 03:21.600
+or maintenance mode depending on how we've configured proactive ha Wennberg configuring proactive ha
+
+03:21.900 --> 03:25.930
+we can choose from a few different options of host modes.
+
+03:29.620 --> 03:36.400
+The first host so that we can choose from is called quarantine mode and quarantine mode basically just
+
+03:36.400 --> 03:41.140
+dictates that no new VM additions can be made on that host.
+
+03:41.330 --> 03:45.480
+So no new virtual machines are or any move to that host by the IRS.
+
+03:45.610 --> 03:51.730
+It's essentially going to sit there with all of the victims that are currently on it but just no new
+
+03:51.730 --> 03:54.760
+VMS will be added to that host.
+
+03:54.810 --> 04:00.960
+Whereas with mixed mode all of the Reems will continue to run on that host unless there's some sort
+
+04:00.960 --> 04:03.950
+of severe hardware failure.
+
+04:04.110 --> 04:04.550
+Right.
+
+04:04.560 --> 04:09.150
+So in mixed mode proactive HA is not going to move anything.
+
+04:09.270 --> 04:13.950
+It's not going to do any of the motions unless the failure is something severe.
+
+04:14.180 --> 04:21.720
+All right whereas with maintenance mode proactive ha will place that host that's degraded into maintenance
+
+04:21.720 --> 04:26.700
+mode and migrate every single virtual machine off that host using the motion
+
+04:31.200 --> 04:37.530
+Another new feature of high availability in six top 6.5 is orchestrated restart.
+
+04:37.670 --> 04:44.810
+And the purpose of orchestrated restart is to allow high availability to restart virtual machines in
+
+04:44.810 --> 04:47.030
+a specified order.
+
+04:47.030 --> 04:54.350
+So if we need to have certain virtual machines that have dependencies on each other orchestrated restart
+
+04:54.410 --> 04:59.960
+is a great way to control the order in which those virtual machines boot up.
+
+05:00.090 --> 05:05.740
+Like for example let's say that we have multi tier applications.
+
+05:05.990 --> 05:13.860
+Maybe we have virtual machines that are web servers database servers and application servers and all
+
+05:13.860 --> 05:19.550
+of these via EMS work together to deliver an application.
+
+05:19.610 --> 05:24.250
+So maybe it's a web application and we need the web layer to deliver the Web site.
+
+05:24.260 --> 05:28.650
+We need the application layer and on the back end we need a database.
+
+05:30.120 --> 05:38.250
+These sorts of applications typically don't work properly unless the virtual machines involved boot
+
+05:38.250 --> 05:40.260
+up in the appropriate order.
+
+05:41.970 --> 05:48.950
+So for example we could create groups of virtual machines like a group of virtual machines called web
+
+05:48.950 --> 05:49.770
+servers.
+
+05:49.910 --> 05:56.310
+And that group will contain all of the Web servers in this multi-tier application.
+
+05:56.780 --> 06:01.790
+And then we can create other groups of search machines called the application servers for the three
+
+06:01.790 --> 06:04.390
+tier application and the database servers.
+
+06:04.550 --> 06:10.860
+And once we've created these groups then we can start to establish dependency rules right.
+
+06:11.270 --> 06:20.260
+So if a host fails high availability will restart the VM and the database servers group first right
+
+06:20.260 --> 06:25.840
+we can create a rule for this and then once that group is completed it will move onto the application
+
+06:25.840 --> 06:32.170
+servers group and then maybe we could create another rule that says both the application servers group
+
+06:32.530 --> 06:38.530
+and then boot the Web servers group right so we can get all of these rules in this logic to ensure that
+
+06:38.530 --> 06:45.370
+if we have a multi-tier application that the appropriate components are launched in the appropriate
+
+06:45.370 --> 06:45.840
+order.
+
+06:46.650 --> 06:53.050
+That's all orchestrated restart is all about enabling the ordered restart of virtual machines and the
+
+06:53.050 --> 06:57.370
+establishment of dependencies.
+
+06:57.380 --> 07:02.190
+Finally there's some big changes to admission control and vse fair 6.5.
+
+07:02.630 --> 07:07.470
+Some things that you may not have even noticed if you just took a quick glance on it.
+
+07:08.030 --> 07:12.690
+But the biggest difference is the defaulted Mission Control Policy.
+
+07:12.710 --> 07:16.450
+It is controlled by cluster resource percentage.
+
+07:16.670 --> 07:24.800
+So if you ever worked with the host failures that cluster tolerates at mission control method and you
+
+07:24.800 --> 07:34.100
+might be familiar with slot size the slot sizes how high availability use to sort of determine what
+
+07:34.190 --> 07:41.150
+amount of resources were available and what amount of resources were required to be reserved for Fagel
+
+07:41.150 --> 07:42.490
+over.
+
+07:42.590 --> 07:48.890
+And it was honestly a little bit of a difficult system to work with because slot size could get skewed
+
+07:48.920 --> 07:51.650
+by virtue machines with large reservations.
+
+07:51.650 --> 07:53.270
+It was just complicated.
+
+07:53.420 --> 07:59.000
+And what happened is a lot of the times people would just turn off at mission control because they couldn't
+
+07:59.000 --> 08:07.310
+figure out why it wasn't working properly and why it wasn't allowing them to boot up virtual machines.
+
+08:08.360 --> 08:17.190
+Admission control kind of took the best of both admission control policies and combined them into one.
+
+08:17.240 --> 08:18.400
+So here's how it works.
+
+08:18.400 --> 08:26.030
+Now you'll go in and enable admission control and you'll say something like Well I want to tolerate
+
+08:26.180 --> 08:28.240
+one host failure.
+
+08:28.820 --> 08:30.470
+Well that's what we've always done it right.
+
+08:31.330 --> 08:38.380
+But what's actually happening under the surface is your cluster center server is actually going to look
+
+08:38.380 --> 08:44.640
+at the cluster and determine well what's the actual percentage of resources that I need.
+
+08:44.640 --> 08:45.070
+Right.
+
+08:45.220 --> 08:54.380
+In order to satisfy this admission control policy what percentage of resources do I need to hold back.
+
+08:54.450 --> 08:56.740
+We don't use slide size for this anymore.
+
+08:57.160 --> 09:05.020
+That's the big improvement as all of that complexity involved with managing a slot size is now eliminated.
+
+09:05.280 --> 09:09.990
+Right so let's take a look at a screen shot here is that Mission Control we're specifying.
+
+09:09.990 --> 09:20.070
+We want to tolerate one host failure and we're going to determine the host fail over capacity by cluster
+
+09:20.070 --> 09:24.680
+resource percentage instead of slot size here.
+
+09:24.890 --> 09:31.370
+So we still have multiple options but this is really the best way to do it let's figure out our failover
+
+09:31.370 --> 09:37.610
+capacity required by cluster resource percentage instead of slot size.
+
+09:37.660 --> 09:38.160
+Right.
+
+09:38.490 --> 09:43.960
+And we can even establish acceptable levels of performance degradation.
+
+09:44.180 --> 09:44.850
+Right.
+
+09:44.940 --> 09:50.840
+So here at the bottom we see performance degradation VAMC to tolerate.
+
+09:51.270 --> 09:59.220
+And what that means is basically the amount of performance reduction that we're willing to handle after
+
+09:59.220 --> 10:08.610
+a failure so high availability will actually monitor virtual machine performance data based on distributed
+
+10:08.610 --> 10:17.430
+resource scheduler to determine whether or not there's enough capacity to continue performing adequately
+
+10:17.430 --> 10:24.160
+after a failover so that we can do is say you know we can do 100 percent right.
+
+10:24.370 --> 10:29.830
+Hundred percent is actually disabling this warning or we can say 0 percent right we want everything
+
+10:29.830 --> 10:34.780
+to perform exactly the same even if there's a host failure.
+
+10:37.410 --> 10:46.260
+So this percentage allows us to kind of forecast and prepare for what percentage of performance impact
+
+10:46.350 --> 10:50.100
+we are willing to handle if a host failure does occur.

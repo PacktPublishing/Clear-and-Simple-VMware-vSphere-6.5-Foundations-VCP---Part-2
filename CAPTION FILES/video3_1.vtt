@@ -1,0 +1,127 @@
+WEBVTT
+
+00:01.710 --> 00:07.710
+In this video I'll demonstrate how to verify the network configuration of a virtual machine.
+
+00:08.260 --> 00:15.070
+So here I've clicked on my Wii motion demo virtual machine and I want to configure and I'm going to
+
+00:15.100 --> 00:22.360
+edit the virtual machine hardware and let's take a look at the virtual network interface card associated
+
+00:22.360 --> 00:24.890
+with this VM.
+
+00:24.940 --> 00:32.180
+So here we see network adapter one and the first setting that we're concerned with is what virtual machine
+
+00:32.180 --> 00:33.120
+port group.
+
+00:33.260 --> 00:39.290
+Are you going to connect this VM to have connected it to a port group called 199 and that poor group
+
+00:39.290 --> 00:42.740
+has specific villans settings.
+
+00:42.750 --> 00:46.340
+It's got security policies associated with it.
+
+00:46.400 --> 00:49.430
+It might have things like traffic shaping configured.
+
+00:49.940 --> 00:51.490
+So I'll pick the network adapter.
+
+00:51.650 --> 00:56.150
+I want to connect the virtual machine to and I'll choose the status right.
+
+00:56.160 --> 00:59.810
+Basically is this network adapter plugged in right now or not.
+
+01:00.490 --> 01:03.420
+And then I'll choose the adapter type.
+
+01:03.540 --> 01:03.830
+Right.
+
+01:03.840 --> 01:12.810
+So in this scenario I've chosen and easy one thousand virtual network interface card and the MAC address
+
+01:12.810 --> 01:14.500
+is assigned automatically.
+
+01:15.000 --> 01:24.300
+Now I might not want to use that e 1000 virtual network interface card as a matter of fact.
+
+01:24.410 --> 01:29.970
+There is actually a type of virtual neck that outperforms the 1000.
+
+01:30.070 --> 01:34.310
+Now it won't give you a huge performance impact on your virtual machine itself.
+
+01:35.090 --> 01:43.670
+But if you use the VM X net three virtual NEC it can actually help the performance of your YES X I host
+
+01:44.060 --> 01:54.760
+by using less resources so I can't change this on my existing network adapter but I could come in here
+
+01:55.090 --> 02:04.570
+create a new network adapter choose the VM X net three virtual neck type and go ahead and create a second
+
+02:04.570 --> 02:06.610
+virtual Nic on this VM.
+
+02:08.040 --> 02:13.820
+And that I could potentially move my IP address over to that new virtual Mac after the fact of course
+
+02:13.820 --> 02:17.810
+I would be service impacting But that's an option.
+
+02:20.250 --> 02:30.210
+I could also choose single route IO virtualization and basically eliminate the virtualization overhead
+
+02:30.300 --> 02:32.040
+for this virtual machine.
+
+02:32.040 --> 02:37.260
+When it comes to networking this is a very unusual configuration though.
+
+02:37.260 --> 02:45.040
+So basically with our VI you're giving this virtual machine dedicated access to a physical Nic.
+
+02:45.150 --> 02:50.810
+I don't really want to do that so I'm just going to leave this as is and I'm going to hit OK.
+
+02:50.970 --> 02:56.150
+And you can see there I can just go ahead and add additional network interface cards on the fly.
+
+02:56.210 --> 02:57.930
+I can do this while the VM is powered on.
+
+02:57.930 --> 02:59.480
+I can do it while it's powered off.
+
+03:00.040 --> 03:02.050
+Right but right now the VM is powered off.
+
+03:02.050 --> 03:06.250
+So my second virtual neck is currently disconnected.
+
+03:07.070 --> 03:10.570
+And if I want to get rid of it later on this is a little tricky.
+
+03:10.600 --> 03:17.050
+You come in here to the hardware screen and over to the far right you'll see this X where you can actually
+
+03:17.860 --> 03:21.870
+remove virtual hardware that will turn red.
+
+03:21.880 --> 03:26.310
+Then I go ahead and hit OK and it'll get removed.
+
+03:26.310 --> 03:32.960
+So those are the key networking settings for a virtual machine that we're going to configure here.
+
+03:33.220 --> 03:37.140
+There's really not a whole lot else that we need to worry about setting up.

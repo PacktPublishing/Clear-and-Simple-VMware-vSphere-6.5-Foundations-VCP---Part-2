@@ -1,0 +1,79 @@
+WEBVTT
+
+00:01.360 --> 00:06.680
+In this video I'll demonstrate how to carry out a scheduled Wii motion.
+
+00:06.750 --> 00:08.110
+So here's my virtual machine.
+
+00:08.130 --> 00:09.470
+Wii motion demo.
+
+00:09.720 --> 00:19.700
+And I can see that it is currently running on Host 1 9 2 1 6 8 1 9 9 1 0 3.
+
+00:19.790 --> 00:24.370
+And so what I'm going to do is I'm going to click on the virtual machine and I'll go to a monitor and
+
+00:24.380 --> 00:32.360
+other tasks and events we can see these scheduled tasks area and I'm going to choose to schedule a new
+
+00:32.360 --> 00:33.040
+task.
+
+00:34.400 --> 00:36.810
+And you have all different options you can choose from.
+
+00:36.840 --> 00:37.110
+Right.
+
+00:37.120 --> 00:43.070
+And if you need to reboot a VM but you want to do it after hours you can schedule that.
+
+00:43.220 --> 00:49.190
+Or if you want to suspend or migrate or clone or take a snapshot you can schedule all of those options
+
+00:49.340 --> 00:52.150
+and I'm going to show you how to schedule of emotion.
+
+00:52.610 --> 00:58.850
+So I'm going to do just a regular old the motion is going to move from one host to another I'm going
+
+00:58.850 --> 01:07.760
+to choose the destination host which in this case is going to be 1 9 2 1 6 8 1 9 9 out 100 I'll choose
+
+01:07.760 --> 01:10.550
+to keep it on the 1 9 9 Network.
+
+01:12.200 --> 01:15.550
+And I'm going to schedule a Wii motion with high priority.
+
+01:15.980 --> 01:17.370
+And here we go.
+
+01:17.450 --> 01:24.490
+I can set my schedule here by clicking change and I want this to happen at let's see.
+
+01:24.500 --> 01:32.310
+It's about 3:30 p.m. I'm going to have it happen at 9:30 p.m. 9:30 4:00 p.m. tonight.
+
+01:32.420 --> 01:38.590
+So this is going to happen after hours tonight and whenever it gets done it's going to send me an email
+
+01:41.000 --> 01:44.060
+confirming that it's actually been completed.
+
+01:44.080 --> 01:52.160
+Right so it is a great way to set up a scheduled Wii motion that's going to occur at some point later
+
+01:52.160 --> 01:53.540
+on in the day.
+
+01:53.580 --> 01:57.990
+Right and it's especially useful when we start dealing with storage of emotion.
+
+01:58.250 --> 02:03.680
+So remember this when we start talking about storage of emotion which is much more resource intensive
+
+02:04.200 --> 02:08.410
+these scheduled migrations are really valuable for storage of emotion.

@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00.610 --> 00:08.120
+In this video explain enhanced Wii motion compatibility or EVC in VSE fair sex.
+
+00:08.260 --> 00:14.650
+Now in this lesson we're going to cover a few topics we'll talk about how EVC is used to ensure that
+
+00:14.680 --> 00:18.280
+all of the hosts in a cluster are Wii motion compatible.
+
+00:18.490 --> 00:24.400
+And this is ideal if you have a depressed cluster that's going to be automatically moving virtual machines
+
+00:24.400 --> 00:27.510
+around using Wii motion.
+
+00:27.550 --> 00:36.110
+It also provides some additional levels of compatibility for Sipa use that would not normally be compatible.
+
+00:36.120 --> 00:39.990
+It also prevents incompatible hosts from being added to a cluster.
+
+00:39.990 --> 00:46.650
+So if you try to add a new host to an existing cluster and that new host is not emotion compatible EVC
+
+00:46.650 --> 00:54.150
+won't allow you to add it to that cluster EVC can be configured on clusters that include either AMD
+
+00:54.510 --> 00:56.630
+or Intel processors.
+
+00:59.510 --> 01:06.650
+So before we get into EVC Let's quickly talk about what a cluster is we can cluster our ESX I hostes
+
+01:06.650 --> 01:14.360
+for a number of purposes maybe we want to protect against a host failure using high availability.
+
+01:14.360 --> 01:21.440
+Maybe we want to automatically load balance across a group of hosts using DRM us or maybe we want to
+
+01:21.440 --> 01:28.260
+pool local storage and use it to present a shared data store using VSAN.
+
+01:28.460 --> 01:38.400
+These are all use cases that we can take advantage of when we create a host cluster.
+
+01:38.410 --> 01:40.200
+So how about DRM.
+
+01:40.330 --> 01:46.450
+Let's say that we've created a host cluster and we've been able to fully automated Diyar rests on that
+
+01:46.450 --> 01:51.500
+cluster Well Diyar wrasse relies upon wiii motion.
+
+01:51.520 --> 01:53.370
+That's how the IRS works.
+
+01:54.070 --> 02:01.440
+So with the IRS the center is going to constantly analyze the workloads of your ESX host and use Wii
+
+02:01.480 --> 02:08.010
+motion to move virtual machines from one host to another for load balancing purposes.
+
+02:08.040 --> 02:13.330
+However here we see a cluster with hosts that are Wii motion incompatible.
+
+02:13.480 --> 02:13.950
+You can't.
+
+02:13.950 --> 02:21.660
+The motion of virtual machine from an HMD host to an Intel host and EVC can't really help with this.
+
+02:21.690 --> 02:28.440
+If you've created this closter this is a cluster that contains incompatible hosts and you can not enable
+
+02:28.770 --> 02:31.410
+EVC on this cluster.
+
+02:31.410 --> 02:36.620
+So even as he can fix some of the motion incompatibilities but it can't fix everything
+
+02:42.440 --> 02:47.540
+so here we see a cluster of ESX I host and they're all HMD hosts.
+
+02:47.540 --> 02:50.120
+This is rephrased.
+
+02:50.870 --> 02:52.230
+This is a closter.
+
+02:52.340 --> 03:00.460
+That's a good candidate for EVC when we can figure EVC we'll choose a baseline.
+
+03:00.830 --> 03:10.430
+And all the hosts in that cluster will present the feature set of that baseline and EVC uses his built
+
+03:10.430 --> 03:21.030
+in technology with am d or Intel processors to create a consistent feature set across ESX I host.
+
+03:21.050 --> 03:22.900
+So how do they do this.
+
+03:23.150 --> 03:31.580
+Well in order to accomplish this newer processor features have to be masked so that they can match up
+
+03:31.580 --> 03:35.070
+with the older C-p use.
+
+03:35.190 --> 03:42.630
+So you'll choose a baseline of an older processor or at the baseline that you choose must be supported
+
+03:42.930 --> 03:48.900
+by the host with the smallest feature set in that cluster.
+
+03:48.900 --> 03:53.400
+Now this doesn't slow down your C.P. use it doesn't throttle them back.
+
+03:53.400 --> 04:01.470
+It doesn't make an AMDP generation one processor perform like a generation three or vice versa.
+
+04:01.950 --> 04:08.580
+What it does is it masks certain features so that all of the processors kind of feel the same to our
+
+04:08.620 --> 04:11.480
+venoms.
+
+04:11.540 --> 04:13.400
+So let's take a look at our slide here.
+
+04:13.430 --> 04:21.470
+We have four ESX I hosts and we've chosen a baseline that matches up with the host with the smallest
+
+04:21.470 --> 04:24.310
+feature set HMD generation one.
+
+04:24.410 --> 04:26.940
+That's our baseline.
+
+04:27.000 --> 04:34.500
+So the end result of this baseline is that the features that are not supported on Generation 1 are not
+
+04:34.500 --> 04:35.620
+available.
+
+04:35.820 --> 04:43.650
+And now my virtual machines get an identical experience on any of these hosts and we motion compatibility
+
+04:43.650 --> 04:45.680
+is achieved.
+
+04:45.700 --> 04:52.570
+So that's one of the big benefits of EVC is it can make hosts that are normally not the motion compatible
+
+04:53.010 --> 04:55.230
+the motion compatible.
+
+04:55.240 --> 05:01.930
+Now a few final notes on EVC EVC does have some hardware requirements that need to be met.
+
+05:02.020 --> 05:06.490
+You must be on ESX I 3.5 or later I'm sure we're all on that.
+
+05:06.670 --> 05:09.120
+All C-p use must be from a single vendor.
+
+05:09.130 --> 05:17.800
+You can't mix and match AMD and Intel Intel Core 2 processors are supported by EVC beginning with the
+
+05:17.800 --> 05:19.830
+Merom generation.
+
+05:20.170 --> 05:27.390
+Am D has two different sequences of EVC levels each of which support different generations of processors.
+
+05:27.620 --> 05:34.410
+There's HMD level one which supports HMD Opteron generation one through three.
+
+05:34.510 --> 05:42.280
+And there's HMD level B which supports Opteron generation 3:55 C.P. use with the 3D now feature are
+
+05:42.280 --> 05:43.320
+not it.

@@ -1,0 +1,235 @@
+WEBVTT
+
+00:02.470 --> 00:10.330
+In this video we'll take a look at what's new and distributed resource scheduler for VSE for 6.5 Vee's
+
+00:10.370 --> 00:16.710
+for 6.5 has introduced some significant enhancements to Diyar ass.
+
+00:16.780 --> 00:24.400
+And one of the biggest enhancements is this feature called predictive DNS so predictive diarists actually
+
+00:24.400 --> 00:25.880
+leverages viu realize.
+
+00:25.930 --> 00:35.110
+Operations manager then and it uses VI realized operations manager in combination with everything that
+
+00:35.110 --> 00:38.320
+it used to look at for just dress.
+
+00:38.680 --> 00:45.910
+And the goal is to migrate virtual machines before resource contention ever occurs.
+
+00:45.940 --> 00:49.430
+I need to be proactive in our approach.
+
+00:49.660 --> 00:56.890
+So if you're not really familiar with vi realize operations let's take a moment just to very quickly
+
+00:56.890 --> 01:00.890
+cover the basics of what we realize operations does.
+
+01:01.100 --> 01:07.570
+And so we have our V Center server Let's call this the center and the center is sitting there kind of
+
+01:07.570 --> 01:15.490
+watching everything right cutting logs and statistics and managing Diyar Ross and what we can do is
+
+01:15.490 --> 01:23.860
+we can set up a V realize operations with the center as a source as a source of information.
+
+01:24.130 --> 01:30.430
+And so now all of these metrics all of this information that visiters constantly collecting and looking
+
+01:30.430 --> 01:39.010
+at is going to be pumped into view realize operations and Virial eyes operations will take all of that
+
+01:39.010 --> 01:40.260
+data.
+
+01:40.750 --> 01:47.920
+All of that information it'll determine if multiple metrics are related somehow it'll understand dynamic
+
+01:47.920 --> 01:49.960
+thresholds.
+
+01:50.140 --> 01:58.270
+And by dynamic thresholds I mean we realize operations will eventually figure out the normal state of
+
+01:58.270 --> 02:06.460
+our environment what normal usage looks like what normal CPQ and memory patterns and disk space usage
+
+02:06.460 --> 02:11.590
+patterns and all those sort of things that will figure out the normal behavior of our environment over
+
+02:11.590 --> 02:19.130
+time and as weeks go by It'll get better and better at understanding what's normal and what's not.
+
+02:20.880 --> 02:28.140
+And it's going to leverage those dynamic thresholds to basically determine when something is going wrong.
+
+02:28.450 --> 02:28.930
+Right.
+
+02:29.130 --> 02:37.980
+That's going to give predictive de-risked the ability to forecast resource shortages and to migrate
+
+02:38.050 --> 02:48.770
+venoms before resources become an issue right before contention even occurs based on these dynamic thresholds.
+
+02:49.590 --> 02:57.030
+So what it might do is say okay we realize operations maybe has a dynamic threshold first.
+
+02:57.090 --> 03:04.640
+Keep your memory usage and those these two victims that are running on the same ESX I host.
+
+03:04.780 --> 03:12.310
+And so eventually we realize operations will start to understand the normal behaviors of these vamp's
+
+03:12.710 --> 03:16.940
+and may be you know at 12 midnight each night.
+
+03:17.080 --> 03:25.030
+Both of these virtual machines run some sort of very memory intensive batch processing every day the
+
+03:25.030 --> 03:26.340
+minute they do the same thing.
+
+03:27.510 --> 03:34.260
+Well eventually we realize operations is going to pick up on this pattern if their host is low on memory
+
+03:34.600 --> 03:36.760
+made say OK it's 11:55.
+
+03:36.990 --> 03:42.060
+Let's migrate one of these VMS to a different host so that they don't both Kickoff.
+
+03:42.060 --> 03:46.620
+There's a really memory intensive operation on the same ESX I host
+
+03:49.490 --> 03:53.400
+so whereas Deloris has always been responsive.
+
+03:53.550 --> 03:56.060
+Right it's weighted for resource contention to occur.
+
+03:56.300 --> 03:58.760
+And it's taken action after the fact.
+
+03:58.760 --> 04:06.050
+Now predictive de-risk can potentially eliminate resource consumption before it ever occurs.
+
+04:06.050 --> 04:09.260
+By leveraging the power of the realized operations manager
+
+04:15.380 --> 04:22.400
+there are some additional enhancements to Diyar us as well starting with virtual machine distribution.
+
+04:22.490 --> 04:28.190
+We can enable dress to evenly distribute virtual machines across hosts.
+
+04:28.190 --> 04:37.520
+Now virtual machine performance is still the top priority for DUI arrests and arrests will continue
+
+04:37.520 --> 04:41.400
+to ensure that their demand of the Virgin machines is met.
+
+04:42.200 --> 04:48.990
+However if it can equally distribute the number of CMS on each host it will do that.
+
+04:49.280 --> 04:57.030
+And the rationale is by equally distributing volume's we minimize the impact of any single host failure.
+
+04:57.080 --> 05:01.940
+So if there is one host that has 20 AVMA and one host that only has 10.
+
+05:02.030 --> 05:06.090
+It's a much more of an impact of the host with 20 VAMC fails.
+
+05:06.440 --> 05:12.680
+But if we only put 15 VMS on both hosts and they're equally distributed now the impact of a single host
+
+05:12.680 --> 05:14.430
+failure is limited
+
+05:18.050 --> 05:22.450
+there are other settings that you can enforce like you overcommitment settings.
+
+05:22.460 --> 05:30.870
+So what we can do is we can enforce a maximum virtual CPQ to physical C-p you ratio.
+
+05:31.010 --> 05:36.170
+And this is handy if you want to just make sure that we're not too heavily over subscribing.
+
+05:36.320 --> 05:43.760
+Right so for example maybe I have a host with for physical use I can say I want my ratio to be 4 to
+
+05:43.760 --> 05:44.690
+1.
+
+05:44.750 --> 05:52.020
+That means I'm only going to be able to create 16 virtual C-p use for all of the VMs running on that
+
+05:52.050 --> 05:53.360
+host.
+
+05:53.580 --> 06:01.020
+And it can help prevent Seip you contention in environments where maybe we have steep spikes at certain
+
+06:01.020 --> 06:03.760
+times like virtual desktop environments.
+
+06:03.780 --> 06:05.510
+This is a very handy setting.
+
+06:11.080 --> 06:19.310
+Another new option is network aware distributed resource scheduler so there's already many metrics that
+
+06:19.310 --> 06:22.600
+go into deep grass migrations.
+
+06:22.600 --> 06:26.060
+Now the IRS will also take network utilization into account.
+
+06:26.100 --> 06:33.970
+It will watch the transmit and receive rates of the physical ethernet adapters on your ESX host.
+
+06:34.060 --> 06:43.450
+And if a host is becoming overwhelmed with network traffic over 80 percent de-risk will not migrate
+
+06:43.450 --> 06:53.070
+for machines to that host so Network utilization is one of the many factors that de-risk now considers
+
+06:59.150 --> 07:06.060
+de-risk has also improved how it integrates with fault tolerance and so fault tolerance has always been
+
+07:06.060 --> 07:12.960
+bandwidth intensive with fault tolerance you have an active VM and a standby VM and they have to be
+
+07:12.960 --> 07:15.720
+kept exactly the same.
+
+07:15.720 --> 07:23.760
+So anything that happens on the active VM needs to be immediately duplicated on the stand by VM and
+
+07:23.760 --> 07:31.290
+that can take a lot of bandwidth especially since vse fair six introduced support for Moel tie virtual
+
+07:31.520 --> 07:38.970
+you via SMS with fault tolerance that exacerbates the problem even further and it makes the bandwidth
+
+07:38.970 --> 07:42.200
+requirements even more so.
+
+07:42.510 --> 07:44.360
+De-risk can be aware of this.
+
+07:44.370 --> 07:52.320
+Right it can make placement decisions by ranking hosts based on the available network bandwidth and
+
+07:52.320 --> 07:57.580
+by recommending the data store in which to place the secondary V MBK files.
+
+07:59.400 --> 08:06.140
+And so the fact that DRM is now aware of network performance allows it to support fault tolerance better.

@@ -1,0 +1,337 @@
+WEBVTT
+
+00:01.580 --> 00:09.170
+In this video I'll demonstrate how to set up a cluster of VSX I hosts for high availability.
+
+00:09.280 --> 00:15.820
+So here you can see we've already created a cluster and it contains two ESX I hosts and one running
+
+00:15.820 --> 00:17.980
+virtual machine.
+
+00:18.050 --> 00:25.510
+So I'm going to start by clicking on my cluster and choosing configure in under configure.
+
+00:25.570 --> 00:32.980
+I can go to the VST fear availability option and at the moment availability is turned off and proactive
+
+00:32.980 --> 00:35.210
+ha is turned off.
+
+00:35.360 --> 00:43.720
+OK so let's go ahead and click on at it and we can start to configure some of our high availability
+
+00:43.720 --> 00:44.590
+settings here.
+
+00:44.950 --> 00:49.800
+So we're going to start by simply turning on VSE for high availability.
+
+00:50.040 --> 00:58.010
+And you can see here there are some definitions right as far as what we want ha to do and when.
+
+00:58.050 --> 01:06.640
+So at the moment it's configured to simply restart any Reems that are on a host if that host fails.
+
+01:06.660 --> 01:06.830
+Right.
+
+01:06.840 --> 01:09.190
+That's what H.A. is going to do for us.
+
+01:09.240 --> 01:16.380
+It's not going to give us 100 percent uptime it's not constant uptime solution but if a host does fail
+
+01:16.590 --> 01:22.150
+those VMs will reboot on other ESX host.
+
+01:22.230 --> 01:30.660
+We can also do things like have our VMS boot up on a different host if there is a host isolation event.
+
+01:30.670 --> 01:38.760
+All right so if an ESX host loses the ability to communicate with the other hosts over the heartbeat
+
+01:38.770 --> 01:42.510
+network that host is considered to be isolated.
+
+01:43.240 --> 01:45.900
+So we can choose what action we want to take there.
+
+01:46.240 --> 01:51.940
+If there are storage conditions that occur like a permanent device loss or in all paths down condition
+
+01:52.570 --> 02:00.910
+we can also reboot those VMs on other hosts or if the guest operating system itself fails we can reboot
+
+02:00.910 --> 02:03.600
+that virtual machine right on the same host.
+
+02:03.610 --> 02:08.190
+These are all actions that VSE for high availability can take.
+
+02:08.530 --> 02:13.820
+So let's take a look and choose some of our configurations here.
+
+02:14.690 --> 02:26.360
+Now in my scenario for my host failure response if my ESX host fails I want those VMs to restart and
+
+02:26.360 --> 02:30.480
+by default all VMS are going to have the same priority.
+
+02:30.500 --> 02:35.500
+So all of my VMS will have a medium priority by default right.
+
+02:35.540 --> 02:44.040
+I'll show you in a little while how to override some of those settings on individual Vienna's.
+
+02:44.290 --> 02:48.600
+I can also create virtual machine dependencies right.
+
+02:48.610 --> 02:52.960
+So if I want to create some virtual machine dependencies I can do that as well.
+
+02:53.020 --> 02:53.560
+Right.
+
+02:53.950 --> 03:01.510
+And I can set conditions that all have to be met in order for virtual machines to boot up my host isolation
+
+03:01.510 --> 03:02.640
+response.
+
+03:02.680 --> 03:12.250
+In this scenario I'm going to assume that if my management network is down my VMs are probably nonfunctional
+
+03:12.250 --> 03:12.910
+as well.
+
+03:13.070 --> 03:17.680
+It may be the management network shares hardware with a storage network or something like that.
+
+03:18.100 --> 03:24.850
+So I'm going to go ahead and say you know what if we have a management network failure and I know heartbeats
+
+03:24.850 --> 03:25.990
+don't work anymore.
+
+03:26.080 --> 03:28.860
+Go ahead and shut down those VMs boot them up on another host.
+
+03:28.870 --> 03:29.770
+So I'm going to enable that
+
+03:32.600 --> 03:33.950
+permanent device loss.
+
+03:33.980 --> 03:35.410
+I'll enable that as well.
+
+03:35.510 --> 03:37.340
+And all paths down condition.
+
+03:37.340 --> 03:45.230
+So if there is just some sort of storage failure like for example a permanent device loss is a scenario
+
+03:45.230 --> 03:52.700
+where your storage array is going down and it sends a sends code to tell the ESX host Hey I am failing
+
+03:52.730 --> 03:54.740
+I'm not coming back.
+
+03:55.460 --> 03:57.330
+That's a permanent device loss condition.
+
+03:57.350 --> 04:05.190
+And in that case we might as well power off and restart those VMC.
+
+04:05.190 --> 04:06.140
+Now let's take a look at it.
+
+04:06.150 --> 04:08.160
+Mission control.
+
+04:08.160 --> 04:08.490
+All right.
+
+04:08.510 --> 04:19.190
+So at Mission Control has changed significantly in Envy's fair 6.5 in older versions we had to worry
+
+04:19.190 --> 04:26.250
+about things like slot size right by default.
+
+04:26.250 --> 04:35.250
+That's the way that our A ha coster's used to be configured as with the slot policy and that led to
+
+04:35.250 --> 04:39.560
+a lot of little problems like sometimes you weren't able to power on VM.
+
+04:39.570 --> 04:44.140
+Or sometimes you had significant resource wastage.
+
+04:44.220 --> 04:53.040
+So in ESX 6.5 one of the great things that they've changed is that's no longer the scenario.
+
+04:53.220 --> 04:53.580
+Right.
+
+04:53.670 --> 05:01.590
+So what it will do is if you configure the default settings the center will determine OK we need to
+
+05:01.650 --> 05:05.970
+protect against one host failure or to host failure or three host failures.
+
+05:05.970 --> 05:06.770
+Right.
+
+05:06.930 --> 05:14.190
+You choose how many hosts that you want to basically prepare for the loss of it.
+
+05:14.230 --> 05:21.090
+So if I have a hundred hosts I might need to accommodate three or four host failure simultaneously.
+
+05:21.270 --> 05:26.750
+But in my environment I only have two hosts so I'm only going to tolerate one host failure.
+
+05:28.250 --> 05:35.270
+So where this is going to do is it's essentially going to say OK if the biggest host fails what percentage
+
+05:35.270 --> 05:44.050
+of our resources do we lose and then it'll basically reserve that capacity so that in case a host does
+
+05:44.050 --> 05:51.610
+fail things will still continue to operate normally with no performance degradation.
+
+05:51.610 --> 05:58.420
+Now what if I say you know what I'm OK with a certain level of performance degradation you know maybe
+
+05:58.420 --> 06:05.440
+if I lose one of my two hosts maybe I'm willing to let everything run with only 75 percent of the normal
+
+06:05.440 --> 06:06.660
+speed.
+
+06:06.820 --> 06:11.130
+Maybe some of my Wii may not perform quite as well.
+
+06:11.320 --> 06:12.650
+I can live with that.
+
+06:13.000 --> 06:19.750
+So I'm going to go ahead and get that 75 and then I'm going to do some other things to minimize the
+
+06:19.750 --> 06:22.340
+impact of that resource shortage.
+
+06:22.390 --> 06:24.280
+Show you those things a little bit later.
+
+06:26.110 --> 06:28.350
+There we've got our heartbeat data stores.
+
+06:28.380 --> 06:32.210
+This is kind of a backup method for my host to heart beat.
+
+06:32.460 --> 06:37.410
+So that way if the management network goes down the hosts can accurately determine the status of the
+
+06:37.410 --> 06:38.280
+other hosts.
+
+06:39.300 --> 06:40.650
+And that's really it for now.
+
+06:40.650 --> 06:49.540
+All right I'm going to go ahead and hit OK here and I have now enabled high availability on my Questor.
+
+06:49.650 --> 06:59.790
+I am now going to simulate and ESX I host failure by powering off this ESX host without putting in maintenance
+
+06:59.790 --> 07:00.740
+mode.
+
+07:01.240 --> 07:02.740
+So all right click the host.
+
+07:02.760 --> 07:04.320
+I'm going to do shut down.
+
+07:04.390 --> 07:11.760
+It'll warn me that it's not in maintenance mode and so my Wii motion demo virtual machine is going to
+
+07:11.760 --> 07:13.820
+fail at this point.
+
+07:14.270 --> 07:18.760
+And my Wii motion demo VM is going to fail when that host shuts down.
+
+07:18.760 --> 07:25.380
+And let's go ahead and monitor this virtual machine and let's see what's going on with it as the ESX
+
+07:25.380 --> 07:26.980
+I hope it fails.
+
+07:27.270 --> 07:29.000
+So the ESX host has failed.
+
+07:29.040 --> 07:31.100
+Now my virtual machine is disconnected.
+
+07:31.180 --> 07:31.830
+Right.
+
+07:31.890 --> 07:37.460
+We can see here the virtual machine is disconnected that's the first bad thing that happened right.
+
+07:38.700 --> 07:40.120
+Right now the VM is disconnected.
+
+07:40.170 --> 07:42.310
+We'll keep an eye on this for a minute here.
+
+07:42.510 --> 07:51.690
+It's not going to take very long for that virtual machine to start rebooting on a different ESX host.
+
+07:51.700 --> 07:58.780
+OK so I paused my recording for a little while and just to kind of speed things up a little bit.
+
+07:58.780 --> 08:06.540
+For those of you watching and here you can see eventually ha restarted the virtual machine.
+
+08:06.610 --> 08:15.010
+And so now we can see here on our second ESX host that this virtual machine running on the other host
+
+08:15.020 --> 08:20.070
+which is exactly what we would expect to see with high availability.
+
+08:20.560 --> 08:25.630
+So we have now configured ha on our ESX host cluster.
+
+08:25.630 --> 08:31.090
+Now one final thing I just want to point out before we move on here let's take a look at the configuration
+
+08:31.090 --> 08:33.290
+of this V.M..
+
+08:33.440 --> 08:37.930
+There are some critical things that we need to make sure are configured properly.
+
+08:37.970 --> 08:38.210
+All right.
+
+08:38.210 --> 08:43.050
+Number one our virtual machine needs to be on shared storage.
+
+08:43.160 --> 08:45.700
+And so we've got that here now is good.
+
+08:45.860 --> 08:53.040
+The network adapter needs to be connected to a network that is present on both of the ESX host.
+
+08:53.070 --> 08:53.680
+Right.
+
+08:53.750 --> 08:59.750
+So those are some of the things that add a virtual machine level could potentially create some problems
+
+08:59.750 --> 09:00.380
+with ha.

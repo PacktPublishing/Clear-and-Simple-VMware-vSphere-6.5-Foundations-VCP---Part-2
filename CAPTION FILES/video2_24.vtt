@@ -1,0 +1,331 @@
+WEBVTT
+
+00:00.410 --> 00:06.570
+This video I'll explain the concepts of resource pools and Wii apps and we'll learn how we can use resource
+
+00:06.570 --> 00:14.100
+pools to group together virtual machines for the purposes of assigning shares limits and reservations
+
+00:14.100 --> 00:15.340
+on a wide scale.
+
+00:16.380 --> 00:21.800
+We can also use resource pools to isolate and compartmentalize workloads.
+
+00:21.870 --> 00:28.350
+For example we could create a resource pool that contains our critical virtual machines and use reservations
+
+00:28.380 --> 00:33.680
+or high share values to ensure that they get the appropriate performance.
+
+00:33.690 --> 00:40.320
+We could also create resource pools with low priority virtual machines and configure resource limit
+
+00:40.650 --> 00:47.610
+to place a cap on the resources consumed by those nonessential workloads.
+
+00:47.650 --> 00:54.700
+We can also apply access controls and permissions at the resource pool level and those permissions will
+
+00:54.700 --> 01:01.830
+be applied to all the virtual machines that are contained within that resource pool.
+
+01:01.850 --> 01:05.530
+So let's take a look at a resource pool example.
+
+01:05.700 --> 01:11.880
+Here we see ESX I host with 48 gigabytes of memory and within it I've got a group of virtual machines
+
+01:11.880 --> 01:18.660
+called Dev and another group of virtual machines called promt and the Prod. virtual machines are configured
+
+01:18.660 --> 01:21.310
+with a 1 gig memory reservation.
+
+01:24.120 --> 01:28.950
+And here we can see we've created a resource pool for the Dabb virtual machines.
+
+01:29.340 --> 01:31.490
+And this is a really simple resource pool.
+
+01:31.560 --> 01:36.840
+It contains all the debt venoms and it has a 16 gig memory limit.
+
+01:36.850 --> 01:38.530
+Now this means a few things.
+
+01:38.530 --> 01:46.820
+Number one it means that all of these devah ATMs can not exceed 16 gigabytes of memory usage.
+
+01:47.020 --> 01:53.170
+So the combined group of virtual machines can only account for 16 gigs of memory usage at any given
+
+01:53.170 --> 01:53.690
+moment.
+
+01:56.010 --> 02:01.250
+The other thing is that this resource pool doesn't guarantee any resources to these Reems.
+
+02:01.530 --> 02:08.160
+So if there is resource contention at any given moment it's going to be the share structure that determines
+
+02:08.160 --> 02:10.500
+how many resources these virtual machines get.
+
+02:11.860 --> 02:16.890
+So let's take a look at the share structure and how it can control contention for resources.
+
+02:18.260 --> 02:24.800
+Here we've created resource pools for the Devils and for the production of virtual machines and the
+
+02:24.800 --> 02:31.720
+dead VM resource pool has 2000 shares whereas the production resource pool has 4000.
+
+02:31.760 --> 02:40.420
+So the production resource pool is entitled to double the memory of the dev resource pool.
+
+02:43.510 --> 02:51.910
+So given that the ESX host has 48 gigabytes of memory based on the share structure we can determine
+
+02:52.030 --> 02:57.060
+that the death pool is essentially going to have two thirds of that memory entitled to it.
+
+02:57.370 --> 03:04.090
+So the death pool is entitled to 16 gigs of memory whereas the production pool is entitled to 32 gigs
+
+03:04.090 --> 03:04.680
+of memory.
+
+03:07.990 --> 03:15.670
+We can also create a child pool within a resource pool and this is a pool within a pool and with the
+
+03:15.670 --> 03:21.520
+effect of a child pool is essentially the same as adding more virtual machines to a resource pool.
+
+03:21.910 --> 03:30.730
+So in this case this child pool and all of these production PMS can only draw upon the resources of
+
+03:30.730 --> 03:39.910
+their parent pool whatever memory or you that that parent pool is entitled to will be divided amongst
+
+03:40.420 --> 03:45.910
+all child pools and all virtual machines that reside within that parent pool.
+
+03:50.510 --> 03:54.140
+Now let's take a look at reservations in this case.
+
+03:54.140 --> 04:00.590
+We've got a resource pool configured with a 16 gigabyte memory reservation and this is a requirement
+
+04:01.190 --> 04:08.240
+if I'm going to create virtual machines with memory reservations inside of this pool so if the proud
+
+04:08.240 --> 04:16.490
+V.M. has a 1 gig memory reservation that reservation must be satisfied by the Parent Resource Pool.
+
+04:17.650 --> 04:24.260
+And if I have 16 Vians with 1 gig memory reservations all of those reservations need to be satisfied
+
+04:24.260 --> 04:26.390
+by the Parent Resource Pool.
+
+04:26.620 --> 04:33.630
+If the parent resource pool can not satisfy those reservations the virtual machines will not be able
+
+04:33.640 --> 04:37.670
+to boot.
+
+04:37.680 --> 04:44.160
+So let's take a little bit of a deeper look at reservations within a resource pool and how they impact
+
+04:44.220 --> 04:46.690
+the ability to power on our virtual machines.
+
+04:48.190 --> 04:55.180
+Here we see a resource pool with a 16 gigabyte memory reservation and it's been configured on an ESX
+
+04:55.330 --> 04:58.220
+host with 48 gigabytes of memory.
+
+04:58.570 --> 05:06.400
+And now I start booting up virtual machines and VM one has a 4 gig memory reservation VM 2 has a 4 gig
+
+05:06.400 --> 05:12.300
+memory reservation VM 3 has a 3 gig memory reservation and so does VM for it.
+
+05:12.460 --> 05:19.210
+So at this point I've successfully booted up four virtual machines within this resource pool and if
+
+05:19.210 --> 05:26.800
+you add up all the memory reservations it comes out to a total of 14 gigabytes.
+
+05:26.900 --> 05:35.990
+That means that 14 gigabytes out of that 16 gigabyte reservation for the pool have been taken.
+
+05:36.270 --> 05:42.930
+The moment you boot up a virtual machine with a reservation it immediately takes those resources from
+
+05:42.960 --> 05:44.840
+its parent resource pool.
+
+05:45.120 --> 05:53.130
+So at this moment the Parent Resource Pool has 2 gig of memory reservation that I can still allocate
+
+05:53.130 --> 06:00.030
+to other Vienna's and if I try to boot some virtual machine with a reservation that exceeds two gigabytes
+
+06:00.630 --> 06:01.640
+it won't work.
+
+06:01.740 --> 06:10.530
+That virtual machine will not be allowed to boot unless we can figure something called expandable reservations
+
+06:10.560 --> 06:13.280
+and that kind of changes this scenario a little bit.
+
+06:14.330 --> 06:21.640
+So let's take a look at a resource pool configured with expandable reservations.
+
+06:21.650 --> 06:25.220
+Here we see a resource pool with a 16 gigabyte memory reservation.
+
+06:25.440 --> 06:30.180
+And let's assume that we're configuring an expandable reservation.
+
+06:30.400 --> 06:42.280
+So the moment that we created this resource pool it drew 16 gigabytes of memory from the host.
+
+06:42.350 --> 06:48.680
+And if I rewind my side a little bit here you can see the host initially had 48 gigs of available memory.
+
+06:48.680 --> 06:58.700
+The moment I create this resource pool it takes 16 gigs of the available memory from that ESX host.
+
+06:58.730 --> 07:05.120
+So now I start booting up virtual machines and again I boot up VM one VM to VM three VM four and they
+
+07:05.120 --> 07:09.550
+have a total of 14 gigabytes of memory reservations.
+
+07:09.750 --> 07:19.500
+And then I boot up VM 5 and at that point my resource pool has two gigabytes of memory reservation that
+
+07:19.590 --> 07:22.660
+it has left to allocate.
+
+07:22.860 --> 07:25.860
+But in this case this scenario is going to be different.
+
+07:25.980 --> 07:33.550
+V.M. five is actually going to successfully boot and what it will do is it will draw its resources that
+
+07:33.550 --> 07:44.040
+it needs from the parent resource pool so notice the ESX host route resource for it.
+
+07:44.050 --> 07:45.880
+This is the ESX host itself.
+
+07:45.910 --> 07:56.140
+This is our resource pool the is I host has 32 gigs of memory remaining before ribu VM 5 and our resource
+
+07:56.140 --> 07:59.020
+pool has 2 gigs of reservation remaining.
+
+07:59.020 --> 08:02.200
+That means that the resource pool can provide 2 gigs.
+
+08:02.230 --> 08:09.040
+But the other two gigs are going to have to come from that route resource pool and thats what an expandable
+
+08:09.040 --> 08:10.260
+reservation does.
+
+08:10.330 --> 08:18.250
+It allows virtual machines to boot up within a resource pool even if that resource pool cannot satisfy
+
+08:18.500 --> 08:20.220
+the reservations.
+
+08:20.350 --> 08:23.790
+A V-Amp is very similar to a resource pool.
+
+08:24.160 --> 08:29.510
+You can configure Chers limits and reservations on groups of virtual machines.
+
+08:29.680 --> 08:34.050
+So it actually gives you many of the same resource controls that a resource pool does.
+
+08:35.040 --> 08:39.260
+However app also provides some additional functionality.
+
+08:39.330 --> 08:46.170
+So here we see our app and weve created three virtual machines that weve dragged into this via our D-B
+
+08:46.320 --> 08:55.290
+app and web virtual machines and these three virtual machines make up a three tier application.
+
+08:55.410 --> 09:01.170
+And in this case we know that the db server has the boot for the app server should boot second.
+
+09:01.310 --> 09:02.930
+And the web server should boot third.
+
+09:03.090 --> 09:08.930
+If we don't boot them in the proper order the multi-tier application won't work properly.
+
+09:12.070 --> 09:17.390
+So that's the main function that a VA app gives you that's different than a resource pool.
+
+09:17.380 --> 09:23.740
+You can actually go into a VA app and configure power on order and when you power on the app it will
+
+09:23.740 --> 09:27.490
+actually power on all these virtual machines in the appropriate order.
+
+09:27.490 --> 09:33.100
+If you shut down the VBE it'll carry out those shut down operations in the opposite order.
+
+09:36.540 --> 09:39.840
+In review in this lesson we covered the following topics.
+
+09:39.840 --> 09:46.350
+We looked at how resource pools can be used to group virtual machines together and allow you to configure
+
+09:46.350 --> 09:48.790
+resource controls on a wide scale.
+
+09:49.800 --> 09:55.290
+We also learned that permissions and alerts can be configured at the resource pool level and they will
+
+09:55.290 --> 09:59.060
+propagate down to the child objects of that resource pool.
+
+10:01.070 --> 10:05.480
+The ESX host or de-risk cluster potentially is the root resource pool.
+
+10:05.510 --> 10:10.830
+This is the actual hardware that these virtual machines are running on.
+
+10:11.080 --> 10:17.650
+And we can create child resource pools within a resource pool and they will draw upon the resources
+
+10:17.650 --> 10:24.320
+of that parent resource pool and so all of the objects within a resource pool whether there are child
+
+10:24.320 --> 10:33.610
+pools or virtual machines will compete for the resources allocated to that resource pool.
+
+10:33.720 --> 10:39.990
+And if you enable expandable reservations on a resource pool virtual machines will be allowed to BU
+
+10:40.530 --> 10:50.440
+even if they have reservations that exceed the capacity of the resource pool they exist and.
+
+10:50.470 --> 10:55.570
+Finally we learned about Wii apps which are very similar to resource pools but they add on some additional
+
+10:55.570 --> 10:58.090
+capabilities most significantly.
+
+10:58.090 --> 10:58.930
+Power on order.

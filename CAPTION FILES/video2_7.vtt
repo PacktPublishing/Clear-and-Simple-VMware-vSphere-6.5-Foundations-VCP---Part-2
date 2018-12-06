@@ -1,0 +1,262 @@
+WEBVTT
+
+00:02.010 --> 00:07.740
+In this video we'll learn about VSD fair a high availability and how it can be used to protect our virtual
+
+00:07.740 --> 00:12.380
+machines from any ESX host failure.
+
+00:12.390 --> 00:17.960
+So the purpose of high availability is to protect our virtual machines from failures.
+
+00:18.060 --> 00:25.450
+But it does not provide 100 percent uptime ha is going to involve virtual machines rebooting.
+
+00:25.460 --> 00:30.070
+It's going to involve virtual machines potentially being down for a little while.
+
+00:30.210 --> 00:36.950
+If something like an ESX host failure occurs that there is going to be an outage associated with that
+
+00:39.390 --> 00:47.160
+what Ha does is essentially if an ESX host fails all of the virtual machines are running on that host
+
+00:47.310 --> 00:48.260
+will fail.
+
+00:49.260 --> 00:56.670
+But after the fact after that failure occurs high availability will start rebooting those virtual machines
+
+00:57.180 --> 00:59.640
+on different hosts within that cluster.
+
+01:01.640 --> 01:08.360
+You can protect your virtual machine from failures at the host level or you can even protect your virtual
+
+01:08.360 --> 01:12.990
+machines from virtual machine level failures with high availability.
+
+01:13.250 --> 01:19.050
+So you can actually monitor the status of VM or tools in your virtual machines.
+
+01:19.370 --> 01:27.360
+And if VM or tool stops responding that virtual machine can be rebooted right on the same host it's
+
+01:27.360 --> 01:34.790
+so H.A. can protect you from failures at either the host or virtual machine level.
+
+01:34.920 --> 01:40.730
+And we can use things like mission control to ensure that we have enough spare capacity right.
+
+01:40.740 --> 01:48.590
+So for example if you have a cluster of four hosts in one of those hosts fails we need to make sure
+
+01:48.680 --> 01:59.960
+that the surviving hosts have enough spare memory and CPQ capacity to acceptably run all of the virtual
+
+01:59.960 --> 02:03.550
+machines that used to be running on that host that has now failed.
+
+02:03.890 --> 02:10.170
+That's what we use at mission control for is to guarantee that we have spare available capacity.
+
+02:12.490 --> 02:18.660
+And one final point about H.A. it does not utilize Wii motion.
+
+02:18.670 --> 02:22.930
+Don't confuse H.A. with DRM or with the motion.
+
+02:22.990 --> 02:30.100
+High Availability does not utilize Wii motion in any way because Wii motion is used for running virtual
+
+02:30.100 --> 02:36.060
+machines and virtual machines that are up with high availability if a host fails.
+
+02:36.060 --> 02:37.720
+My virtual machines are down.
+
+02:42.150 --> 02:45.720
+So let's take a look at how high availability works.
+
+02:45.900 --> 02:53.710
+Here you can see I have a VM called V.M. 1 and my VM is running on host ESX size 0 1.
+
+02:54.150 --> 02:58.080
+And so we've got this VM running and right now everything is fine.
+
+02:58.110 --> 03:07.050
+My VM is working it's running on a host 1 and my VM also has access to all of its files that are down
+
+03:07.050 --> 03:09.000
+here on shared storage.
+
+03:09.000 --> 03:09.280
+Right.
+
+03:09.430 --> 03:14.410
+And by the way shared storage is required for H.A..
+
+03:14.520 --> 03:23.130
+So I have to have some sort of shared storage system that all of my hosts in the cluster have access
+
+03:23.130 --> 03:23.910
+to.
+
+03:23.940 --> 03:29.080
+So I've got shared storage I've got VM one running on ESX has ever one.
+
+03:29.280 --> 03:35.770
+And then something happens something goes wrong and ESX zero one fails right.
+
+03:35.880 --> 03:45.550
+So now my host that the VM one was running on is down and my VM can't run if the host is down.
+
+03:45.570 --> 03:49.260
+So VM one fails right along with that host
+
+03:51.990 --> 03:58.020
+so there's going to be some down time for this virtual machine and every other VM that was running on
+
+03:58.020 --> 03:59.180
+that host.
+
+03:59.550 --> 04:05.360
+And what's going to happen now is the virtual machines files are still intact.
+
+04:05.360 --> 04:05.740
+Right.
+
+04:05.790 --> 04:15.540
+The vim's running state or live state may have been affected but there's still a a set of files for
+
+04:15.540 --> 04:23.080
+this virtual machine that are intact that exist on shared storage and those files can be used to now
+
+04:23.100 --> 04:29.970
+boot up another instance of that virtual machine on some other ESX I host.
+
+04:30.150 --> 04:32.980
+And that's how high availability works.
+
+04:33.530 --> 04:41.500
+And when the host one fails hosts two or three or four one of them is going to be a master host that
+
+04:41.500 --> 04:45.000
+host is going to recognize that hey host one is down.
+
+04:45.280 --> 04:51.400
+Let's take all the victims that were running on that host will leverage their files which are still
+
+04:51.400 --> 04:57.380
+intact and will start booting up all those victims on the surviving hosts within that cluster.
+
+05:03.080 --> 05:10.160
+So now we're just going to take a very brief look at the architecture of high availability at a pretty
+
+05:10.160 --> 05:11.230
+high level here.
+
+05:12.530 --> 05:20.180
+And here we see V.M. kernel ports running on every host in my cluster and those VM kernel ports are
+
+05:20.180 --> 05:22.110
+marked for management traffic.
+
+05:22.190 --> 05:28.640
+And so what high availability is going to do is once we go hadn't we create our cluster right in the
+
+05:28.640 --> 05:29.470
+center.
+
+05:29.480 --> 05:34.390
+We go ahead and enable high availability on this cluster.
+
+05:34.520 --> 05:41.580
+Then at that point what will happen is once high availability is enabled an election will take place.
+
+05:41.580 --> 05:49.440
+And one of these hosts in the cluster will take on the role of master every other host in that cluster
+
+05:49.960 --> 05:51.930
+will take on the role of Slave
+
+05:55.110 --> 06:02.550
+The other thing that will happen when we enable high availability is the fault domain manager or FDM
+
+06:03.080 --> 06:05.370
+will start running on each of these hosts.
+
+06:05.940 --> 06:13.220
+And the Default Domain manager is basically responsible for these hosts communicating with each other.
+
+06:13.530 --> 06:21.420
+So the master hosts will be constantly sending heartbeats to all the slaves all of the slaves will constantly
+
+06:21.420 --> 06:23.850
+be sending heartbeats to the Master.
+
+06:23.850 --> 06:24.220
+Right.
+
+06:24.420 --> 06:32.200
+And and so basically this allows the master to know hey if any of the slaves are down the master will
+
+06:32.200 --> 06:38.920
+know or if the master itself goes down all of the slaves on that master sends heartbeats to the slaves
+
+06:39.400 --> 06:43.020
+slaves send heart beats to the master.
+
+06:43.120 --> 06:48.730
+And this allows our closter to detect failures.
+
+06:48.730 --> 06:48.940
+Right.
+
+06:48.940 --> 06:56.260
+So if we have a slave host that all of a sudden you know goes down it's going to stop sending heartbeats
+
+06:56.290 --> 06:57.580
+to the master.
+
+06:57.580 --> 07:03.970
+The master can determine that and it will do a couple of tricks to verify that that's actually the case
+
+07:03.970 --> 07:06.360
+that the host is truly down.
+
+07:06.450 --> 07:12.120
+At which point those victims that are affected can start booting up on other hosts
+
+07:16.660 --> 07:17.150
+OK.
+
+07:17.260 --> 07:25.300
+So from the perspective of the VM We're certified associate exam what you need to know is that high
+
+07:25.300 --> 07:29.660
+availability provides a reliability mechanism right.
+
+07:29.680 --> 07:35.490
+If a host fails those VMs are going to restart on other ESX hosts.
+
+07:35.620 --> 07:39.110
+But there's going to be some downtime associated with that.
+
+07:39.610 --> 07:46.130
+And really the ideal way to configure this is to enable both high availability and DNS on your cluster.
+
+07:46.180 --> 07:48.240
+H.A. does not use the motion though.
+
+07:49.390 --> 07:55.420
+And we took a little brief look at the architecture how the master sends heartbeats to the slaves.
+
+07:55.480 --> 08:02.650
+The slaves send heartbeats to the master and that's how we determine if a host has failed and the component
+
+08:02.650 --> 08:09.120
+that actually runs in the host handles all of this heart beating and the communication between hosts.
+
+08:09.160 --> 08:10.620
+It's called the fault domain manager.

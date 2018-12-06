@@ -1,0 +1,226 @@
+WEBVTT
+
+00:02.630 --> 00:08.410
+In this video I'll demonstrate how to carry out of emotion migration of a virtual machine.
+
+00:08.900 --> 00:13.980
+So here you can see we have a virtual machine that's been created called the motion demo.
+
+00:14.570 --> 00:20.590
+And I have to ESX I hosts present in my cluster and you don't need a cluster for Wii motion.
+
+00:20.630 --> 00:20.840
+Right.
+
+00:20.840 --> 00:24.860
+Really the only thing you need for Wii motion is shared storage.
+
+00:24.860 --> 00:31.790
+A properly configured VM kernel port you need the center and you need the same networks on both the
+
+00:31.790 --> 00:34.270
+source and destination host.
+
+00:34.340 --> 00:41.530
+So at the moment I can see that this virtual machine is currently running on Host 1 9 2 1 6 8 1 9 9
+
+00:41.540 --> 00:45.110
+out 100 so it's running on my first host.
+
+00:45.200 --> 00:53.790
+Now I can just carry out a very simple Wii motion migration by right clicking this VM and choosing my
+
+00:53.790 --> 00:59.380
+great and the very first option is to change the compute resource only.
+
+00:59.660 --> 01:01.390
+That's an emotion right.
+
+01:01.550 --> 01:08.240
+I'm not moving the virtual disks from one data store to another and I'm not doing a storage Wii motion.
+
+01:08.240 --> 01:13.220
+I'm doing a Wii Motion I'm moving it from one ESX host to another.
+
+01:13.460 --> 01:18.890
+But all of the files that make up this VM are going to remain right on the same data store that they're
+
+01:18.890 --> 01:20.290
+currently on.
+
+01:22.010 --> 01:32.020
+So let's go ahead and hit Next here and my source host is 1 9 2 1 6 8 1 9 9 100 so I'm going to choose
+
+01:32.020 --> 01:38.620
+one or three as the destination and what you'll notice as soon as I click on one of the three down here
+
+01:38.620 --> 01:46.930
+in the compatibility area if there are any readily apparent problems that are going to cause this not
+
+01:46.930 --> 01:53.210
+to work those will show up there as a validation check is performed OK.
+
+01:53.300 --> 01:55.670
+So our compatibility checks have succeeded.
+
+01:55.670 --> 01:58.890
+There's nothing wrong here.
+
+01:58.910 --> 02:05.300
+OK so now that we've chosen the destination host on the next screen it's going to have us select the
+
+02:05.300 --> 02:12.890
+network that we want to connect to and you can see our source network is a group called 199 the destination
+
+02:12.890 --> 02:17.360
+network that we're going to choose is going to also be 1 9 9.
+
+02:17.420 --> 02:23.890
+But in this scenario that destination network is not actually available.
+
+02:23.930 --> 02:26.060
+The other ESX host.
+
+02:26.530 --> 02:32.090
+OK so let's take a moment and check this out and see what happens when we kind of minimize this task
+
+02:32.960 --> 02:40.620
+and go back and take a look at these two ESX host.
+
+02:40.640 --> 02:47.950
+OK so let's take a look at our destination host which is 1 9 2 1 6 8 8 1 9 9 1 0 3.
+
+02:47.950 --> 02:53.890
+And I want to look at our virtual switches and you can see here on VSE which is zero.
+
+02:54.270 --> 02:57.220
+We have one port group called V.M. network.
+
+02:57.480 --> 03:05.300
+Let's take a look at the other ESX I host this vse which we have two port groups.
+
+03:05.300 --> 03:11.750
+All right we've got the VM network and we've got port group 199 which is what our virtual machine is
+
+03:11.750 --> 03:13.290
+currently connected to.
+
+03:13.320 --> 03:13.850
+Right.
+
+03:14.150 --> 03:17.070
+And I'm going to quickly look at the info screen.
+
+03:17.150 --> 03:18.560
+All right.
+
+03:18.560 --> 03:23.000
+So on the source host this VM is connected to porker 199.
+
+03:23.240 --> 03:26.530
+And notice the security settings that are configured here.
+
+03:26.930 --> 03:29.700
+And notice the LAN configuration as well.
+
+03:31.160 --> 03:40.730
+When I take this VM and migrate it to Host 1 0 3 second host it has to have a port group that matches
+
+03:40.790 --> 03:42.950
+this configuration.
+
+03:42.950 --> 03:49.310
+So I'm going to set up a port group that is exactly the same on my destination host complete with the
+
+03:49.310 --> 03:56.520
+same name the same VPN membership and the same security settings.
+
+03:56.570 --> 03:58.140
+So let's call it 199.
+
+03:58.190 --> 04:05.520
+We'll make the release on 199 and we'll go ahead and hit finish here and then I'm going to quickly modify
+
+04:08.050 --> 04:12.420
+the security settings on this pop group as well so choose poor group 199.
+
+04:12.820 --> 04:21.990
+I had a little pencil or modify and will quickly change the security settings to match exactly what
+
+04:22.650 --> 04:25.160
+the porker on the other host is configured for.
+
+04:25.350 --> 04:30.660
+And I know this seems like kind of a long process to sort of pause and take a look at here but these
+
+04:30.660 --> 04:37.610
+are the sort of little inconsistencies across hosts that can create big V motion problems.
+
+04:37.710 --> 04:38.370
+Right.
+
+04:38.370 --> 04:45.180
+And so what we want to really think about is basically you want all of your hosts to be as similar as
+
+04:45.180 --> 04:47.460
+they possibly can.
+
+04:47.490 --> 04:48.130
+All right.
+
+04:48.240 --> 04:55.420
+Because as we move on in this video series you're going to see that things like deep grass and high
+
+04:55.420 --> 05:04.500
+availability are going to rely on all of these configurations being very consistent across your hosts.
+
+05:04.590 --> 05:10.230
+And so we always want to be very careful that maybe even using things like host profiles will allow
+
+05:10.230 --> 05:13.300
+us to kind of maintain that consistency.
+
+05:16.960 --> 05:24.770
+OK so now we've gone ahead and we've chosen our destination host we've chosen our destination network.
+
+05:25.320 --> 05:29.850
+And do we want to do a high priority Wii motion or lower priority Wii motion.
+
+05:29.850 --> 05:34.430
+Basically the high priority Wii motion chews up a little bit more C-p resources.
+
+05:34.540 --> 05:38.640
+So we're going to go with that and then I'm going to go ahead and finish here.
+
+05:38.780 --> 05:42.140
+And you should see it should happen very quickly.
+
+05:42.140 --> 05:47.420
+So I am going to go ahead and unpinned this and we're going to look at our recent tasks and look at
+
+05:47.420 --> 05:49.270
+that relocate virtual machine.
+
+05:49.400 --> 05:51.210
+It's already completed.
+
+05:51.300 --> 05:53.850
+It was cute for about 5 milliseconds.
+
+05:53.870 --> 06:00.950
+It started at 11:30 and 29 seconds in it finished at 11:30 and 32 seconds.
+
+06:00.980 --> 06:06.170
+So the whole process took us somewhere around three seconds.
+
+06:06.210 --> 06:13.040
+And now if I look at my Wii motion demo virtual machine I can see it's now on ESX I host 1 9 2 1 6 8
+
+06:13.340 --> 06:16.560
+1 9 9 1 or 3.
+
+06:16.660 --> 06:23.160
+So now that our virtual machine has been relocated tune into the next video where I'll show you how
+
+06:23.160 --> 06:25.590
+to carry out a scheduled migration.

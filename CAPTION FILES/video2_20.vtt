@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.530 --> 00:07.520
+In this video I'll demonstrate how to configure DNS on an ESX I host cluster.
+
+00:07.520 --> 00:15.860
+So here you can see my cluster it currently contains 2 ESX I hosts and one of the really critical things
+
+00:16.040 --> 00:22.970
+that I have already set up in advance here is on my ESX I hosts I have actually set up a Wii motion
+
+00:22.970 --> 00:23.940
+network.
+
+00:24.050 --> 00:30.650
+So if we go to each host we look at the configure option and we go to our virtual switches here we can
+
+00:30.650 --> 00:40.270
+see on both hosts I have a port group called the 199 a group called V.M. network.
+
+00:40.270 --> 00:46.420
+And if I look at my other ESX I host I should see the identical configuration.
+
+00:46.470 --> 00:56.550
+So I've got the same port groups configured on both hosts and I've also got a VM kernel port that is
+
+00:56.550 --> 00:58.970
+marked for Wii motion.
+
+00:59.360 --> 01:01.570
+And each one of these ESX I host.
+
+01:01.640 --> 01:02.260
+Right.
+
+01:02.310 --> 01:08.070
+And that's critical because Diyar us is completely dependent on the motion.
+
+01:08.120 --> 01:15.490
+Right that's all d r S's is automatic Feme motion for the purposes of load balancing.
+
+01:15.550 --> 01:18.760
+So I've got my Wii motion network all ready to go.
+
+01:18.760 --> 01:22.850
+I've got my VM kernel ports created I'm in good shape there.
+
+01:23.000 --> 01:29.160
+So let's go back to the cluster itself and edit the configuration of the cluster.
+
+01:29.360 --> 01:35.180
+And I've named it ha cluster but I'm going to have DRM enabled on this cluster as well.
+
+01:36.050 --> 01:38.690
+And let's walk through the settings.
+
+01:38.690 --> 01:42.830
+So the first setting is whether or not we want to turn Diyar ass on.
+
+01:42.950 --> 01:46.050
+And in this case I've already enabled the.
+
+01:46.170 --> 01:53.400
+And then I can choose the Deros automation level the automation level is a very important setting and
+
+01:53.400 --> 02:01.300
+you can see here I have it configured for manual and in manual mode Diyar DRM will never automatically
+
+02:01.330 --> 02:04.340
+migrate virtual machines from host to host.
+
+02:04.370 --> 02:04.680
+Right.
+
+02:04.830 --> 02:11.290
+It will simply give you recommendations and you can manually choose whether or not you want to carry
+
+02:11.290 --> 02:13.070
+out those recommendations.
+
+02:15.060 --> 02:22.130
+Partially automated is a little bit different in that you're turning over more control to the center.
+
+02:22.190 --> 02:22.510
+Right.
+
+02:22.530 --> 02:25.550
+So it's partially automated dioramas.
+
+02:25.740 --> 02:32.310
+What's going to happen is as you power on virtual machines DNS will just automatically choose a host
+
+02:32.400 --> 02:39.580
+to place them on right so let's say you're powering on a virtual machine that's very memory intensive.
+
+02:39.910 --> 02:45.900
+Well dress will automatically select the ideal host in your cluster to run that virtual machine.
+
+02:47.990 --> 02:54.820
+Right and then we have a fully automated mode and in fully automated mode we're basically turning complete
+
+02:54.820 --> 02:57.020
+control over to the center.
+
+02:57.140 --> 02:58.010
+We're saying you know what.
+
+02:58.000 --> 03:04.180
+The sooner you can migrate virtual machines from host to host anytime you want carry out as many of
+
+03:04.180 --> 03:06.350
+the motions as are necessary.
+
+03:06.400 --> 03:09.070
+Doesn't matter what time of day it can be during business hours.
+
+03:09.070 --> 03:10.820
+It can be whenever.
+
+03:10.970 --> 03:16.460
+So with fully automated mode we're letting a lot of stuff happen automatically we're letting all of
+
+03:16.460 --> 03:20.210
+our emotions happen automatically without our approval.
+
+03:22.830 --> 03:29.550
+And then we can also choose the migration threshold so you can see here it's currently right in the
+
+03:29.550 --> 03:30.730
+middle right.
+
+03:30.840 --> 03:35.310
+And in most cases this is the optimal migration threshold.
+
+03:35.520 --> 03:39.840
+You really don't need to change this unless you have a really good reason to do so.
+
+03:40.050 --> 03:41.490
+Now you can change it if you want.
+
+03:41.490 --> 03:46.000
+Right we could go up to aggressiveness level 4.
+
+03:46.260 --> 03:52.560
+And that's going to make changes that promise even a moderate improvement to the load balancing but
+
+03:52.560 --> 03:55.140
+in most cases you know that's overkill right.
+
+03:55.140 --> 04:01.660
+So in most cases we'll just leave it at the default migration threshold and that should be just fine.
+
+04:01.680 --> 04:05.530
+We can also enable predictive diyas if we want.
+
+04:05.540 --> 04:14.210
+Right so DRM is going to look at forecasted metrics that are delivered from the Realize operations and
+
+04:14.300 --> 04:20.000
+move virtual machines proactively before resource contention even occurs.
+
+04:20.090 --> 04:21.470
+Pretty cool feature.
+
+04:21.710 --> 04:24.420
+I'm going to disable it in my lab.
+
+04:24.710 --> 04:26.620
+But that's a possible feature for real life.
+
+04:26.630 --> 04:27.780
+That might be helpful.
+
+04:30.910 --> 04:32.680
+Virtual Machine automation.
+
+04:32.740 --> 04:42.840
+Do we want the ability to override this de-risk cluster configuration for individual VM.
+
+04:43.180 --> 04:50.490
+So for example let's say I have a V Center server appliance deployed on a virtual machine.
+
+04:50.610 --> 04:53.800
+I might not want that to move from host to host right.
+
+04:53.810 --> 05:00.640
+I always want to know which host my center server or appliance VM is running on.
+
+05:00.640 --> 05:00.860
+Right.
+
+05:00.900 --> 05:06.230
+That way if I ever need to counsel then to have a rebooted or something like that I know where it is.
+
+05:06.240 --> 05:14.550
+So by checking this box we're basically saying we can go to individual VMS and configure settings for
+
+05:14.550 --> 05:15.630
+specific vim's.
+
+05:15.640 --> 05:20.030
+Right so maybe I'll put the center in manual dress mode.
+
+05:20.130 --> 05:20.330
+Right.
+
+05:20.330 --> 05:24.290
+So the only time it will move is if I actually manually approve it.
+
+05:28.710 --> 05:35.040
+Do we want to try an evenly distribute virtual machines across hosts for availability reasons.
+
+05:35.040 --> 05:41.070
+That's your call if you want to enable that or not do we want to load balance based on consumed memory
+
+05:41.100 --> 05:44.480
+rather than active memory of virtual machines.
+
+05:44.740 --> 05:52.560
+Really this is ideal for clusters where you have memory that's not over committed meaning you have a
+
+05:52.560 --> 05:57.330
+bunch of virtual machines and even if they all use their memory at once you still won't have a memory
+
+05:57.330 --> 05:59.170
+shortage right.
+
+05:59.190 --> 06:04.200
+So in that case I'm going to go ahead and just leave that as is and I'm going to hit OK on my cluster
+
+06:04.200 --> 06:09.350
+here and now I've been able to fully automated DRM.
+
+06:09.810 --> 06:16.800
+So if I go to my distress service here you can see it's unable and fully automated but.
+
+06:16.890 --> 06:22.960
+So let's go to the monitor tab and let's take a look at these fair.
+
+06:24.120 --> 06:29.090
+And right now I can hit run diarists and old tell me are there any recommendations right.
+
+06:29.100 --> 06:31.660
+Is there anything that should happen.
+
+06:31.710 --> 06:35.950
+Should I migrate VMS from host one to host two or anything like that.
+
+06:36.060 --> 06:39.150
+But there's no recommendations currently.
+
+06:39.330 --> 06:46.830
+If we were to configure DNS in manual mode we would see a list of recommendations here and then we could
+
+06:46.830 --> 06:53.080
+choose to manually apply those recommendations if there's any duress fault.
+
+06:53.090 --> 06:54.100
+We'll see those here.
+
+06:54.100 --> 06:55.280
+There's none right now.
+
+06:55.280 --> 07:01.400
+And this is really handy right once you enable fully automated Diyar as you may want to see what's actually
+
+07:01.400 --> 07:01.980
+going on.
+
+07:02.000 --> 07:02.210
+Right.
+
+07:02.210 --> 07:05.210
+What is the IRS doing within your cluster.
+
+07:05.240 --> 07:06.920
+What moves isn't making.
+
+07:07.050 --> 07:12.100
+So this is a good way to see all the moves that Demarest has made recently.
+
+07:12.300 --> 07:18.900
+And then we can also take a look at the CPI memory and network utilization and get an idea of how evenly
+
+07:18.900 --> 07:22.480
+the work load is distributed across the hosts in my cluster.
+
+07:23.040 --> 07:25.350
+So that's how we configure dress right.
+
+07:25.350 --> 07:27.060
+Pretty straightforward to set it up.
+
+07:27.240 --> 07:33.270
+If you're brand new to the IRS I always recommend starting it out in manual mode and letting it roll
+
+07:33.270 --> 07:37.230
+for a few days and keeping a close eye on the recommendations.
+
+07:37.290 --> 07:37.530
+Right.
+
+07:37.560 --> 07:43.530
+And then you'll have a really good idea of what's actually going to happen when you enable it and fully
+
+07:43.530 --> 07:44.970
+automated mode.
+
+07:45.180 --> 07:50.430
+And the other thing to remember is that Deros is just really Wii motion right.
+
+07:50.430 --> 07:57.720
+That's all it's doing is migrating virtual machines from host to host using Wii motion for load balancing.
+
+07:57.750 --> 08:05.360
+So if your Wii motion network is not set up correctly or if you've got CPQ affinity or local ISO images
+
+08:05.360 --> 08:10.150
+or things like that those things are all going to impact the.
+
+08:10.350 --> 08:16.140
+So you really need to make sure that all of your virtual machines on the cluster are properly configured
+
+08:16.530 --> 08:19.680
+for Wii motion prior to enabling DNS.

@@ -1,0 +1,358 @@
+WEBVTT
+
+00:01.030 --> 00:06.130
+In this video I'll demonstrate how to work with alarms and vse fair.
+
+00:06.340 --> 00:13.000
+And the first step is to make sure that we've got the center properly configured right so that's always
+
+00:13.000 --> 00:20.080
+going to be the first and most critical step because if alarm's get generated we need to be notified
+
+00:20.080 --> 00:21.260
+of them somehow.
+
+00:21.380 --> 00:29.970
+We want to get an e-mail address or we want an asinine P-trap to be sent to our SMP server.
+
+00:30.070 --> 00:34.750
+So we have a couple of different options of how we can get these messages through to us.
+
+00:35.020 --> 00:39.820
+But none of those options are going to work unless we've properly configured the center to be able to
+
+00:39.820 --> 00:42.190
+send those types of messages.
+
+00:43.380 --> 00:49.710
+So here you can see I'm in the hosts and Questors view I clicked on my v center server I clicked on
+
+00:50.310 --> 01:00.500
+settings and other general settings I clicked on it and we can modify the A.P. host.
+
+01:00.620 --> 01:07.400
+So for example I could put in my email server here I could say that the email is going to be sent in
+
+01:07.400 --> 01:19.670
+from service at trayner tests dot com and now I've got the ability to allow the sender to actually send
+
+01:19.670 --> 01:21.620
+out alerts to my email address.
+
+01:21.950 --> 01:29.310
+And most smartphones have an email address that you can also utilize to send text messages.
+
+01:29.360 --> 01:34.190
+So if you want the alerts to go to your phone via text you just need to find out the email address for
+
+01:34.190 --> 01:38.390
+your phone to receive text messages on and set that up here.
+
+01:39.600 --> 01:39.860
+All right.
+
+01:39.870 --> 01:42.410
+Or you can set up an SMP host.
+
+01:42.420 --> 01:49.590
+So if I happen to have an Ensign and the host in my environment that I want to configure and send traps
+
+01:49.590 --> 01:52.520
+to I can set that up here.
+
+01:52.530 --> 02:00.630
+So that's really step one of configuring alerts in the center is to make sure that the center itself
+
+02:00.690 --> 02:08.520
+is properly configured to send any of these triggered alarms to the appropriate resources.
+
+02:08.520 --> 02:13.890
+Now that we've covered kind of the basic first step here of setting up alarming itself let's take a
+
+02:13.890 --> 02:19.300
+moment to look at some of the alarms that we can create and how we can create them.
+
+02:19.320 --> 02:26.010
+So here at the V.A. center level we can go ahead and look at the alarm definitions and you'll see a
+
+02:26.010 --> 02:31.070
+bunch of alarms that are predefined built right into the center.
+
+02:31.080 --> 02:38.830
+So for example let's pick one here called Data Store let's look for any alarms.
+
+02:38.860 --> 02:40.380
+Specific to data stores.
+
+02:40.450 --> 02:43.260
+And here we go a data store capacity alarm.
+
+02:43.840 --> 02:52.240
+Right so this is an alarm that is going to trigger if my data store is running low on disk space and
+
+02:52.260 --> 02:59.070
+I can click Edit and take a look at the specific settings of this particular alarm it's going to trigger
+
+02:59.070 --> 03:07.500
+based on an event and the event is if I'm getting this system capability warnings from the storage provider.
+
+03:07.740 --> 03:14.580
+So basically if the storage array itself is telling me that we're running out of space let's take a
+
+03:14.580 --> 03:16.250
+look at an even simpler alarm.
+
+03:16.320 --> 03:19.540
+Here we see data store usage on disk.
+
+03:19.800 --> 03:26.510
+And this is a conditional arm and it's going to trigger if my data stores more than 75 percent fault
+
+03:26.660 --> 03:29.240
+I will send a warning if my data stores.
+
+03:29.310 --> 03:33.930
+Eighty five percent full or more it'll send a critical alert.
+
+03:34.110 --> 03:37.660
+And what is it going to do in those situations.
+
+03:40.740 --> 03:44.750
+We'll see an alert here in the east for a web client but it's not going to send me an e-mail.
+
+03:44.750 --> 03:51.510
+It's not going to send in S and P-trap unless I specifically go in here and configure an action for
+
+03:51.510 --> 04:00.290
+this alarm say let's send a notification e-mail to service at trayner tests dot com
+
+04:03.150 --> 04:09.150
+So that's an important thing to understand about the alarms that are baked right into the center is
+
+04:09.150 --> 04:14.060
+the fact that you know they're not really going to send you any kind of alert.
+
+04:14.270 --> 04:14.780
+Right.
+
+04:14.830 --> 04:20.560
+There's no alerts that's going to go to your e-mail or your SMP server by default.
+
+04:20.640 --> 04:22.400
+You need to set those actions up
+
+04:25.460 --> 04:28.640
+and you also need to set those actions up if you're creating a new alarm.
+
+04:28.640 --> 04:40.420
+So let's set up a new alarm and I'm going to set up an alarm called the CPQ over 95 percent maybe I
+
+04:40.420 --> 04:48.400
+want to know if my virtual machines are going over ninety 95 percent and CPQ I'm going to enable this
+
+04:48.400 --> 04:56.110
+alarm so that it's turned on and I am going to monitor for a condition and the condition that I'm going
+
+04:56.110 --> 05:01.110
+to Maatta monitor for is virtual machines usage.
+
+05:01.660 --> 05:07.480
+If it's over 95 percent that's all I care about in this case so I'm going to make these two criteria
+
+05:07.480 --> 05:09.200
+exactly the same.
+
+05:09.390 --> 05:17.780
+If it's over 95 percent for five minutes I want to get these alerts.
+
+05:18.170 --> 05:19.780
+And so that's my trigger.
+
+05:20.600 --> 05:26.000
+If those criteria are met this alarm will trigger and it's going to force me to use slightly different
+
+05:26.000 --> 05:26.410
+values.
+
+05:26.430 --> 05:33.730
+Ok so I'll change the the warning to something a little bit lower here.
+
+05:38.150 --> 05:41.320
+94 percent OK.
+
+05:41.790 --> 05:44.160
+And so now I've created the triggers.
+
+05:44.160 --> 05:44.460
+Right.
+
+05:44.460 --> 05:48.460
+Those are the things that are basically going to set this alarm off.
+
+05:48.690 --> 05:51.360
+And so what do I want to have happen.
+
+05:51.360 --> 05:51.750
+All right.
+
+05:51.990 --> 05:53.930
+And maybe I only really want to be notified.
+
+05:53.950 --> 05:55.660
+Ninety five percent.
+
+05:55.980 --> 06:01.240
+So I will say you know send an e-mail to my e-mail address.
+
+06:01.470 --> 06:09.570
+Once we hit that 95 percent mark I don't really care about the 94 percent mark so I'm not going to set
+
+06:09.570 --> 06:11.240
+any notifications for that.
+
+06:12.310 --> 06:13.420
+And is warning me here.
+
+06:13.500 --> 06:18.540
+I never really configured an e-mail server in the center so I have to do that.
+
+06:18.550 --> 06:22.360
+But that's a really simple condition.
+
+06:22.360 --> 06:23.550
+Alarm.
+
+06:23.650 --> 06:27.900
+And when I create this alarm let me go back to the main screen of the alarm.
+
+06:28.060 --> 06:34.840
+I'm going to name it something a little bit more descriptive called Rick demo alarm just so that I can
+
+06:34.840 --> 06:41.430
+show you how this alarm gets propagated.
+
+06:41.490 --> 06:52.890
+So now I've created an alarm and the center itself so if any of these victims that are sub objects go
+
+06:52.890 --> 07:01.170
+over 95 percent CPQ that's going to trigger my alarm this alarm that I created here is going to be propagated
+
+07:01.170 --> 07:03.840
+down to this ha cluster.
+
+07:03.840 --> 07:10.420
+And let's look at our alarm definitions under H.A. cluster and it's also going to be propagated down
+
+07:10.420 --> 07:20.560
+to all of the ESX hosts and all of the virtual machines that are managed by this vse center Scherrer.
+
+07:20.580 --> 07:24.290
+So here we see the Rick DMO alarm on the H.A. cluster.
+
+07:24.350 --> 07:29.770
+If I look at an individual host the alarm is going to be propagated down to those hosts as well.
+
+07:29.790 --> 07:37.870
+So if I want to create a global alarm I'll create it at the center level and when I create those alarms
+
+07:37.930 --> 07:42.370
+I will specify exactly what they're going to be monitoring.
+
+07:42.410 --> 07:47.300
+Right so my Rick demo alarm is monitoring virtual machines.
+
+07:47.470 --> 07:51.620
+So now that I've configured one alarm lets configure one more alarm.
+
+07:51.670 --> 07:56.660
+I'm going to configure this one on the H.A. cluster instead of at the center level.
+
+07:56.680 --> 08:02.980
+Who knows maybe I have multiple clusters where I want to configure different alarms and I want to create
+
+08:02.980 --> 08:11.210
+an alarm that is going to notify me whenever and ESX host goes into maintenance mode.
+
+08:11.260 --> 08:14.860
+So I'm going to monitor for a specific event.
+
+08:15.190 --> 08:21.380
+It is not a condition a host entering maintenance mode is a one time event.
+
+08:21.380 --> 08:25.810
+It's not an ongoing condition like high Seip you use your high memory usage.
+
+08:25.820 --> 08:27.010
+It's an event.
+
+08:27.080 --> 08:29.250
+So we're going to monitor for that event.
+
+08:29.300 --> 08:36.990
+We're going to monitor our ESX I host and I'll set up my alarm trigger to say if a host has entered
+
+08:36.990 --> 08:39.380
+maintenance mode I want to trigger the alarm
+
+08:44.220 --> 08:44.810
+Riego.
+
+08:45.020 --> 08:53.000
+So now I've created my trigger saying if the host enters maintenance mode I want this alarm to be triggered
+
+08:54.020 --> 08:56.260
+and I want it to send me an email.
+
+08:56.270 --> 09:03.500
+Create an S and M P-trap or I can set up all sorts of other actions here as well.
+
+09:03.520 --> 09:03.920
+Right.
+
+09:04.060 --> 09:08.390
+Things like taking the host out of standby mode which really wouldn't be applicable here.
+
+09:08.410 --> 09:11.500
+But exiting main mode rebooting the host.
+
+09:11.570 --> 09:11.750
+Right.
+
+09:11.790 --> 09:15.880
+Maybe we want to automatically reboot the host if it gets put maintenance mode.
+
+09:15.880 --> 09:16.940
+Probably not.
+
+09:17.380 --> 09:23.110
+But I just wanted to show you this so that you could kind of get a feel for the many types of alarm
+
+09:23.110 --> 09:25.010
+actions that can be carried out.
+
+09:25.150 --> 09:28.310
+And there's alarm actions for virtual machines as well.
+
+09:28.370 --> 09:38.280
+Right so if we wanted to let's say create a virtual machine alarm that monitor for Migration resource
+
+09:38.280 --> 09:40.710
+error migration warning it doesn't really matter.
+
+09:40.800 --> 09:45.960
+We go to the next screen we can set up all sorts of actions on our virtual machines.
+
+09:45.960 --> 09:51.780
+Right we can have them get rebooted we can run a command on them we can suspend them we can migrate
+
+09:51.790 --> 09:53.270
+them.
+
+09:53.450 --> 09:58.320
+So alarm actions aren't really just notifications.
+
+09:58.340 --> 10:03.120
+There's all sorts of actions that you can carry out on hosts or on virtual machines.
+
+10:04.020 --> 10:06.120
+Automatically if an alarm was triggered.

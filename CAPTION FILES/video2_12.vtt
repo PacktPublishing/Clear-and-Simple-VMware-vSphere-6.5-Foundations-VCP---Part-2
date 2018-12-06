@@ -1,0 +1,160 @@
+WEBVTT
+
+00:01.800 --> 00:09.660
+In this video we'll take a look at the proactive ha feature that is now available in these first five.
+
+00:09.900 --> 00:16.860
+And so here you can see I'm under the hosts and cluster's view and I'm looking at my H.A. cluster and
+
+00:16.860 --> 00:23.070
+I'm going to go ahead and click on edit and we'll take a look at the cluster settings here.
+
+00:23.270 --> 00:29.530
+And one of the settings that we have the ability to configure is to turn on proactive ha.
+
+00:29.780 --> 00:32.920
+But you can see here there is a prerequisite to that.
+
+00:33.290 --> 00:35.850
+We have to have dress enabled first.
+
+00:36.140 --> 00:42.710
+So I'm going to start by simply just enabling dress in manual mode.
+
+00:42.730 --> 00:51.700
+OK so now I've configured my cluster to enable D or s in manual mode and I'm going to go ahead and go
+
+00:51.700 --> 00:57.070
+to the other screen here and now turn on proactive high availability as well.
+
+00:57.070 --> 01:00.930
+And so here's what proactive ha is going to do for me.
+
+01:01.500 --> 01:03.990
+High Availability is normally.
+
+01:03.990 --> 01:05.480
+Service impacting.
+
+01:05.610 --> 01:11.160
+Right you can see here we have all of these conditions that we can configure like for example if a host
+
+01:11.160 --> 01:12.020
+fails.
+
+01:12.120 --> 01:15.390
+We want our virtual machines to restart.
+
+01:15.390 --> 01:24.330
+Right so all of these responses that we see here other than proactive ha involve restarting of Virtual
+
+01:24.330 --> 01:33.470
+Machine This changes in these first six top five or higher visibility now has the capability of detecting
+
+01:34.010 --> 01:37.530
+hardware problems inside of your ESX I host.
+
+01:37.700 --> 01:46.890
+And this can allow you to get the virtual machines off of a host before it creates an outage proactive.
+
+01:46.930 --> 01:47.500
+Ha.
+
+01:47.500 --> 01:56.380
+Works with hardware vendors to monitor the health status of things like your power supply or the fans
+
+01:56.590 --> 02:06.370
+in an ESX host and if one of those components fails we can leverage Diyar Ross to migrate the virtual
+
+02:06.370 --> 02:08.210
+machines off of that host.
+
+02:08.440 --> 02:15.100
+So you'll see in the configuration that I've established here right now the automation level is manual
+
+02:15.490 --> 02:19.920
+right which means you're going to have to approve any changes.
+
+02:20.350 --> 02:25.420
+But I'm going to go ahead and change it to automate it that way.
+
+02:25.420 --> 02:35.260
+If there is some kind of health problem with one of my ESX I host the virtual machines will move automatically.
+
+02:35.300 --> 02:43.550
+So now that I've enabled proactive ha and I've configured it to be automated now I can configure the
+
+02:43.550 --> 02:47.340
+remediation and we have a few different options here.
+
+02:47.510 --> 02:55.730
+So the first option is quarantine mode for all failures and this basically means that if proactive ha
+
+02:55.730 --> 03:03.920
+detects some sort of failure on an ESX host it will not power up any new Reems on that host and it will
+
+03:03.920 --> 03:11.180
+also attempt to move virtual machines off of that host as long as it doesn't create any performance
+
+03:11.180 --> 03:12.710
+issues.
+
+03:12.710 --> 03:16.320
+So this is a really conservative way to do this.
+
+03:16.340 --> 03:22.900
+Right if a host reports one of these problems we're going to try and get virtual machines off it.
+
+03:22.950 --> 03:26.010
+We're not going to power up any new VMS on that host.
+
+03:26.130 --> 03:33.000
+But if migrating VMS off of that host will create a performance issue that won't happen.
+
+03:34.190 --> 03:42.800
+So VMS may continue to run that host that has an issue or we could say you know what let's do this quarantine
+
+03:42.800 --> 03:49.660
+mode for moderate problems in maintenance mode for severe problems.
+
+03:49.670 --> 03:56.940
+So if if a problem that is qualified as a moderate occurs the host is going to be quarantined right.
+
+03:56.960 --> 04:03.500
+Meaning no VMS will boot up on it and it will migrate as many CMS off of that host as possible.
+
+04:03.740 --> 04:09.230
+As long as it doesn't create a performance issue but if there is a severe failure that host is going
+
+04:09.230 --> 04:14.900
+to enter may in its mode and that means that every Virgine machine will be evacuated from it and no
+
+04:14.900 --> 04:16.790
+VMS can boot up on it.
+
+04:16.820 --> 04:21.890
+And the third option is we can just be really aggressive and say you know what if there's any failure.
+
+04:22.160 --> 04:24.310
+Go ahead and place the host in maintenance mode.
+
+04:24.830 --> 04:30.530
+And that means no CMS can run that host or any virtual machines running out it will be automatically
+
+04:30.530 --> 04:32.520
+migrated off.
+
+04:32.530 --> 04:38.950
+So that's proactive ha and kind of the thought process here is looking to avoid outages rather than
+
+04:38.950 --> 04:46.450
+just responding to those outages we're trying to set up our cluster to actually avoid a failure of our
+
+04:46.450 --> 04:48.290
+virtual machines.
+
+04:48.310 --> 04:49.490
+So I just said Okay.
+
+04:49.570 --> 04:52.740
+And then proactive ha will be enabled on my cluster.

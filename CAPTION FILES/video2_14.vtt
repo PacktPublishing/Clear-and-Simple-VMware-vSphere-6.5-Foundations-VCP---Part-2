@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00.630 --> 00:09.160
+In this video I'll explain Dior as a virtual machine and group affinity rules when we enable Diyar rests
+
+00:09.170 --> 00:11.580
+on a cluster of ESX hosts.
+
+00:11.690 --> 00:16.310
+We're going to allow press to automatically take virtual machines and move them around.
+
+00:17.640 --> 00:23.040
+And this could potentially create some unexpected results.
+
+00:23.040 --> 00:30.600
+So for example in our slide here we see four ESX high hosts and we have two domain controllers running
+
+00:30.600 --> 00:31.900
+as virtual machines.
+
+00:32.010 --> 00:39.770
+And at the moment there are different ESX high hosts when we enable fully automated Diyar as we're going
+
+00:39.770 --> 00:46.030
+to allow virtual machines to be automatically Vae motion from host to host.
+
+00:46.060 --> 00:51.970
+So we have the possibility that domain controller 2 and domain controller one could end up on the same
+
+00:51.970 --> 00:53.800
+ESX I host.
+
+00:53.940 --> 00:56.460
+And if that ESX I host word fail.
+
+00:56.590 --> 01:01.470
+Well now we've lost both of our domain controllers.
+
+01:01.540 --> 01:08.920
+So when we automate certain things like DRM when we allow virtual machines to be automatically moved
+
+01:08.920 --> 01:16.120
+around we may need to think about what could potentially go wrong and create some rules that govern
+
+01:16.120 --> 01:25.480
+this behavior and anti affinity rule would force these virtual machines to remain on different hosts.
+
+01:25.480 --> 01:30.730
+So that's definitely something you should consider for any virtual machines that serve I redundant purpose
+
+01:31.000 --> 01:36.580
+such as domain controllers.
+
+01:36.600 --> 01:41.400
+We can also create affinity rules that are enforced on a wider scale.
+
+01:41.460 --> 01:50.560
+So for example we could create the IRS groups of hosts on the left hand side we have three ESX hosts
+
+01:50.650 --> 01:55.080
+that have been grouped together as our production hosts on the right hand side.
+
+01:55.090 --> 02:02.090
+We have three ESX hosts that are our development hosts and we can also create groups of virtual machines
+
+02:02.090 --> 02:07.510
+as well and we can say all of our production VMP must run on the production hosts
+
+02:10.230 --> 02:13.530
+Well what if those ESX hosts fail.
+
+02:13.830 --> 02:21.630
+Now I've created a group of virtual machines and a group of VSX I hosts and I've created a group of
+
+02:21.630 --> 02:29.890
+finity rule that says the production venoms must run on the production host.
+
+02:30.110 --> 02:40.380
+If those production hosts were to fail those virtual machines would not restart the development hosts.
+
+02:40.420 --> 02:46.060
+Now we do have another way that we can set up a group affinity role.
+
+02:46.470 --> 02:50.580
+The rule that I've just described is called the required affinity rule.
+
+02:50.580 --> 02:56.550
+That means that these virtual machines must run on the production host and they cannot run on the development
+
+02:56.550 --> 02:58.140
+hosts for any reason.
+
+02:59.890 --> 03:06.870
+I could create a preferential affinity rule that would have a similar effect.
+
+03:07.030 --> 03:15.070
+However preferential affinity rules can be violated if a high availability event occurs.
+
+03:15.070 --> 03:16.420
+So what does that mean.
+
+03:17.390 --> 03:22.550
+Well in that circumstance if the three production hosts were to fail high availability could actually
+
+03:22.550 --> 03:25.250
+restart these virtual machines on the development hosts.

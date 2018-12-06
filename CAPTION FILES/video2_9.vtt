@@ -1,0 +1,157 @@
+WEBVTT
+
+00:01.280 --> 00:08.660
+High availability uses a mechanism called a data store heart beat as an additional way to validate if
+
+00:08.660 --> 00:12.360
+a host is truly failed or not.
+
+00:12.360 --> 00:14.430
+So let's take a look at our diagram here.
+
+00:14.430 --> 00:22.290
+And again you can see we have four ESX I hosts ESX 0 1 0 2 0 3 0 4 and they're all connected to a physical
+
+00:22.290 --> 00:27.420
+switch and they all have V.M. zero which is our management VM kernel port.
+
+00:27.420 --> 00:30.910
+So all of the hosts can send heartbeats to each other.
+
+00:31.060 --> 00:36.640
+And so the master is going to send solve the slaves and all of the slaves will send their heart beats
+
+00:36.640 --> 00:37.690
+to the master.
+
+00:37.780 --> 00:41.110
+And as long as this continues to be the case everything is fine.
+
+00:43.500 --> 00:49.320
+Let's assume that the management connection to ESX size 0 4 is broken.
+
+00:50.750 --> 00:52.640
+What is ESX 0 4.
+
+00:52.650 --> 00:59.830
+Actually down at this point it's not as like 0 4 is still up and running.
+
+00:59.840 --> 01:05.220
+There are still virtual machines that are potentially working on that host and maybe those VM even have
+
+01:05.220 --> 01:07.420
+a network connection that's still up.
+
+01:07.500 --> 01:12.370
+All of our traffic might not flow through that physical switch at the bottom of the diagram
+
+01:15.280 --> 01:21.110
+when that connection is broken when that management network connection is broken a few things will happen.
+
+01:22.580 --> 01:28.860
+The master host will try and ping ESX 0 4 and that will fail.
+
+01:31.260 --> 01:40.950
+The master hosts will then check the data store heartbeat of ESX size zero for and what I mean by the
+
+01:40.950 --> 01:47.760
+data store Harpy is each of these hosts has a little file called the lock file that it maintains on
+
+01:47.760 --> 01:49.650
+shared storage.
+
+01:49.650 --> 01:57.530
+And as long as it maintains that file and that file remains locked by the host the host must still be
+
+01:57.530 --> 02:00.240
+up and it must still have access to storage.
+
+02:00.260 --> 02:08.300
+So what the Master is doing is saying hey can I open the lock file for ESX 0 4 if it can't then it knows
+
+02:08.300 --> 02:17.030
+that ESX 0 4 is still maintaining a lock on that file and therefore the host is still up.
+
+02:17.040 --> 02:23.840
+So now the master host knows that ESX 0 4 isn't truly down.
+
+02:25.520 --> 02:28.730
+But that it's just isolated from the management network.
+
+02:33.130 --> 02:35.100
+So what happens in this scenario.
+
+02:35.200 --> 02:37.470
+This is considered a host isolation.
+
+02:38.430 --> 02:47.520
+So let's start by focusing on the master and slave hosts that a failed slave host ESX 0 4 has a broken
+
+02:47.520 --> 02:49.210
+management network connection.
+
+02:52.170 --> 02:58.530
+And at the moment the only thing we know for sure is that ESX I 0 4 can't connect to the management
+
+02:58.530 --> 02:59.400
+network.
+
+02:59.610 --> 03:05.910
+It might have other networks connected for virtual machines that are still up and running and we know
+
+03:05.910 --> 03:10.620
+that the host can still access storage based on our data store heartbeat.
+
+03:10.620 --> 03:20.800
+So we may not want to do anything to ESX 04 we may want to just continue to allow it to run as is the
+
+03:20.800 --> 03:25.910
+correct host isolation response really depends on your environment.
+
+03:27.180 --> 03:30.660
+What do you think is going on if the management network has failed.
+
+03:31.640 --> 03:35.510
+If the management network is down are your virtual machines most likely down.
+
+03:36.350 --> 03:40.130
+Does it run on the same network as your virtual machine traffic.
+
+03:40.340 --> 03:40.520
+Right.
+
+03:40.520 --> 03:48.740
+Once you answer these questions about your environment you can correctly choose the appropriate host
+
+03:48.860 --> 03:53.870
+isolation response and you centrally have three options.
+
+03:55.410 --> 03:59.500
+What this slave host can do is number one it can just leave the virtual machines running.
+
+03:59.640 --> 03:59.850
+Right.
+
+03:59.850 --> 04:07.910
+The slave host will realize that its isolated and it can either just leave those victims running as
+
+04:07.910 --> 04:15.990
+is option to is host ESX size or four can shut down those virtual machines and theyll boot up on some
+
+04:15.990 --> 04:22.410
+other host or the final option is to just power off the VMS without a graceful shutdown and boot them
+
+04:22.410 --> 04:28.280
+up on other hosts and all the virtual machines files are on shared storage right.
+
+04:28.290 --> 04:35.190
+So if those VMs get powered off or shut down another ESX host is going to be able to reach out and boot
+
+04:35.250 --> 04:37.940
+those VAMC up.
+
+04:38.020 --> 04:46.990
+So the correct decision to host isolation event really depends on what the architecture of your environment
+
+04:46.990 --> 04:47.760
+looks like.

@@ -1,0 +1,259 @@
+WEBVTT
+
+00:01.160 --> 00:08.740
+In this video I'll demonstrate how to verify the network configuration of ESX I hosts in a virtual machines
+
+00:08.740 --> 00:09.440
+as well.
+
+00:10.320 --> 00:15.510
+And all of this content is going to be represented on your sphere foundations exam.
+
+00:15.510 --> 00:19.170
+So let's start with our ESX I host.
+
+00:19.170 --> 00:21.290
+I'm going to go to hosts and questers.
+
+00:21.570 --> 00:30.100
+Pick out a host and let's go to configure and take a look at our ESX host and we'll go under the networking
+
+00:30.100 --> 00:30.660
+screen.
+
+00:30.700 --> 00:34.440
+And we're going to look at all of these different areas on our networking.
+
+00:35.050 --> 00:38.700
+So first off we have our virtual switches.
+
+00:38.950 --> 00:44.660
+You can click on a virtual switch and you can use any of the menu options here to make changes.
+
+00:44.710 --> 00:44.880
+Right.
+
+00:44.890 --> 00:52.180
+So the first menu option is the ADD networking option or if I want to create a new port group I can
+
+00:52.180 --> 00:55.080
+do that here right if I want to create a new VM kernel port.
+
+00:55.360 --> 00:56.360
+I can do that here.
+
+00:56.590 --> 01:03.490
+I if I want to create an entirely new virtual switch I'll choose this option create a new port group
+
+01:04.170 --> 01:12.070
+and then I'll choose to create it on a new standard switch so I can create either port groups VM kernel
+
+01:12.070 --> 01:16.180
+ports or an entirely new virtual switch using that option.
+
+01:18.190 --> 01:21.720
+Now if you hover over any of these buttons it'll tell you what they do.
+
+01:21.820 --> 01:25.680
+This one will refresh the hosts network system if I've made changes.
+
+01:25.930 --> 01:31.230
+And here I can manage the physical adapters for this particular virtual switch.
+
+01:31.540 --> 01:40.220
+So if I had additional physical adapters or VM Annex I could add those here to this virtual switch right.
+
+01:40.250 --> 01:47.960
+Each physical adapter of your ESX I host can only be assigned to one virtual switch.
+
+01:48.380 --> 01:54.710
+So for this host I have one physical adapter that physical adapter is assigned to this particular virtual
+
+01:54.710 --> 01:55.580
+switch.
+
+01:56.910 --> 02:05.890
+And if we look at some of the characteristics of this physical adapter we can see that it is actually
+
+02:05.890 --> 02:07.600
+a virtual device right.
+
+02:07.600 --> 02:10.150
+Were using it in this lab environment.
+
+02:10.180 --> 02:19.420
+ESX I host are actually virtual machines so you can see at this moment CGP and LDP have not been enabled.
+
+02:19.420 --> 02:25.140
+If they were we could see information about the physical switches that this host is connected to here.
+
+02:25.240 --> 02:30.460
+But like I said this this ESX I hope this is actually a virtual machine and its not really connected
+
+02:30.460 --> 02:31.600
+to a physical switch.
+
+02:36.490 --> 02:40.420
+This next button allows us to move our VM kernel ports around.
+
+02:40.570 --> 02:46.600
+So if I have a VM kernel port thats on one virtual switch and I want to move it to another virtual switch
+
+02:46.960 --> 02:49.990
+I can do that using this menu option.
+
+02:50.380 --> 02:56.860
+And if I want to edit my virtual switch itself lets with the pencil icon for so I can edit things like
+
+02:56.860 --> 03:02.340
+the maximum transmission unit I can edit things like security settings right.
+
+03:02.350 --> 03:07.830
+I can go ahead and reject MAC address changes and forged transmits if I don't need those things.
+
+03:09.450 --> 03:16.210
+I can configure traffic shaping or nic teaming and fail over and a lot of these topics are covered in
+
+03:16.210 --> 03:18.820
+the other videos that are part of this course.
+
+03:18.820 --> 03:25.180
+So if you're not familiar with the different load balancing mechanisms or the different way that network
+
+03:25.180 --> 03:32.550
+failure detection is performed check out the other videos in this course.
+
+03:32.750 --> 03:36.230
+But I want to move on now I want to take a look at the VM kernel ports.
+
+03:36.230 --> 03:40.580
+All right so here we have a VM kernel port called V case 0.
+
+03:41.060 --> 03:45.340
+And I'm going to go ahead and add it does VM kernel port.
+
+03:45.600 --> 03:52.820
+And here we can see all of the services that are enabled on this VM kernel port it so I could enable
+
+03:52.820 --> 03:59.030
+V.M. Colonel Portes specifically for virtual sceneries for replication or fault tolerance or management
+
+03:59.030 --> 04:00.820
+or emotion.
+
+04:04.370 --> 04:08.290
+If we look at the nix settings we can see the empty you for the VM kernel port.
+
+04:08.720 --> 04:15.050
+We can see the IP address and at the moment we're actually obtaining the IP version 4 settings automatically.
+
+04:15.050 --> 04:18.400
+I could statically configure it as well if I wanted to.
+
+04:19.920 --> 04:22.470
+And I'll go ahead and hit OK here.
+
+04:22.500 --> 04:27.540
+Now you want to be careful when you're working with the management VM kernel port because if you make
+
+04:27.540 --> 04:31.470
+a mistake here you're going to lose management access to the host.
+
+04:31.590 --> 04:36.520
+And so therefore you won't be able to manage it with the center or the vees fair web client anymore.
+
+04:39.270 --> 04:41.170
+Here are my physical adapters for this host.
+
+04:41.180 --> 04:49.970
+We've already looked at these a little bit and then I can see the TCAP IP configuration for this host.
+
+04:50.020 --> 04:59.990
+So there are multiple network stacks available in your ESX I hosts and vice versa stuff five the default
+
+04:59.990 --> 05:03.230
+stack is used for everything by default.
+
+05:03.230 --> 05:10.100
+All right so what we mean by different network stacks is we can assign different DNS servers we can
+
+05:10.100 --> 05:17.400
+assign different default gateways we can have different routing tables for different types of traffic.
+
+05:17.900 --> 05:24.800
+So if I wanted to send all of my Wii motion traffic over a different network I could do that I could
+
+05:24.800 --> 05:31.460
+create a different TCAP IP stack configuration and then associate it with the motion so that all my
+
+05:31.460 --> 05:34.970
+view motion traffic goes over one specific network
+
+05:39.220 --> 05:46.750
+and that's really the host specific configuration here for my networking settings.
+
+05:46.770 --> 05:50.420
+You can see here we can configure routing IP version 4.
+
+05:50.490 --> 05:58.350
+So if you wanted to do something like change the DNS server that might ESX I host points to we can go
+
+05:58.350 --> 06:00.930
+here we can edit this TZP IP stack.
+
+06:01.080 --> 06:10.250
+We can modify the DNS server we can modify the routing settings and change the default gateway.
+
+06:10.730 --> 06:13.800
+And we can modify our advanced configurations here as well.
+
+06:16.420 --> 06:22.000
+And my second host is configured pretty much identically very similar configuration.
+
+06:22.030 --> 06:24.400
+We have one VM kernel port on that host as well.
+
+06:24.650 --> 06:27.170
+And one virtual switch.
+
+06:27.700 --> 06:31.180
+So that's the basics of the ESX host configuration.
+
+06:31.180 --> 06:36.030
+So if you want to verify the network configuration of a host this is how you do it.
+
+06:36.040 --> 06:41.680
+Now there's one final setting that I do want to take a little bit of time to delve into.
+
+06:42.780 --> 06:44.990
+Maximum transmission unit.
+
+06:45.480 --> 06:52.320
+The main thing that you want to be aware of here is we want to make sure that we're configuring an empty
+
+06:52.320 --> 06:56.210
+view that is consistent.
+
+06:56.220 --> 07:03.810
+So for example if I enable jumbo frames on this virtual switch and this virtual switch has a physical
+
+07:03.810 --> 07:09.970
+adapter or it has a VM Nic and that VM Nic is connected to a physical switch.
+
+07:10.100 --> 07:17.340
+Right here is my physical adapter that physical switch also needs to have that empty you of 9000.
+
+07:17.340 --> 07:23.880
+That's really important because if it doesn't we're going to run into connectivity problems there.
+
+07:24.000 --> 07:31.130
+When you have a mismatch in the MT you settings it can result in a couple of different scenarios.
+
+07:31.140 --> 07:31.770
+Right.
+
+07:31.770 --> 07:41.240
+Number one it can break network connectivity entirely or number two it can result in what we call fragmentation
+
+07:41.360 --> 07:42.590
+and re-assembly.

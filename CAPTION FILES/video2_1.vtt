@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.750 --> 00:06.510
+In this video I'll explain the basic concepts of the motion and how it can be used to take a running
+
+00:06.510 --> 00:13.860
+virtual machine and move it from one ESX host to another and that's the purpose of the motion.
+
+00:13.890 --> 00:17.170
+We have virtual machines that are running on one ESX host.
+
+00:17.220 --> 00:24.990
+And maybe we need to do some sort of physical maintenance on that host like add more memory or maybe
+
+00:24.990 --> 00:27.060
+we need to load balance.
+
+00:27.060 --> 00:34.410
+For example maybe one of our ESX hosts is very heavily utilized and we want to take some running virtual
+
+00:34.410 --> 00:41.280
+machines and move them off that heavily utilized host to a host that has less virtual machines on it.
+
+00:41.350 --> 00:48.240
+That's what we use the motion for is to take a running VM move it from one physical ESX host to another
+
+00:48.900 --> 00:50.810
+with no service outage.
+
+00:51.820 --> 00:55.380
+So let's take a look at how Wii motion works.
+
+00:56.290 --> 01:04.900
+And in this example we see a virtual machine and purple running on ESX I host one and this is where
+
+01:04.900 --> 01:07.710
+the live state of our virtual machine is running.
+
+01:09.050 --> 01:13.460
+So maybe we need to take down host one for a memory upgrade.
+
+01:14.000 --> 01:23.100
+And we want to move our virtual machine to another host using Wii motion this virtual machine also has
+
+01:23.100 --> 01:29.260
+a set of files that we see on the right hand side on our data store.
+
+01:29.370 --> 01:35.900
+And so we're going to take this virtual machine and move it to a different ESX host.
+
+01:36.090 --> 01:39.060
+It must still be able to access those files.
+
+01:39.060 --> 01:46.590
+We cannot have our virtual machine losing access to its files because one of those files is a VM decay
+
+01:47.790 --> 01:50.770
+and that VME K is my virtual machines.
+
+01:50.800 --> 01:52.170
+C-drive.
+
+01:52.200 --> 01:54.680
+Or one of its virtual disks.
+
+01:54.750 --> 02:01.830
+So it's imperative that if a VM is going to move from one host to another that it is still able to access
+
+02:02.280 --> 02:06.260
+all of its files on the data store.
+
+02:06.470 --> 02:11.320
+And so to do that we're going to need what's called shared storage.
+
+02:11.440 --> 02:13.960
+And when you hear that term shared storage.
+
+02:14.020 --> 02:15.430
+Just think of it this way.
+
+02:16.380 --> 02:23.180
+Shared storage is a data store that is accessible across multiple ESX I host it.
+
+02:23.190 --> 02:27.060
+So we've got this data store that's available on multiple hosts.
+
+02:27.250 --> 02:32.720
+And so if my VM moves from Host 1 to host 2 it's still going to be able to access all of its files.
+
+02:35.200 --> 02:39.650
+So here we see my virtual machine has just moved from Host 1 to host 2.
+
+02:39.730 --> 02:45.400
+It still has access to its data store because the data store is shared storage and is accessible across
+
+02:45.400 --> 02:46.620
+multiple hosts.
+
+02:46.870 --> 02:53.350
+And notice on the left hand side the virtual machine is connected to a virtual switch and those virtual
+
+02:53.350 --> 03:00.520
+switches are also identically configured so that my VM does not lose access to the network when it moves
+
+03:01.360 --> 03:08.440
+the IP address of the virtual machine does not change so that address still needs to provide connectivity
+
+03:09.240 --> 03:12.330
+when that VM moves to another host.
+
+03:12.350 --> 03:18.130
+OK so let's take a look at an example of what actually happens when we carry out of emotion.
+
+03:18.380 --> 03:26.700
+So again my VM is running on host ESX 0 1 and we've configured something called the VM kernel por for
+
+03:26.790 --> 03:27.750
+emotion.
+
+03:28.160 --> 03:33.270
+The point of a VM kernel port is to handle special traffic.
+
+03:33.350 --> 03:37.550
+It's not for Virtu machine traffic it's for other stuff.
+
+03:37.690 --> 03:46.390
+So the VM kernel port in this case is marked for Wii motion traffic and what it's going to do is facilitate
+
+03:47.110 --> 03:53.170
+a creation of a copy of that virtual machine the destination host.
+
+03:53.230 --> 03:53.840
+Right.
+
+03:53.890 --> 03:55.400
+So let's rewind here.
+
+03:55.720 --> 04:00.910
+My virtual machine is running on ESX I host one right now and it's got stuff running in memory it's
+
+04:00.910 --> 04:03.600
+accessing a virtual network interface.
+
+04:03.730 --> 04:05.180
+It's accessing storage.
+
+04:05.350 --> 04:09.810
+We need to copy the state of that VM to the destination host.
+
+04:09.910 --> 04:13.100
+And that's the point of the Wii motion VM kernel port.
+
+04:13.180 --> 04:21.660
+And once that copy is complete now I've got an exact duplicate of that VM running on the destination
+
+04:21.660 --> 04:22.690
+host.
+
+04:22.740 --> 04:29.190
+And so what will happen then is any final changes anything that changed during the Wii motion will also
+
+04:29.190 --> 04:33.330
+be copied over and the VM on Host 1 will be halted.
+
+04:34.670 --> 04:37.070
+And the VM on Host 2 will take over.
+
+04:37.700 --> 04:42.970
+And now we've successfully Wii motion the virtual machine from Host 1 to host 2.
+
+04:43.010 --> 04:45.960
+And like I said there's no outage associated with this.
+
+04:45.980 --> 04:54.030
+We do need to have the center in place and you may notice a slight bump in latency while this Wii motion
+
+04:54.030 --> 04:54.940
+occurs.
+
+04:55.320 --> 04:59.970
+But again there's no noticeable outage.
+
+05:00.130 --> 05:05.890
+So the motion is used to take a running virtual machine and move it from one host to another.
+
+05:05.890 --> 05:10.780
+This is not the only type of motion with these for sex.
+
+05:10.870 --> 05:18.310
+We can actually take a virtual machine that's running on a host managed by one V Center instance and
+
+05:18.310 --> 05:20.890
+move it to a host managed by another.
+
+05:20.980 --> 05:25.830
+The center instance and so prior to these first six this was not possible.
+
+05:25.840 --> 05:34.000
+Now we can use crossover center V motion to move a running VM from one host managed by one V Center
+
+05:34.000 --> 05:38.590
+server to another host managed by a different the center server.
+
+05:40.620 --> 05:47.010
+Another change in these first six is the fact that long distance Wii motion is now supported over connections
+
+05:47.460 --> 05:54.360
+with up to 150 milliseconds of latency and we have this ability to take a virtual machine that's running
+
+05:54.660 --> 06:03.990
+Wii motion with no service interruption across a long geographic distance as long as that physical connection
+
+06:04.830 --> 06:08.610
+does not have more than 150 milliseconds of latency.
+
+06:09.740 --> 06:17.260
+We can even migrate virtual machines from one virtual switch to another using cross network Wii motion.
+
+06:17.510 --> 06:22.880
+And so in this lesson we learned how Wii motion can be used to take a running VM move it from one host
+
+06:22.880 --> 06:29.410
+to another and how we need a Wii motion VM kernel port in order to copy the required information.
+
+06:30.400 --> 06:37.840
+These first six introduced a number of new Wii motion features like cross the center of the motion cross
+
+06:37.860 --> 06:45.340
+a virtual switch Wii motion and long distance Wii motion with networks up to 150 milliseconds of latency.

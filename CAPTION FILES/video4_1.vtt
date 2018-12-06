@@ -1,0 +1,142 @@
+WEBVTT
+
+00:02.720 --> 00:09.830
+In this video we'll let her out ESX I host logs and how we can export these logs and use them with VM
+
+00:09.830 --> 00:11.600
+war support.
+
+00:11.800 --> 00:19.090
+And that's the most common scenario in which you're going to be exporting these logs is a situation
+
+00:19.150 --> 00:22.670
+in which VM war support has asked you to do so.
+
+00:22.810 --> 00:23.430
+Right.
+
+00:23.470 --> 00:25.570
+These logs are complicated.
+
+00:25.790 --> 00:26.830
+They're hard to read.
+
+00:26.830 --> 00:33.250
+They're hard to understand and most of the time your best bet if you're dealing with these logs is to
+
+00:33.400 --> 00:39.640
+send a motive here or support most of the time if if they are working with you they're going to request
+
+00:39.670 --> 00:46.890
+that you can export these logs and maybe even a log bundle and send them over to them as well.
+
+00:47.200 --> 00:49.210
+And that's what the diagnostic bundle is.
+
+00:49.210 --> 00:55.210
+It's simply a collection of all logs all of the troubleshooting information that V.M. or could possibly
+
+00:55.210 --> 00:56.170
+need.
+
+00:56.170 --> 01:00.930
+Often they'll ask you to generate a diagnostic bundle and send it over to them.
+
+01:00.970 --> 01:07.510
+You can even upload them directly from the vees for a web client to a support request.
+
+01:08.720 --> 01:15.470
+And so this is an old practice here with these fair and as you can tell by the number of the Knowledge
+
+01:15.470 --> 01:19.420
+Base article this K.B. has been around for a long time.
+
+01:19.470 --> 01:20.160
+Right.
+
+01:20.270 --> 01:23.390
+Most of the cases now are six digits long.
+
+01:23.390 --> 01:26.590
+This is a knowledge base article 6:53.
+
+01:26.810 --> 01:28.680
+So this one has been around for a while.
+
+01:28.880 --> 01:35.020
+Let's take a quick look at the Kaybee article that walks you through the process of uploading logs.
+
+01:37.060 --> 01:40.360
+OK so here we see knowledgebase article 6:53.
+
+01:40.390 --> 01:47.620
+We can see it's been updated as of February 2016 and if we scroll down a little bit you can see that
+
+01:47.620 --> 01:54.370
+it walks you through a number of different processes for different versions of ESX high right and right
+
+01:54.370 --> 01:57.500
+off the bat you're probably thinking oh here's the vees for a client.
+
+01:57.550 --> 02:00.220
+That's not the kind of work for me.
+
+02:00.270 --> 02:02.440
+No we're going to have to use a different method here.
+
+02:02.620 --> 02:08.980
+So here's the method to obtain diagnostic information using the Vee's for a web client and you can see
+
+02:08.980 --> 02:10.470
+it's very straightforward right.
+
+02:10.480 --> 02:17.770
+You're simply going to go to hosts and Gloucester's you'll pick the host that you want to export the
+
+02:17.770 --> 02:23.850
+logs from or you can pick an entire set for instance and on the right hand side you've got the actions
+
+02:23.860 --> 02:24.280
+button.
+
+02:24.460 --> 02:30.010
+Or you can even just right click the host or the V Center instance and go to actions.
+
+02:30.130 --> 02:35.630
+And under all the center actions you'll find the export system logs action.
+
+02:36.010 --> 02:42.610
+And what that will do is it'll give you a few options of what exactly you want to gather.
+
+02:42.640 --> 02:45.490
+You know do you want to pull performance data or not.
+
+02:45.490 --> 02:52.000
+At which point you'll generate the log bundle and that is simply the sender putting all of those logs
+
+02:52.000 --> 03:01.030
+together once it's generated you have the ability to download it and from there you can upload the results
+
+03:01.030 --> 03:11.960
+to VM were using their SFP or anti-peace site which is detailed and base article 1 0 0 8 5 2 5 that
+
+03:12.330 --> 03:18.840
+that KB article will walk you through the process of actually uploading your diagnostic logs.
+
+03:19.350 --> 03:21.880
+Really simple and straightforward process.
+
+03:22.650 --> 03:27.680
+When you go to your support request you can choose the upload files option right.
+
+03:27.730 --> 03:31.540
+And then you can simply upload all of your diagnostic logs to them.
+
+03:31.540 --> 03:37.570
+You'll see this little progress bar going as they're being uploaded and when you're done you'll notice
+
+03:37.570 --> 03:42.910
+that in your support request there will be an entry basically saying you know at a certain point in
+
+03:42.910 --> 03:47.320
+time the requester up loaded the required support locks.

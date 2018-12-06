@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00.400 --> 00:07.370
+In this video I'll introduce you to the VSE for distributed resource scheduler or Diyar Wrath's feature
+
+00:08.910 --> 00:12.500
+and de-stress is a really a fairly simple feature.
+
+00:12.510 --> 00:18.960
+Now it takes some work to properly implement it but essentially what Deros provides us with is Wii motion
+
+00:18.960 --> 00:22.240
+for load balancing purposes.
+
+00:22.270 --> 00:27.690
+So for example let's say that we have the two ESX I hosts shown in the slide.
+
+00:27.910 --> 00:30.960
+And in reality we would probably have more host than this.
+
+00:31.180 --> 00:39.520
+But essentially what the press is going to do is this if ESX I host one starts to become overwhelmed.
+
+00:39.640 --> 00:46.540
+We can use Wii motion to load balance and we can take this virtual machine and we can migrate it to
+
+00:46.540 --> 00:49.030
+a different host with no downtime.
+
+00:49.030 --> 00:54.670
+Right that's one of the main purposes of the motion is to allow us to load balance across.
+
+00:54.740 --> 01:02.220
+ESX hosts but identifying when these emotions need to happen.
+
+01:02.220 --> 01:10.220
+You know identifying when is an imbalance across multiple ESX hosts becomes increasingly difficult as
+
+01:10.220 --> 01:13.120
+your environment gets larger and larger.
+
+01:13.140 --> 01:15.450
+That's where Diyar RASC comes in.
+
+01:15.590 --> 01:23.520
+The press will automatically Wii motion virtual machines from host to host for the purposes of load
+
+01:23.520 --> 01:30.260
+balancing and Wii motion is really the bedrock of dress.
+
+01:30.290 --> 01:34.570
+So we have to make sure that our venoms are Wii motion compatible.
+
+01:34.670 --> 01:42.410
+So things like a local ISO images things like mismatched processors things like insufficient bandwidth
+
+01:42.410 --> 01:49.760
+that our connection can all impose some limitations or compatibility issues when it comes to Wii motion.
+
+01:50.270 --> 01:56.780
+And you'll notice here at the bottom of your screen it says CVM or knowledge base article 1 0 0 3 6
+
+01:56.780 --> 02:03.530
+8 4 for common Wii motion areas that will walk you through a lot of the kind of the motion and compatibility
+
+02:03.530 --> 02:07.220
+issues that you could potentially run into.
+
+02:07.220 --> 02:10.490
+Now it's not really covered on the VM or certified associate exam.
+
+02:10.490 --> 02:12.490
+So I don't spend a lot of time on it here.
+
+02:13.930 --> 02:22.330
+But check out that knowledge base article or Also check out w w w dot trayner Testim com slash you to
+
+02:22.330 --> 02:27.160
+me for information on where you can get additional resources
+
+02:31.650 --> 02:33.770
+Deros comes in a few different flavors.
+
+02:33.780 --> 02:37.400
+We've got manual mode right end with theorist's manual mode.
+
+02:37.440 --> 02:45.120
+What you're looking to do is enable DRM so that it can load balance across a cluster but maybe you're
+
+02:45.120 --> 02:50.560
+not entirely comfortable with allowing it to happen automatically.
+
+02:50.610 --> 02:55.570
+Maybe you don't want virtual machines being Wii motion all over your cluster in the middle of the day.
+
+02:56.460 --> 03:01.050
+Or maybe you're just not comfortable with the RSA enough to allow it to take over this point.
+
+03:01.050 --> 03:07.410
+But in the future you might go with fully automated mode manual mode is a good starting point because
+
+03:07.410 --> 03:11.220
+manual mode does not do any thing automatically.
+
+03:11.220 --> 03:18.240
+What it does is it analyzes the performance of your cluster and it gives you recommendations and you
+
+03:18.240 --> 03:22.480
+can choose whether or not you want to carry out those recommendations.
+
+03:24.680 --> 03:31.380
+In partially automated mode this is all a little bit more automation than you get with manual mode.
+
+03:31.380 --> 03:38.800
+Basically what it means is when you power on a virtual machine for the first time it's automatically
+
+03:38.800 --> 03:40.530
+placed on the ideal host.
+
+03:40.870 --> 03:47.160
+So dear rest we'll do a little bit of automation here basically just saying hey somebody just powered
+
+03:47.160 --> 03:48.730
+on a new VM.
+
+03:48.730 --> 03:50.810
+You don't have to pick which host to power it on.
+
+03:51.610 --> 03:58.110
+Deros will automatically select the ideal host for you right now with fully automated mode.
+
+03:58.120 --> 04:00.800
+This is like putting it on autopilot.
+
+04:00.940 --> 04:09.120
+You're telling your cluster OK V Center is going to monitor this cluster and if a performance improvement
+
+04:09.150 --> 04:18.740
+can be made by migrating a VM then the rest will automatically use the motion to migrate that VM to
+
+04:18.740 --> 04:20.030
+the ideal host.
+
+04:20.980 --> 04:27.470
+And so and with fully automated mode we are turning over control to dress and saying load balance costs
+
+04:27.480 --> 04:28.950
+are automatically for us.
+
+04:29.020 --> 04:33.520
+You know there's no there's no manual approval of these changes.
+
+04:33.580 --> 04:36.360
+They just happen.
+
+04:36.510 --> 04:39.600
+So you can choose any one of those three different automation levels.
+
+04:39.750 --> 04:48.790
+You can also specify certain affinity or anti affinity rules like for example when I enable digraphs
+
+04:48.840 --> 04:55.250
+on a cluster I have to think about which virtual machines should be separated.
+
+04:55.360 --> 05:03.180
+And so for example here we see two domain controller virtual machines or domain controller run as running
+
+05:03.180 --> 05:09.200
+on ESX 0 3 domain controller 2 is running on ESX 0 4.
+
+05:09.420 --> 05:16.650
+But Diyar US has the keys now and it can move virtual machines wherever it sees fit.
+
+05:17.100 --> 05:24.780
+And so if I just allow DNS to do whatever it wants it might potentially take domain controller one domain
+
+05:24.780 --> 05:29.840
+controller two and put them on the same host for load balancing reasons.
+
+05:30.150 --> 05:36.010
+And if that host were to fail I now have lost both of my domain controllers.
+
+05:37.240 --> 05:39.340
+Now they may boot up on other hosts.
+
+05:40.720 --> 05:46.380
+But for at least a little while my environment has no running domain controllers.
+
+05:46.730 --> 05:54.890
+Well now with an anti affinity rule what the anti affinity rule will do is basically tell the IRS these
+
+05:54.890 --> 05:58.220
+VMS need to run on different hosts.
+
+05:58.410 --> 06:03.990
+And so that way de-risk will never automatically migrate these two VMS the same host.
+
+06:03.990 --> 06:08.100
+It'll keep them separated for redundancy purposes.
+
+06:08.100 --> 06:15.670
+And those are virtual machine affinity or anti affinity rules affinity rules keep VMS together.
+
+06:16.070 --> 06:18.280
+Anti-fan the rules keep them apart.
+
+06:23.500 --> 06:26.250
+So how does Wii center fit into this picture.
+
+06:26.350 --> 06:34.050
+Well we'll use Wii Center with the Vee's for a web client to create a cluster and to enable de-stress
+
+06:34.060 --> 06:35.020
+on it.
+
+06:35.050 --> 06:41.920
+And once we have enabled the IRS and fully automated mode my virtual machines will start migrating around
+
+06:41.920 --> 06:47.680
+on my ESX I hosts according to what de-risk thinks is correct.
+
+06:49.070 --> 06:58.810
+So DNS uses Wii motion as its underlying mechanism and both the arrest and the motion require the center.
+
+06:59.060 --> 07:05.110
+So the center fails D.R. S does not operate de-risk doesn't work without the center.
+
+07:05.240 --> 07:08.820
+Neither does Wii motion.
+
+07:08.830 --> 07:12.470
+OK so in review and this lesson we learned a little bit about DRM.
+
+07:12.490 --> 07:18.710
+We learn how it can automatically Wii motion virtual machines across hosts for load balancing.
+
+07:18.730 --> 07:25.090
+We learned about anti affinity roles and how they can be used to segregate redundant VAMC and keep them
+
+07:25.090 --> 07:27.040
+on separate hosts.
+
+07:27.040 --> 07:31.810
+Another important characteristic of DRM is that it makes it really easy to put a host in a maintenance
+
+07:31.810 --> 07:41.650
+mode or do upgrades because we can use the press to automatically evacuate a host Dira supports a manual
+
+07:42.020 --> 07:49.230
+partially automated and fully automated phones and it can automatically evacuate and ESX I host when
+
+07:49.230 --> 07:54.360
+it's placed in maintenance mode to make things like Update Manager work better.
+
+07:54.660 --> 08:01.350
+And as we learn more and work our way throughout this course you'll see that Deros and high availability
+
+08:01.620 --> 08:04.720
+are two features that work really well together.
+
+08:04.740 --> 08:09.870
+So we haven't really covered H.A. yet but as we go a little further in this course we'll learn about
+
+08:09.870 --> 08:11.870
+how these two technologies work together.

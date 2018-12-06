@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00.600 --> 00:08.210
+In this video I'll explain Diodorus and resource fragmentation and how Deros can help in a high availability
+
+00:08.210 --> 00:08.760
+event.
+
+00:09.670 --> 00:17.890
+In the slide you see here we have a four host cluster of ESX 0 1 0 2 0 3 and 0 4.
+
+00:17.890 --> 00:26.330
+And if you'll notice on host ESX size 0 4 I've got a really large virtual machine running now with a
+
+00:26.330 --> 00:28.230
+high availability event.
+
+00:28.280 --> 00:31.210
+We're potentially losing in ESX host.
+
+00:31.280 --> 00:39.020
+So let's say in this scenario we lose host ESX size zero for that host is now failed and they have this
+
+00:39.020 --> 00:47.850
+really large virtual machine that isn't going to fit comfortably on any of the surviving ESX I hosts.
+
+00:47.850 --> 00:53.820
+Maybe I even have a reservation that will prevent it from booting on any of these other hosts.
+
+00:53.850 --> 00:56.750
+This is called Resource fragmentation.
+
+00:56.820 --> 01:01.790
+The remaining hosts have plenty of capacity to run this virtual machine.
+
+01:01.840 --> 01:10.800
+However those resources are spread out in small chunks over a group of hosts so no single host has the
+
+01:10.800 --> 01:13.730
+resources necessary to run this VM.
+
+01:14.680 --> 01:17.280
+This is where DRM can help us.
+
+01:17.530 --> 01:24.030
+If an ESX I host fails HLA is going to try to reboot those virtual machines on other hosts.
+
+01:24.250 --> 01:33.400
+DRM us can move around virtual machines to consolidate the workloads on other hosts and make room for
+
+01:33.400 --> 01:35.640
+this really large VM.
+
+01:35.730 --> 01:40.320
+So I always say that HHN DNS are sort of like peanut butter and jelly.
+
+01:40.380 --> 01:43.960
+They go good separately but they're best when they're put together.
+
+01:44.220 --> 01:46.180
+And this is an example of that.
+
+01:46.470 --> 01:51.550
+Ha won't perform as well if DRM is not enabled on this cluster as well.

@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00.540 --> 00:03.490
+In this video I'll explain how de-risk works with me.
+
+00:03.510 --> 00:11.440
+It's most at times we may need a place in ESX I host in the maintenance mode if we need to reboot it.
+
+00:11.460 --> 00:18.360
+So for example let's say we're using update manager to perform some critical host updates on our ESX
+
+00:18.360 --> 00:20.060
+I host.
+
+00:20.160 --> 00:24.870
+We have this critical host updates that need to get pushed out and so we choose to stage these two and
+
+00:24.950 --> 00:33.520
+ESX I host and then to remediate that ESX I host and maybe that remediate involves a reboot and this
+
+00:33.520 --> 00:42.470
+is one of many circumstances in which you may potentially have to reboot and ESX host.
+
+00:42.680 --> 00:47.820
+But before you can reboot your host you should always put it in maintenance mode.
+
+00:47.830 --> 00:49.890
+Now what is maintenance mode mean.
+
+00:50.260 --> 00:58.060
+Well that means that no running virtual machines can be present on this ESX host.
+
+00:58.090 --> 01:04.450
+So if we want to place ESX C02 and the maintenance mode we would need to take all the Virgin machines
+
+01:04.450 --> 01:09.880
+that are running on the host and we motion them to some other host.
+
+01:09.990 --> 01:16.460
+This is the part that DRM can automate for us when we place a host in maintenance mode.
+
+01:16.560 --> 01:23.490
+The rest will automatically use the motion to evacuate all of the virtual machines off of that host
+
+01:24.120 --> 01:25.950
+and run them on other hosts.
+
+01:27.540 --> 01:34.180
+So now we can place a host the maintenance mode at any time with virtual machines running out it and
+
+01:34.180 --> 01:39.820
+the rest will evacuate all of those virtual machines for us and place that host in maintenance mode.

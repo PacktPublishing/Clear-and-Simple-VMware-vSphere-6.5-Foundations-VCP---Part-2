@@ -1,0 +1,391 @@
+WEBVTT
+
+00:00.300 --> 00:06.500
+In this video I'll demonstrate some common troubleshooting options for virtual machines.
+
+00:06.570 --> 00:10.400
+We're going to start by looking at this virtual machine called the motion demo.
+
+00:11.040 --> 00:17.150
+And one of the first troubleshooting steps that I like to take when I look at a virtual machine.
+
+00:17.910 --> 00:22.650
+Is to determine if it has VM or tools installed on it and you can see that this virtual machine does
+
+00:22.650 --> 00:24.210
+not.
+
+00:24.300 --> 00:26.970
+So what does that mean for this particular VM.
+
+00:27.060 --> 00:34.440
+Well number one it means that if I console when my mouse and keyboard aren't really going to work as
+
+00:34.440 --> 00:37.260
+well as they would if I had VM or tools installed.
+
+00:37.650 --> 00:38.870
+That's really no big deal.
+
+00:39.090 --> 00:46.680
+But the other part that is more important is the balloon driver will not be installed on this virtual
+
+00:46.680 --> 00:47.540
+machine.
+
+00:48.030 --> 00:55.470
+And that means if there is a shortage of memory on the ESX host the host will not be able to perform
+
+00:55.470 --> 00:56.790
+ballooning on this Wii.
+
+00:57.090 --> 01:03.450
+And that essentially means that it won't be able to reclaim that memory from this virtual machine even
+
+01:03.450 --> 01:06.570
+if the virtual machine is no longer using that memory.
+
+01:07.490 --> 01:16.220
+So that's an important part of VM more tools to have that balloon driver installed on your vim's so
+
+01:16.220 --> 01:20.360
+we can see right here this virtual machine does not have VM or tools installed.
+
+01:20.450 --> 01:23.840
+It's very easy to install VM tools on a virtual machine.
+
+01:23.840 --> 01:27.190
+You can just right click it and right now the virtual machine is powered off.
+
+01:27.200 --> 01:33.620
+But you just right click it and go ahead and go to Guest OS and do install VM are tools.
+
+01:33.780 --> 01:35.300
+It's very simple.
+
+01:35.300 --> 01:43.430
+Another thing that I like to do edit the settings of this VM for Aviemore tools is make sure my VM are
+
+01:43.450 --> 01:45.220
+tools.
+
+01:45.220 --> 01:48.050
+Installation is always up to date.
+
+01:48.050 --> 01:50.470
+Right so you can go to the VM options here.
+
+01:51.640 --> 01:59.950
+And under VM tools you can choose to have VM or tools automatically upgrade every time this VM is powered
+
+01:59.950 --> 02:00.530
+on.
+
+02:00.820 --> 02:08.360
+Right so thats a great way to ensure that VM or tools is always consistently kept up to date
+
+02:14.520 --> 02:15.750
+while we're in here.
+
+02:15.750 --> 02:19.900
+Let's take a look at a couple other configuration options on this VM.
+
+02:20.770 --> 02:30.730
+Maybe I am having an issue V motioning this virtual machine to a different host that can occur if I've
+
+02:30.760 --> 02:34.420
+created a scheduling affinity for this VM.
+
+02:34.420 --> 02:40.780
+Also if I'm having performance issues on this virtual machine and it looks like CPQ you might be the
+
+02:40.780 --> 02:44.600
+problem maybe I've created a CPE limit.
+
+02:45.580 --> 02:51.500
+Maybe I've limited this VM to a certain amount of maigre hurts of CPQ usage.
+
+02:51.640 --> 02:55.020
+Or maybe I've given it a low number of shares.
+
+02:55.030 --> 03:03.260
+These are things that could definitely negatively impact the performance of this VM.
+
+03:03.540 --> 03:07.310
+Similar settings exist under memory.
+
+03:07.670 --> 03:14.520
+I can create memory limits so I could limit this VM to 20 megs of memory and if I do that the performance
+
+03:14.520 --> 03:17.560
+of the VM probably isn't going to be very good right.
+
+03:17.760 --> 03:26.180
+So memory limits CPQ limits those can all create potential problems and a change in my memory reservation
+
+03:26.190 --> 03:27.110
+back to zero.
+
+03:27.330 --> 03:30.090
+That's another really good thing to be aware of though.
+
+03:30.210 --> 03:36.000
+So if you'll notice when I came in here my virtual machine had a memory reservation.
+
+03:36.270 --> 03:42.450
+So let's take a moment to talk about what a virtual machines memory reservation actually does.
+
+03:42.450 --> 03:48.430
+So here we have a VM called the motion demo which is currently running on this host.
+
+03:48.450 --> 03:56.230
+Let's just call a host one or three and this host has a total of 19 gigs of memory available.
+
+03:56.750 --> 04:01.660
+So I'm going to go to my Wii motion demo VM and I'm going to right click the virtual machine and go
+
+04:01.660 --> 04:02.730
+to settings
+
+04:07.070 --> 04:13.270
+and we're going to go ahead and give this virtual machine a lot of memory and I'm going to give it 19
+
+04:13.280 --> 04:19.450
+gigs of memory which is pretty much the most that I could possibly support for virtual machine.
+
+04:19.520 --> 04:24.980
+ESX I host and I'll go ahead and give it a memory reservation as well.
+
+04:25.120 --> 04:33.760
+So I'm going to reserve all to memory basically saying if I've configured 19 gigs of memory for this
+
+04:33.760 --> 04:38.030
+VM we are going to guarantee this VM.
+
+04:38.110 --> 04:41.140
+19 gigs of memory all the time.
+
+04:41.140 --> 04:45.710
+Any time you boot this virtual machine up it's going to get that 19 gigs of memory.
+
+04:46.300 --> 04:49.790
+So we have now guaranteed this VM.
+
+04:49.940 --> 04:53.450
+19 gigs of memory at all times.
+
+04:53.560 --> 04:58.260
+So let's go ahead and power on this virtual machine and see what happens.
+
+04:59.230 --> 05:04.210
+So I just click the button the power on the VM and you'll notice here a little notification popped up
+
+05:04.780 --> 05:07.950
+power on virtual machine failed.
+
+05:07.960 --> 05:12.250
+So let's take a closer look and see why I was not able to power on this VM.
+
+05:12.310 --> 05:18.120
+Will go to monitor tasks and events and we're going to look at tasks
+
+05:20.930 --> 05:22.590
+and see what went wrong here.
+
+05:24.530 --> 05:30.580
+The host does not have sufficient memory resources to satisfy the reservation.
+
+05:30.650 --> 05:37.280
+I've configured a reservation on this via And that means that it also comes with something called admission
+
+05:37.280 --> 05:38.070
+control.
+
+05:39.310 --> 05:43.770
+Admission control is basically the guarantee part of this right.
+
+05:43.870 --> 05:53.710
+My VM can not boot up unless the host can actually satisfy this reservation that I've created so I've
+
+05:53.720 --> 05:57.740
+guaranteed this VM 19 gigs of memory any time that is powered up.
+
+05:58.430 --> 06:04.850
+But my host can't do that my hosts can't satisfy that memory reservation so let's change the memory
+
+06:04.850 --> 06:11.000
+reservation to something more more doable for my ESX host.
+
+06:11.000 --> 06:15.150
+Right now we can see we have 19 gigs of memory for this VM.
+
+06:15.170 --> 06:17.690
+I'm going to change it back to 4 gigs.
+
+06:17.820 --> 06:18.660
+OK.
+
+06:19.340 --> 06:23.940
+And now let's try and power on this VM and see if we're able to power on now.
+
+06:24.500 --> 06:25.980
+And it should work just fine.
+
+06:26.150 --> 06:31.360
+Because that's a reservation that this ESX host can definitely satisfy.
+
+06:31.610 --> 06:36.550
+So my VM is now successfully powered on.
+
+06:36.640 --> 06:45.030
+So for issues like not being able to power on a VM or general performance issues reservation's limits
+
+06:45.080 --> 06:46.090
+sharers.
+
+06:46.120 --> 06:49.370
+Those are all important configurations to take a look at.
+
+06:50.910 --> 06:56.740
+Here we see a second VM this VM is currently an old version of virtual hardware.
+
+06:56.960 --> 07:04.590
+Right that means it's not going to support some of the latest maximums and options that a virtual machine
+
+07:04.710 --> 07:09.800
+on the current version of virtual hardware would be able to support.
+
+07:09.870 --> 07:17.180
+So I'm going to Right-Click this virtual machine and go to edit settings and you'll notice that in the
+
+07:17.240 --> 07:24.610
+edit settings screen you have the ability to schedule a virtual hardware upgrade.
+
+07:24.820 --> 07:30.710
+The next time this VM boots up I can change the virtual hardware version to one of these newer versions
+
+07:31.220 --> 07:35.250
+like for example ESX I-65.
+
+07:35.480 --> 07:41.090
+So I'm going to go ahead and hit OK here and then next time I power on this VM the virtual hardware
+
+07:41.090 --> 07:43.090
+version is going to be updated.
+
+07:44.960 --> 07:53.840
+So let's go ahead and power on VM one will go to monitor and we'll look at tasks and events and will
+
+07:53.840 --> 07:59.060
+validate that the virtual machine is actually upgraded to the latest revision.
+
+07:59.060 --> 08:03.710
+And another way to actually look at this is we can just simply right click the virtual machine right
+
+08:03.710 --> 08:05.750
+now go to edit settings
+
+08:09.380 --> 08:17.180
+and you can see the virtual machines compatability mode listed here and now it V.M. version 13 compatible
+
+08:17.180 --> 08:21.660
+with ESX I 6.5.
+
+08:21.660 --> 08:27.280
+All right let's think about some other potential problems that could exist with our virtual machines.
+
+08:27.360 --> 08:35.130
+So let's say that you've decided hey I want to install a Windows Server 2012 on this VM.
+
+08:35.310 --> 08:42.480
+So I'm going right click the VM go to edit settings and when you create a virtual machine you're essentially
+
+08:42.480 --> 08:44.470
+creating virtual hardware.
+
+08:45.030 --> 08:45.440
+Right.
+
+08:45.480 --> 08:54.570
+So you may create a set of virtual hardware that's compatible with the 32 bit operating systems or 64
+
+08:54.570 --> 09:01.200
+bit operating systems if you don't have the right virtual hardware you're not going to be able to run
+
+09:01.200 --> 09:03.350
+your operating system.
+
+09:03.370 --> 09:12.210
+So here you can see for the guest OS version on this VM I've chosen Windows Server 2008 R2 64 bit if
+
+09:12.210 --> 09:18.690
+you choose the improper operating system when you create the VM that can cause some problems and you
+
+09:18.690 --> 09:22.080
+might not actually be able to boot up that operating system.
+
+09:22.230 --> 09:28.200
+So you can modify these here after the fact and I'm just going to go ahead and Right-Click VM one and
+
+09:28.200 --> 09:29.600
+power it off.
+
+09:29.850 --> 09:36.240
+You can modify the guest operating system selection here doesn't actually change the guest operating
+
+09:36.240 --> 09:39.240
+system that is running in a VM.
+
+09:39.600 --> 09:45.310
+It just changes the guest operating system designation of the VM itself.
+
+09:48.100 --> 09:54.100
+So we can go to edit settings here and we can modify the guest operating system now.
+
+09:54.130 --> 10:00.230
+Now you may notice that even after you change this you're still unable to boot your virtual machine.
+
+10:00.340 --> 10:05.860
+And sometimes if you don't choose the correct operating system initially you may actually need to blow
+
+10:05.860 --> 10:12.380
+away that VM and build a new virtual machine with the proper guest operating system selected.
+
+10:17.640 --> 10:22.140
+Now while we're looking at the settings for VM one there's just a couple other settings I want to take
+
+10:22.140 --> 10:23.480
+a quick look at.
+
+10:23.770 --> 10:27.570
+Here's our network adapter.
+
+10:27.650 --> 10:34.130
+Notice here we have a network adapter type that's not supported by Windows Server 2012.
+
+10:34.610 --> 10:42.270
+And so in this scenario we've got a network adapter you 1000 that's not actually supported anymore.
+
+10:42.440 --> 10:47.900
+So we may want to replace that with a different network adapter.
+
+10:49.610 --> 10:50.810
+And this time around
+
+10:53.780 --> 11:00.320
+we'll choose the VM X net three virtual network interface card type.
+
+11:00.390 --> 11:08.860
+So rather than choose the 1000 let's choose the VM x 3 which is really best practice in the vast majority
+
+11:08.860 --> 11:13.640
+of use cases and it's supported by just about every operating system now.
+
+11:14.130 --> 11:22.970
+And we'll go ahead and we'll hit OK so we can't change the type of virtual Nic after the fact but we
+
+11:22.970 --> 11:25.360
+can always create a new virtual neck.
+
+11:25.640 --> 11:29.380
+And then just go into the guest operating system and move our IP address over.

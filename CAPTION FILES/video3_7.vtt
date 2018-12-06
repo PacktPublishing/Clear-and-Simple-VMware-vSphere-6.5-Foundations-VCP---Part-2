@@ -1,0 +1,196 @@
+WEBVTT
+
+00:02.500 --> 00:10.010
+In this video I'll demonstrate some common troubleshooting steps for storage related to an ESX host.
+
+00:10.330 --> 00:18.610
+So I'm going to click on my first host here and we can look at the Summary tab and get a little quick
+
+00:18.610 --> 00:24.720
+summary of the ESX host including the storage capacity and how much is actually used.
+
+00:25.750 --> 00:32.640
+And from there we're actually going to go to the configure screen and at the configure screen we've
+
+00:32.640 --> 00:35.210
+got a bunch of options here under storage.
+
+00:35.250 --> 00:38.340
+So let's start with our first option.
+
+00:39.270 --> 00:42.970
+So here we see multiple storage adapters.
+
+00:43.110 --> 00:50.730
+Some of these are probably for my local storage devices and I've got local hard disks that are part
+
+00:50.730 --> 00:52.650
+of this ESX I hosed.
+
+00:53.010 --> 01:00.860
+So that's probably what some of my H.B. ways are automatically as a matter of fact only one of these
+
+01:01.070 --> 01:04.020
+HBO was actually created by me.
+
+01:04.150 --> 01:06.880
+I set up a software I scuzz the initiator.
+
+01:07.370 --> 01:14.930
+And so the purpose of the software is because the initiator is to allow my ESX host to communicate with
+
+01:14.930 --> 01:16.490
+an ice because the storage array.
+
+01:16.670 --> 01:21.920
+And if we look at the properties of the storage adapter you can see here the name of it that it's a
+
+01:21.920 --> 01:29.360
+nice cozy software adapter and we have a unique I Kihuen or ice because the qualified name that's just
+
+01:29.360 --> 01:32.310
+an ice scuzzy addressing scheme.
+
+01:32.420 --> 01:39.090
+So any device that's an ice Gazi device has one of these unique IQ winds associated with it.
+
+01:39.740 --> 01:43.730
+And you can also see here I've configured what's called Dynamic discovery.
+
+01:43.900 --> 01:44.360
+Right.
+
+01:44.450 --> 01:56.180
+So dynamic discovery is basically how is this ESX I host going to find available Lunts and I've configured
+
+01:56.550 --> 02:04.260
+dynamic discovery under targets here and set up a dynamic discovery so that my ESX I host will reach
+
+02:04.260 --> 02:13.690
+out to $192 168 199 17 and queer yet to find out about available storage devices
+
+02:18.320 --> 02:28.100
+if I want to perform a query on demand if I want to find out what's currently available on this storage
+
+02:28.100 --> 02:28.860
+array.
+
+02:29.450 --> 02:37.640
+I can do what's called a rescan and the rescan is going to basically have my ESX host find out hey are
+
+02:37.640 --> 02:39.640
+there any new LUNs available.
+
+02:39.740 --> 02:46.310
+Are there any new VM FS volumes that this host has access to that it just doesn't know about.
+
+02:46.640 --> 02:51.310
+And so by performing a rescan I'm basically finding out the latest information
+
+02:55.250 --> 03:03.140
+here under devices we see all of the Lund's that are available through this ice Gazi software adapter.
+
+03:03.300 --> 03:09.470
+Mean if we look at some of our other HPH here you can see the ones that are available to each and every
+
+03:09.470 --> 03:17.830
+one of these HBL is an a VM HBK one this is attached to my local desk's on this ESX host.
+
+03:18.030 --> 03:21.930
+So I have a 60 gig local disk on this host.
+
+03:21.930 --> 03:24.350
+It's reachable via HBO they want
+
+03:27.030 --> 03:31.610
+V.M. HBO a zero is connected to my CD-ROM device.
+
+03:31.780 --> 03:33.290
+Nvm HBO sixty five.
+
+03:33.360 --> 03:35.210
+That's my software because the initiator
+
+03:39.680 --> 03:47.240
+here we can see all of the paths that are available via the software I because the H.B. So these are
+
+03:47.240 --> 03:48.910
+passed to 1 0.
+
+03:49.260 --> 03:59.810
+As you can see based on the elves 0 here and the target 0 and target 0 is just simply my last.
+
+03:59.960 --> 04:06.890
+Now one final thing I want to walk you through here related to software I scuzzy here under network
+
+04:06.890 --> 04:08.160
+port binding.
+
+04:08.210 --> 04:17.750
+You can choose the VM kernel ports that are going to be used to actually handle all of the scuzzy traffic.
+
+04:18.050 --> 04:24.470
+So in this scenario I've only got one VM kernel port created on this host of PMK 0.
+
+04:24.860 --> 04:33.500
+But I could potentially go create a separate VM kernel port on a different virtual switch connected
+
+04:33.500 --> 04:40.040
+to a different physical network that's strictly dedicated to scuzzy.
+
+04:40.150 --> 04:47.650
+So I can use network port binding to basically direct this ice because the traffic to whatever VM kernel
+
+04:47.650 --> 04:48.740
+poor I want.
+
+04:49.000 --> 04:54.940
+OK so now that we've looked at our storage adapters Let's go ahead and look at our storage devices here
+
+04:54.940 --> 05:01.360
+under storage devices we can see all of the ones that are accessible to this ESX host.
+
+05:01.360 --> 05:09.850
+If we click on them we can see some of the details about those Lund's broken down here below below the
+
+05:09.850 --> 05:13.640
+one where you can see the capacity the location as well.
+
+05:14.320 --> 05:18.670
+And then the transport mode that's being used in this case it's its eyes because the
+
+05:21.910 --> 05:26.620
+if we look at our local desks again we can see similar properties listed for those as well.
+
+05:28.990 --> 05:32.950
+And here are all the data stores that are available to this ESX host.
+
+05:32.950 --> 05:39.160
+I've got one local data store called Data Store one and the second data store that's actually on my
+
+05:39.370 --> 05:43.480
+scuzzy storage array called shared.
+
+05:43.640 --> 05:48.430
+I can do things like increase the data storage capacity at the screen.
+
+05:48.590 --> 05:55.890
+I can refresh the data store usage shown here and we have all sorts of other options as well.
+
+05:56.120 --> 06:02.330
+And that's really all we need to look at from a storage perspective on our ESX host at least from a
+
+06:02.330 --> 06:05.120
+basic troubleshooting configuration.
+
+06:05.120 --> 06:11.570
+Now if you're doing some more advanced stuff like creating a host cache or using protocol and points
+
+06:11.570 --> 06:16.500
+for virtual volumes there are some other options that are available to you here.
+
+06:16.880 --> 06:23.210
+But as far as the foundations exam goes this is really the basic stuff that you need to know how to
+
+06:23.210 --> 06:23.750
+troubleshoot.
