@@ -1,8 +1,3 @@
-## $5 Tech Unlocked 2021!
-[Buy and download this product for only $5 on PacktPub.com](https://www.packtpub.com/)
------
-*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
-
 # Clear-and-Simple-VMware-vSphere-6.5-Foundations-VCP---Part-2
 Code repository for Clear and Simple VMware vSphere 6.5 Foundations VCP - Part 2, Published by Packt
 # Clear and Simple VMware vSphere 6.5 Foundations VCP - Part 2
